@@ -1,0 +1,320 @@
+import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:numberpicker/numberpicker.dart';
+
+class BookingForm extends StatefulWidget {
+  @override
+  _BookingFormState createState() => _BookingFormState();
+}
+
+class _BookingFormState extends State<BookingForm> {
+  DateTime? departureDate;
+  TimeOfDay? departureTime;
+  DateTime? returningDate;
+  TimeOfDay? returningTime;
+  int numberOfAdults = 1;
+  int numberOfChildren = 0;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Booking Form"),
+        backgroundColor: Colors.blue,
+      ),
+      body: Container(
+        padding: EdgeInsets.all(16),
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [Color(0xFFE0E8F8), Color(0xFFBED2E9)],
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+          ),
+        ),
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              buildGuestSelection(),
+              SizedBox(height: 16),
+              buildBookingDetails(),
+              SizedBox(height: 16),
+              buildTotalLengthOfStay(),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget buildGuestSelection() {
+    return Card(
+      elevation: 8,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(15.0),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              "Who are you booking for?",
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.blue),
+            ),
+            SizedBox(height: 16),
+            Row(
+              children: [
+                Expanded(
+                  child: buildGuestPicker("Adults", numberOfAdults, (value) {
+                    setState(() {
+                      numberOfAdults = value;
+                    });
+                  }),
+                ),
+                SizedBox(width: 16),
+                Expanded(
+                  child: buildGuestPicker("Children", numberOfChildren, (value) {
+                    setState(() {
+                      numberOfChildren = value;
+                    });
+                  }),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget buildGuestPicker(String label, int value, ValueChanged<int> onChanged) {
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(12),
+        color: Colors.white,
+      ),
+      padding: EdgeInsets.all(12),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            label,
+            style: TextStyle(fontSize: 16, color: Colors.blue),
+          ),
+          SizedBox(height: 8),
+          NumberPicker(
+            value: value,
+            minValue: 0,
+            maxValue: 10,
+            onChanged: onChanged,
+            itemWidth: 50,
+            itemHeight: 40,
+            axis: Axis.horizontal,
+            textStyle: TextStyle(fontSize: 16, color: Colors.blue),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget buildDateTimePicker({
+    required String label,
+    required DateTime selectedDateTime,
+    required Function(DateTime) onDateTimeSelected,
+    bool isTimePicker = false,
+  }) {
+    return Card(
+      elevation: 5,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(15.0),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              label,
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.blue),
+            ),
+            SizedBox(height: 8),
+            ElevatedButton(
+              onPressed: () async {
+                final pickedDateTime = isTimePicker
+                    ? await showTimePicker(
+                  context: context,
+                  initialTime: TimeOfDay.fromDateTime(
+                    selectedDateTime ?? DateTime.now(),
+                  ),
+                )
+                    : await showDatePicker(
+                  context: context,
+                  initialDate: selectedDateTime ?? DateTime.now(),
+                  firstDate: DateTime.now(),
+                  lastDate: DateTime(2101),
+                );
+
+                if (pickedDateTime != null &&
+                    pickedDateTime != selectedDateTime) {
+                  onDateTimeSelected(pickedDateTime as DateTime);
+                }
+              },
+              style: ElevatedButton.styleFrom(
+                padding: EdgeInsets.all(16),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10.0),
+                ),
+                primary: Colors.blue,
+              ),
+              child: Text(
+                isTimePicker
+                    ? formatTime(selectedDateTime)
+                    : formatDate(selectedDateTime),
+                style: TextStyle(fontSize: 16),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget buildBookingDetails() {
+    return Card(
+      elevation: 5,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(15.0),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              "Booking Details",
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.blue),
+            ),
+            SizedBox(height: 16),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Expanded(
+                  child: buildDateTimePicker(
+                    label: "Departure Date",
+                    selectedDateTime: departureDate ?? DateTime.now(),
+                    onDateTimeSelected: (DateTime selectedDate) {
+                      setState(() {
+                        departureDate = selectedDate;
+                      });
+                    },
+                  ),
+                ),
+                SizedBox(width: 16),
+                Expanded(
+                  child: buildDateTimePicker(
+                    label: "Departure Time",
+                    selectedDateTime: DateTime(
+                      2023,
+                      1,
+                      1,
+                      departureTime?.hour ?? 0,
+                      departureTime?.minute ?? 0,
+                    ),
+                    onDateTimeSelected: (DateTime selectedDateTime) {
+                      setState(() {
+                        departureTime =
+                            TimeOfDay.fromDateTime(selectedDateTime);
+                      });
+                    },
+                    isTimePicker: true,
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(height: 16),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Expanded(
+                  child: buildDateTimePicker(
+                    label: "Returning Date",
+                    selectedDateTime: returningDate ?? DateTime.now(),
+                    onDateTimeSelected: (DateTime selectedDate) {
+                      setState(() {
+                        returningDate = selectedDate;
+                      });
+                    },
+                  ),
+                ),
+                SizedBox(width: 16),
+                Expanded(
+                  child: buildDateTimePicker(
+                    label: "Returning Time",
+                    selectedDateTime: DateTime(
+                      2023,
+                      1,
+                      1,
+                      returningTime?.hour ?? 0,
+                      returningTime?.minute ?? 0,
+                    ),
+                    onDateTimeSelected: (DateTime selectedDateTime) {
+                      setState(() {
+                        returningTime =
+                            TimeOfDay.fromDateTime(selectedDateTime);
+                      });
+                    },
+                    isTimePicker: true,
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget buildTotalLengthOfStay() {
+    return Card(
+      elevation: 5,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(15.0),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              "Total Length of Stay",
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.blue),
+            ),
+            SizedBox(height: 8),
+            Text(
+              calculateLengthOfStay(),
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: Colors.blue),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  String formatDate(DateTime dateTime) {
+    return DateFormat('dd/MM/yyyy').format(dateTime);
+  }
+
+  String formatTime(DateTime dateTime) {
+    return DateFormat('HH:mm').format(dateTime);
+  }
+
+  String calculateLengthOfStay() {
+    if (departureDate != null && returningDate != null) {
+      final difference = returningDate!.difference(departureDate!);
+      return "${difference.inDays} day(s)";
+    }
+
+    return "N/A";
+  }
+}
