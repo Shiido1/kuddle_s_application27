@@ -30,7 +30,8 @@ class VehiclesectionItemWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    NumberFormat currencyFormat = NumberFormat.currency(locale: 'en_NG', symbol: '\₦');
+    NumberFormat currencyFormat =
+        NumberFormat.currency(locale: 'en_NG', symbol: '\₦');
     return SizedBox(
       height: 300.v,
       width: 181.h,
@@ -39,7 +40,8 @@ class VehiclesectionItemWidget extends StatelessWidget {
         children: [
           CustomImageView(
             // imagePath: ImageConstant.imgValeriiaBugaio,
-            imagePath: ('https://api.maczuby.com/images/${vehicle.vehiclePic1}'), // Adjust this based on your data model
+            imagePath:
+                ('${vehicle.vehiclePic1}'), // Adjust this based on your data model
             height: 200.v,
             width: 181.h,
             fit: BoxFit.cover,
@@ -84,7 +86,6 @@ class VehiclesectionItemWidget extends StatelessWidget {
                               padding: EdgeInsets.only(left: 5.h),
                               child: Text(
                                 '${vehicle?.country}',
-
                                 style: CustomTextStyles.bodySmallOnPrimary,
                               ),
                             ),
@@ -98,7 +99,6 @@ class VehiclesectionItemWidget extends StatelessWidget {
                                 text: "₦${formatPrice(vehicle.price)}/",
                                 style: CustomTextStyles.labelLargeOnPrimary_1,
                               ),
-
                               TextSpan(
                                 text: " day",
                                 style: CustomTextStyles.bodySmallOnPrimaryLight,
@@ -124,7 +124,8 @@ class VehiclesectionItemWidget extends StatelessWidget {
                       bottom: 2.v,
                     ),
                     child: Text(
-                      vehicle.vehicleId.toString(), // Adjust this based on your data model
+                      vehicle.vehicleId
+                          .toString(), // Adjust this based on your data model
                       style: theme.textTheme.labelSmall,
                     ),
                   ),

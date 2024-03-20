@@ -19,18 +19,14 @@ import '../book_room_calendar_screen/BookingRoom.dart';
 import '../favorite_page/favourite_tab.dart';
 
 class HotelDetail extends StatefulWidget {
-
   final PropertyModel property;
-   HotelDetail({Key? key, required this.property}) : super(key: key);
+  HotelDetail({Key? key, required this.property}) : super(key: key);
 
   @override
   State<HotelDetail> createState() => _HotelDetailState();
 }
 
-
-
 class _HotelDetailState extends State<HotelDetail> {
-
   ProviderServices? providerServices;
   int? selectedRoomIDNow;
   String? price;
@@ -48,9 +44,10 @@ class _HotelDetailState extends State<HotelDetail> {
     // TODO: implement dispose
     super.dispose();
   }
-  // Assuming currencyFormat is an instance of NumberFormat
-  NumberFormat currencyFormat = NumberFormat.currency(locale: 'en_NG', symbol: '\₦');
 
+  // Assuming currencyFormat is an instance of NumberFormat
+  NumberFormat currencyFormat =
+      NumberFormat.currency(locale: 'en_NG', symbol: '\₦');
 
   @override
   Widget build(BuildContext context) {
@@ -69,14 +66,17 @@ class _HotelDetailState extends State<HotelDetail> {
                 children: [
                   _buildSeventyFour(context),
                   Container(
-                    margin: EdgeInsets.only(bottom: 0), // Adjust margin as needed
-                    padding: EdgeInsets.symmetric(horizontal: 15.h, vertical: 24.v),
+                    margin:
+                        EdgeInsets.only(bottom: 0), // Adjust margin as needed
+                    padding:
+                        EdgeInsets.symmetric(horizontal: 15.h, vertical: 24.v),
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         // Text("${widget.property.propertyId}", style: theme.textTheme.headlineMedium),
-                        Text("${widget.property.propertyName}", style: theme.textTheme.headlineMedium),
+                        Text("${widget.property.propertyName}",
+                            style: theme.textTheme.headlineMedium),
                         SizedBox(height: 8.v),
                         _buildVector(context),
                         SizedBox(height: 27.v),
@@ -109,54 +109,69 @@ class _HotelDetailState extends State<HotelDetail> {
                         _buildSwimmingPool(context),
                         SizedBox(height: 27.v),
                         _buildLaundry(context),
-                        SizedBox(height: 27.v),  // Add space between sections
+                        SizedBox(height: 27.v), // Add space between sections
                         _buildAdditionalDetails(context),
                         SizedBox(height: 27.v),
                         _buildRoomList(context),
                         Container(
-                          padding: EdgeInsets.symmetric( horizontal: 10), // Add padding for a better visual
+                          padding: EdgeInsets.symmetric(
+                              horizontal:
+                                  10), // Add padding for a better visual
                           child: Text(
                             roomType == null ? '' : 'Room Type: $roomType',
                             style: TextStyle(
                               fontSize: 14.0,
-                              color: Colors.blueAccent, // Set the text color to white for better visibility on a blue background
+                              color: Colors
+                                  .blueAccent, // Set the text color to white for better visibility on a blue background
                               fontWeight: FontWeight.bold,
                             ),
-                            textAlign: TextAlign.center, // Align the text to the center
+                            textAlign: TextAlign
+                                .center, // Align the text to the center
                           ),
                         ),
                         SizedBox(height: 27.v),
 
                         Container(
-                          padding: EdgeInsets.symmetric( horizontal: 10), // Add padding for a better visual
+                          padding: EdgeInsets.symmetric(
+                              horizontal:
+                                  10), // Add padding for a better visual
                           child: Text(
                             roomNo == null ? '' : 'Room No: $roomNo',
                             style: TextStyle(
                               fontSize: 14.0,
-                              color: Colors.blue, // Set the text color to white for better visibility on a blue background
+                              color: Colors
+                                  .blue, // Set the text color to white for better visibility on a blue background
                               fontWeight: FontWeight.bold,
                             ),
-                            textAlign: TextAlign.center, // Align the text to the center
+                            textAlign: TextAlign
+                                .center, // Align the text to the center
                           ),
                         ),
                         SizedBox(height: 27.v),
 
                         Container(
-                          padding: EdgeInsets.symmetric( horizontal: 10), // Add padding for a better visual
+                          padding: EdgeInsets.symmetric(
+                              horizontal:
+                                  10), // Add padding for a better visual
                           child: Text(
-                            roomPrice == null ? '' : 'price: ₦${formatPrice(roomPrice)}/night',
+                            roomPrice == null
+                                ? ''
+                                : 'price: ₦${formatPrice(roomPrice)}/night',
                             style: TextStyle(
                               fontSize: 14.0,
-                              color: Colors.blue, // Set the text color to white for better visibility on a blue background
+                              color: Colors
+                                  .blue, // Set the text color to white for better visibility on a blue background
                               fontWeight: FontWeight.bold,
                             ),
-                            textAlign: TextAlign.center, // Align the text to the center
+                            textAlign: TextAlign
+                                .center, // Align the text to the center
                           ),
                         ),
 
                         SizedBox(height: 100.v),
-                        selectedRoomIDNow == null ? Text('') : _buildBookNow(context),
-
+                        selectedRoomIDNow == null
+                            ? Text('')
+                            : _buildBookNow(context),
                       ],
                     ),
                   ),
@@ -165,7 +180,6 @@ class _HotelDetailState extends State<HotelDetail> {
             ),
           ),
         ),
-
       ),
     );
   }
@@ -185,9 +199,10 @@ class _HotelDetailState extends State<HotelDetail> {
   }
 
   Widget _buildAdditionalDetails(BuildContext context) {
-
-    String? priceString = widget.property.price != null && widget.property.price!.isNotEmpty ? widget.property.price : '0.0';
-
+    String? priceString =
+        widget.property.price != null && widget.property.price!.isNotEmpty
+            ? widget.property.price
+            : '0.0';
 
     // Convert the String to a double using double.parse
     double price = double.parse(priceString!);
@@ -203,7 +218,9 @@ class _HotelDetailState extends State<HotelDetail> {
       children: [
         Padding(
           padding: EdgeInsets.symmetric(horizontal: 16.h),
-          child: Text("Additional Details", style: theme.textTheme.headline6?.copyWith(color: Color(0xFF003B95))),
+          child: Text("Additional Details",
+              style: theme.textTheme.headline6
+                  ?.copyWith(color: Color(0xFF003B95))),
         ),
         SizedBox(height: 8.v), // Reduced spacing
         IntrinsicHeight(
@@ -211,24 +228,25 @@ class _HotelDetailState extends State<HotelDetail> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              _buildDetailItem(Icons.access_time, "Check In", "From 07:44 AM to 1:44 PM"),
-              _buildDetailItem(Icons.access_time, "Check Out", "From 12:00 PM to 3:00 PM"),
+              _buildDetailItem(
+                  Icons.access_time, "Check In", "From 07:44 AM to 1:44 PM"),
+              _buildDetailItem(
+                  Icons.access_time, "Check Out", "From 12:00 PM to 3:00 PM"),
             ],
           ),
         ),
         SizedBox(height: 8.v),
 
-
-
         IntrinsicHeight(
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              _buildDetailItem(Icons.policy, "Cancellation/prepayment", "Cancellation and prepayment policies vary according to accommodations type."),
+              _buildDetailItem(Icons.policy, "Cancellation/prepayment",
+                  "Cancellation and prepayment policies vary according to accommodations type."),
             ],
           ),
-        ),// Red
+        ), // Red
 
         SizedBox(height: 8.v), // Reduced spacing
         IntrinsicHeight(
@@ -236,11 +254,11 @@ class _HotelDetailState extends State<HotelDetail> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              _buildDetailItem(Icons.child_care, "Children & Beds", "Children are not allowed in this property. No age restriction. There's no age requirement for check-in."),
+              _buildDetailItem(Icons.child_care, "Children & Beds",
+                  "Children are not allowed in this property. No age restriction. There's no age requirement for check-in."),
             ],
           ),
         ),
-
 
         SizedBox(height: 8.v), // Reduced spacing
         IntrinsicHeight(
@@ -249,7 +267,8 @@ class _HotelDetailState extends State<HotelDetail> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               _buildDetailItem(Icons.pets, "Pets", "Pets are not allowed."),
-              _buildDetailItem(Icons.smoking_rooms, "Smoking", "Smoking is not allowed."),
+              _buildDetailItem(
+                  Icons.smoking_rooms, "Smoking", "Smoking is not allowed."),
             ],
           ),
         ),
@@ -259,7 +278,8 @@ class _HotelDetailState extends State<HotelDetail> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              _buildDetailItem(Icons.payment, "Accepted payment methods", "Cash is not accepted. Pay securely through your e-wallet."),
+              _buildDetailItem(Icons.payment, "Accepted payment methods",
+                  "Cash is not accepted. Pay securely through your e-wallet."),
             ],
           ),
         ),
@@ -267,7 +287,11 @@ class _HotelDetailState extends State<HotelDetail> {
     );
   }
 
-  Widget _buildDetailItem(IconData icon, String title, String content,) {
+  Widget _buildDetailItem(
+    IconData icon,
+    String title,
+    String content,
+  ) {
     // Calculate the fraction of ListTile width for the icon
     double iconFraction = 0.1; // Adjust the fraction for the desired size
 
@@ -281,14 +305,17 @@ class _HotelDetailState extends State<HotelDetail> {
           borderRadius: BorderRadius.circular(12.0),
         ),
         child: ListTile(
-          contentPadding: EdgeInsets.symmetric(horizontal: 16.h, vertical: 16.v),
+          contentPadding:
+              EdgeInsets.symmetric(horizontal: 16.h, vertical: 16.v),
           leading: Container(
             width: iconSize,
             height: iconSize,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(icon, color: Colors.white, size: 16.0), // Adjust the size for the desired icon size
+                Icon(icon,
+                    color: Colors.white,
+                    size: 16.0), // Adjust the size for the desired icon size
               ],
             ),
             padding: EdgeInsets.all(8.h),
@@ -299,13 +326,15 @@ class _HotelDetailState extends State<HotelDetail> {
           ),
           title: Text(
             title,
-            style: theme.textTheme.subtitle1?.copyWith(color: Color(0xFF003B95)),
+            style:
+                theme.textTheme.subtitle1?.copyWith(color: Color(0xFF003B95)),
           ),
           subtitle: Padding(
             padding: EdgeInsets.only(top: 8.v),
             child: Text(
               content,
-              style: theme.textTheme.bodyText2?.copyWith(color: Color(0xFF003B95)),
+              style:
+                  theme.textTheme.bodyText2?.copyWith(color: Color(0xFF003B95)),
             ),
           ),
         ),
@@ -313,14 +342,13 @@ class _HotelDetailState extends State<HotelDetail> {
     );
   }
 
-
   int _currentIndex = 0;
 
   Widget _buildSeventyFour(BuildContext context) {
     final List<String> imageUrls = [
-      'https://api.maczuby.com/images/${widget.property.propertyPic1}',
-      'https://api.maczuby.com/images/${widget.property.propertyPic2}',
-      'https://api.maczuby.com/images/${widget.property.propertyPic3}',
+      '${widget.property.propertyPic1}',
+      '${widget.property.propertyPic2}',
+      '${widget.property.propertyPic3}',
       // Add other image URLs as needed
     ];
 
@@ -379,11 +407,11 @@ class _HotelDetailState extends State<HotelDetail> {
                 right: 16.0,
                 child: GestureDetector(
                   onTap: () {
-
-                    addFavoriteAndShowList(widget.property.roomId.toString(),
-                      widget.property.propertyName.toString(),
-                      widget.property.propertyPic1.toString(),
-                      widget.property.price.toString());
+                    addFavoriteAndShowList(
+                        widget.property.roomId.toString(),
+                        widget.property.propertyName.toString(),
+                        widget.property.propertyPic1.toString(),
+                        widget.property.price.toString());
                   },
                   child: Icon(
                     Icons.favorite,
@@ -400,30 +428,28 @@ class _HotelDetailState extends State<HotelDetail> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: List.generate(
                     imageUrls.length,
-                        (index) => Padding(
+                    (index) => Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Container(
                         width: _currentIndex == index ? 33.0 : 5.0,
                         height: _currentIndex == index ? 5.0 : 10.0,
                         child: _currentIndex == index
                             ? Container(
-                          decoration: BoxDecoration(
-                            color: Color(0xff003B95),
-                            borderRadius: BorderRadius.circular(15),
-                          ),
-                        )
+                                decoration: BoxDecoration(
+                                  color: Color(0xff003B95),
+                                  borderRadius: BorderRadius.circular(15),
+                                ),
+                              )
                             : Container(
-                          width: 30.0,
-                          height: 5.0,
-                          decoration: BoxDecoration(
-                            color: Colors.grey,
-                            shape: BoxShape.circle,
-                          ),
-                        ),
-
+                                width: 30.0,
+                                height: 5.0,
+                                decoration: BoxDecoration(
+                                  color: Colors.grey,
+                                  shape: BoxShape.circle,
+                                ),
+                              ),
                       ),
-
-                        ),
+                    ),
                   ),
                 ),
               ),
@@ -434,16 +460,12 @@ class _HotelDetailState extends State<HotelDetail> {
     );
   }
 
-
-
-
-
   /// Section Widget
   Widget _buildVector(BuildContext context) {
-
-
-    String? priceString = widget.property.price != null && widget.property.price!.isNotEmpty ? widget.property.price : '0.0';
-
+    String? priceString =
+        widget.property.price != null && widget.property.price!.isNotEmpty
+            ? widget.property.price
+            : '0.0';
 
     // Convert the String to a double using double.parse
     double price = double.parse(priceString!);
@@ -502,16 +524,14 @@ class _HotelDetailState extends State<HotelDetail> {
                     ])
                   ])),
           Align(
-              alignment: Alignment.topRight,
-              child:
-
-              RichText(
-                  text: TextSpan(children: [
-                    TextSpan(text: " ${widget.property.country}", style: theme.textTheme.titleSmall),
-
-
-                  ]),
-                  textAlign: TextAlign.left),
+            alignment: Alignment.topRight,
+            child: RichText(
+                text: TextSpan(children: [
+                  TextSpan(
+                      text: " ${widget.property.country}",
+                      style: theme.textTheme.titleSmall),
+                ]),
+                textAlign: TextAlign.left),
           )
         ]));
   }
@@ -685,9 +705,10 @@ class _HotelDetailState extends State<HotelDetail> {
           Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (context) => HotelBookingWidget(vehicle: widget.property, itemID: selectedRoomIDNow.toString())
-            ),);
-
+                builder: (context) => HotelBookingWidget(
+                    vehicle: widget.property,
+                    itemID: selectedRoomIDNow.toString())),
+          );
         });
   }
 
@@ -725,13 +746,14 @@ class _HotelDetailState extends State<HotelDetail> {
                   setState(() {
                     selectedRoomID = newSelectedRoomID;
                     selectedRoomIDNow = newSelectedRoomID;
-
-
                   });
 
-                  String selectedRoomType = getRoomType(selectedRoomID!, provider.roomModel?.rooms);
-                  String selectedRoomNo = getRoomNumber(selectedRoomID!, provider.roomModel?.rooms);
-                  String price = getRoomPrice(selectedRoomID!, provider.roomModel?.rooms);
+                  String selectedRoomType =
+                      getRoomType(selectedRoomID!, provider.roomModel?.rooms);
+                  String selectedRoomNo =
+                      getRoomNumber(selectedRoomID!, provider.roomModel?.rooms);
+                  String price =
+                      getRoomPrice(selectedRoomID!, provider.roomModel?.rooms);
                   // Update the global variable roomType
                   setState(() {
                     roomType = selectedRoomType;
@@ -752,30 +774,29 @@ class _HotelDetailState extends State<HotelDetail> {
                   // Handle room selection here
                   print('Selected Room ID: $selectedRoomID');
                   // Print the room type for debugging
-                  print('Room Type: ${getRoomType(selectedRoomID!, provider.roomModel?.rooms)}');
+                  print(
+                      'Room Type: ${getRoomType(selectedRoomID!, provider.roomModel?.rooms)}');
                   print('Room Type: ${selectedRoomIDNow}');
                 },
-
                 items: provider.roomModel?.rooms
                     .map<DropdownMenuItem<int>>((room) {
                   return DropdownMenuItem<int>(
                     value: room.roomID,
-                    child:Text(room.roomNo.toString() + ': ' + room.roomType),
+                    child: Text(room.roomNo.toString() + ': ' + room.roomType),
                   );
-                })
-                    .toList(),
+                }).toList(),
               ),
               SizedBox(height: 20.v),
               // Display the selected room information
               selectedRoomID != null
                   ? Text(
-                'Selected Room Type: ${selectedRoomIDNow}',
-                style: TextStyle(
-                  fontSize: 20.0,
-                  color: Colors.red,
-                  fontWeight: FontWeight.bold,
-                ),
-              )
+                      'Selected Room Type: ${selectedRoomIDNow}',
+                      style: TextStyle(
+                        fontSize: 20.0,
+                        color: Colors.red,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    )
                   : Container(), // You can customize this part based on your UI requirements
             ],
           ),
@@ -787,7 +808,7 @@ class _HotelDetailState extends State<HotelDetail> {
   String getRoomType(int selectedRoomID, List<Room>? rooms) {
     // Find the room with the selected ID
     Room? selectedRoom = rooms?.firstWhere(
-          (room) => room.roomID == selectedRoomID,
+      (room) => room.roomID == selectedRoomID,
       orElse: () => null as Room,
     );
 
@@ -795,11 +816,10 @@ class _HotelDetailState extends State<HotelDetail> {
     return selectedRoom?.roomType ?? 'Unknown';
   }
 
-
   String getRoomNumber(int selectedRoomID, List<Room>? rooms) {
     // Find the room with the selected ID
     Room? selectedRoom = rooms?.firstWhere(
-          (room) => room.roomID == selectedRoomID,
+      (room) => room.roomID == selectedRoomID,
       orElse: () => null as Room,
     );
 
@@ -810,17 +830,13 @@ class _HotelDetailState extends State<HotelDetail> {
   String getRoomPrice(int selectedRoomID, List<Room>? rooms) {
     // Find the room with the selected ID
     Room? selectedRoom = rooms?.firstWhere(
-          (room) => room.roomID == selectedRoomID,
+      (room) => room.roomID == selectedRoomID,
       orElse: () => null as Room,
     );
 
     // Return the room type if found, otherwise 'Unknown'
     return selectedRoom?.price.toString() ?? 'Unknown';
   }
-
-
-
-
 
   /// Navigates back to the previous screen.
   onTapImgArrowLeft(BuildContext context) {
@@ -850,9 +866,8 @@ class _HotelDetailState extends State<HotelDetail> {
     }
   }
 
-
-
-  Future<void> addFavorite(String favoriteName, String name, String image, String price) async {
+  Future<void> addFavorite(
+      String favoriteName, String name, String image, String price) async {
     try {
       print('adding now');
 
@@ -916,15 +931,12 @@ class _HotelDetailState extends State<HotelDetail> {
     }
   }
 
-
-
-  Future<void> addFavoriteAndShowList(String favoriteName, String name, String image, String price) async {
-    await addFavorite( favoriteName,  name, image, price);
+  Future<void> addFavoriteAndShowList(
+      String favoriteName, String name, String image, String price) async {
+    await addFavorite(favoriteName, name, image, price);
     await initializeFavorites(); // This will print the updated list
     initializeFavorites();
-
   }
-
 
   Future<void> initializeFavorites() async {
     try {
@@ -934,8 +946,6 @@ class _HotelDetailState extends State<HotelDetail> {
       print('Error getting favorites list: $e');
     }
   }
-
-
 
   Future<List<Favorite>> getFavoritesList() async {
     var favoritesBox = await Hive.openBox<Favorite>('favoritesBox');

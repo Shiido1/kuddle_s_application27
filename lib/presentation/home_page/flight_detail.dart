@@ -15,9 +15,8 @@ import '../book_room_calendar_screen/book_flight_calendar_screen_original.dart';
 import '../book_room_calendar_screen/buildBooking.dart';
 
 class FlightDetail extends StatefulWidget {
-
   final FlightModel flight;
-   FlightDetail({Key? key, required this.flight}) : super(key: key);
+  FlightDetail({Key? key, required this.flight}) : super(key: key);
 
   @override
   State<FlightDetail> createState() => _FlightDetailState();
@@ -41,13 +40,16 @@ class _FlightDetailState extends State<FlightDetail> {
                 children: [
                   _buildSeventyFour(context),
                   Container(
-                    margin: EdgeInsets.only(bottom: 0), // Adjust margin as needed
-                    padding: EdgeInsets.symmetric(horizontal: 15.h, vertical: 24.v),
+                    margin:
+                        EdgeInsets.only(bottom: 0), // Adjust margin as needed
+                    padding:
+                        EdgeInsets.symmetric(horizontal: 15.h, vertical: 24.v),
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text("${widget.flight.hostName}", style: theme.textTheme.headlineMedium),
+                        Text("${widget.flight.hostName}",
+                            style: theme.textTheme.headlineMedium),
                         SizedBox(height: 8.v),
                         _buildVector(context),
                         SizedBox(height: 27.v),
@@ -92,7 +94,6 @@ class _FlightDetailState extends State<FlightDetail> {
             ),
           ),
         ),
-
       ),
     );
   }
@@ -168,8 +169,10 @@ class _FlightDetailState extends State<FlightDetail> {
   // }
 
   Widget _buildAdditionalDetails(BuildContext context) {
-
-    String? priceString = widget.flight.price != null && widget.flight.price!.isNotEmpty ? widget.flight.price : '0.0';
+    String? priceString =
+        widget.flight.price != null && widget.flight.price!.isNotEmpty
+            ? widget.flight.price
+            : '0.0';
 
     // Convert the String to a double using double.parse
     double price = double.parse(priceString!);
@@ -184,7 +187,9 @@ class _FlightDetailState extends State<FlightDetail> {
       children: [
         Padding(
           padding: EdgeInsets.symmetric(horizontal: 16.h),
-          child: Text("Additional Details", style: theme.textTheme.headline6?.copyWith(color: Color(0xFF003B95))),
+          child: Text("Additional Details",
+              style: theme.textTheme.headline6
+                  ?.copyWith(color: Color(0xFF003B95))),
         ),
         SizedBox(height: 8.v), // Reduced spacing
         IntrinsicHeight(
@@ -192,8 +197,10 @@ class _FlightDetailState extends State<FlightDetail> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              _buildDetailItem(Icons.flight_takeoff, "Departure", "${widget.flight.fromWhere}"),
-              _buildDetailItem(Icons.flight_land, "Arrival", "${widget.flight.toWhere}"),
+              _buildDetailItem(Icons.flight_takeoff, "Departure",
+                  "${widget.flight.fromWhere}"),
+              _buildDetailItem(
+                  Icons.flight_land, "Arrival", "${widget.flight.toWhere}"),
             ],
           ),
         ),
@@ -204,8 +211,10 @@ class _FlightDetailState extends State<FlightDetail> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              _buildDetailItem(Icons.access_time, "Departure Time", "${widget.flight.departure}"),
-              _buildDetailItem(Icons.access_time, "Arrival Time", "${widget.flight.arrival}"),
+              _buildDetailItem(Icons.access_time, "Departure Time",
+                  "${widget.flight.departure}"),
+              _buildDetailItem(Icons.access_time, "Arrival Time",
+                  "${widget.flight.arrival}"),
             ],
           ),
         ),
@@ -216,7 +225,8 @@ class _FlightDetailState extends State<FlightDetail> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              _buildDetailItem(Icons.monetization_on, "Ticket Price", "$formattedCurrency/ticket"),
+              _buildDetailItem(Icons.monetization_on, "Ticket Price",
+                  "$formattedCurrency/ticket"),
             ],
           ),
         ),
@@ -225,7 +235,11 @@ class _FlightDetailState extends State<FlightDetail> {
     );
   }
 
-  Widget _buildDetailItem(IconData icon, String title, String content,) {
+  Widget _buildDetailItem(
+    IconData icon,
+    String title,
+    String content,
+  ) {
     // Calculate the fraction of ListTile width for the icon
     double iconFraction = 0.1; // Adjust the fraction for the desired size
 
@@ -239,14 +253,17 @@ class _FlightDetailState extends State<FlightDetail> {
           borderRadius: BorderRadius.circular(12.0),
         ),
         child: ListTile(
-          contentPadding: EdgeInsets.symmetric(horizontal: 16.h, vertical: 16.v),
+          contentPadding:
+              EdgeInsets.symmetric(horizontal: 16.h, vertical: 16.v),
           leading: Container(
             width: iconSize,
             height: iconSize,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(icon, color: Colors.white, size: 16.0), // Adjust the size for the desired icon size
+                Icon(icon,
+                    color: Colors.white,
+                    size: 16.0), // Adjust the size for the desired icon size
               ],
             ),
             padding: EdgeInsets.all(8.h),
@@ -257,13 +274,15 @@ class _FlightDetailState extends State<FlightDetail> {
           ),
           title: Text(
             title,
-            style: theme.textTheme.subtitle1?.copyWith(color: Color(0xFF003B95)),
+            style:
+                theme.textTheme.subtitle1?.copyWith(color: Color(0xFF003B95)),
           ),
           subtitle: Padding(
             padding: EdgeInsets.only(top: 8.v),
             child: Text(
               content,
-              style: theme.textTheme.bodyText2?.copyWith(color: Color(0xFF003B95)),
+              style:
+                  theme.textTheme.bodyText2?.copyWith(color: Color(0xFF003B95)),
             ),
           ),
         ),
@@ -282,7 +301,7 @@ class _FlightDetailState extends State<FlightDetail> {
   //           child: Stack(alignment: Alignment.topCenter, children: [
   //             CustomImageView(
   //                 // imagePath: ImageConstant.imgYuliyaPankevic,
-  //               imagePath: ('https://api.maczuby.com/images/${widget.flight.flightPic1}'),
+  //               imagePath: ('${widget.flight.flightPic1}'),
   //                 height: 311.v,
   //                 width: 430.h,
   //                 radius: BorderRadius.circular(15.h),
@@ -324,9 +343,9 @@ class _FlightDetailState extends State<FlightDetail> {
 
   Widget _buildSeventyFour(BuildContext context) {
     final List<String> imageUrls = [
-      'https://api.maczuby.com/images/${widget.flight.flightPic1}',
-      'https://api.maczuby.com/images/${widget.flight.flightPic2}',
-      'https://api.maczuby.com/images/${widget.flight.flightPic1}',
+      '${widget.flight.flightPic1}',
+      '${widget.flight.flightPic2}',
+      '${widget.flight.flightPic1}',
       // Add other image URLs as needed
     ];
 
@@ -402,30 +421,28 @@ class _FlightDetailState extends State<FlightDetail> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: List.generate(
                     imageUrls.length,
-                        (index) => Padding(
+                    (index) => Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Container(
                         width: _currentIndex == index ? 33.0 : 5.0,
                         height: _currentIndex == index ? 5.0 : 10.0,
                         child: _currentIndex == index
                             ? Container(
-                          decoration: BoxDecoration(
-                            color: Color(0xff003B95),
-                            borderRadius: BorderRadius.circular(15),
-                          ),
-                        )
+                                decoration: BoxDecoration(
+                                  color: Color(0xff003B95),
+                                  borderRadius: BorderRadius.circular(15),
+                                ),
+                              )
                             : Container(
-                          width: 30.0,
-                          height: 5.0,
-                          decoration: BoxDecoration(
-                            color: Colors.grey,
-                            shape: BoxShape.circle,
-                          ),
-                        ),
-
+                                width: 30.0,
+                                height: 5.0,
+                                decoration: BoxDecoration(
+                                  color: Colors.grey,
+                                  shape: BoxShape.circle,
+                                ),
+                              ),
                       ),
-
-                        ),
+                    ),
                   ),
                 ),
               ),
@@ -436,14 +453,12 @@ class _FlightDetailState extends State<FlightDetail> {
     );
   }
 
-
-
-
-
   /// Section Widget
   Widget _buildVector(BuildContext context) {
-
-    String? priceString = widget.flight.price != null && widget.flight.price!.isNotEmpty ? widget.flight.price : '0.0';
+    String? priceString =
+        widget.flight.price != null && widget.flight.price!.isNotEmpty
+            ? widget.flight.price
+            : '0.0';
 
 // Convert the String to a double using double.parse
     double price = double.parse(priceString!);
@@ -683,20 +698,18 @@ class _FlightDetailState extends State<FlightDetail> {
       text: "Reserve Now",
       margin: EdgeInsets.only(left: 76.h, right: 76.h, bottom: 29.v),
       buttonStyle: CustomButtonStyles.fillPrimary.copyWith(
-        backgroundColor: MaterialStateProperty.resolveWith<Color>((Set<MaterialState> states) {
+        backgroundColor: MaterialStateProperty.resolveWith<Color>(
+            (Set<MaterialState> states) {
           return Color(0xFFFFB700);
         }),
       ),
       onPressed: () {
-
-
         Navigator.push(
           context,
           MaterialPageRoute(
             builder: (context) => FlightBookingWidget(flight: widget.flight),
           ),
         );
-
 
         // Navigator.push(
         //   context,
@@ -705,7 +718,6 @@ class _FlightDetailState extends State<FlightDetail> {
         //   ),
         // );
         //
-
 
         // Navigator.push(
         //   context,

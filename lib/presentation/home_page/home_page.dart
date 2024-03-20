@@ -1259,8 +1259,7 @@ class _HomePageState extends State<HomePage> {
                       alignment: Alignment.bottomCenter,
                       children: [
                         CustomImageView(
-                          imagePath:
-                              ('https://api.maczuby.com/images/${currentItem.propertyPic2}'),
+                          imagePath: ('${currentItem.propertyPic2}'),
                           height: 200
                               .v, // Make sure the height matches the Container's height
                           width: 350.h,
@@ -1317,7 +1316,7 @@ class _HomePageState extends State<HomePage> {
                                         children: [
                                           CustomImageView(
                                             imagePath:
-                                                ('https://api.maczuby.com/images/${currentItem.propertyPic2}'),
+                                                ('${currentItem.propertyPic2}'),
                                             height: 12.v,
                                             width: 8.h,
                                             radius: BorderRadius.circular(4.h),
@@ -1369,7 +1368,7 @@ class _HomePageState extends State<HomePage> {
                                             children: [
                                               CustomImageView(
                                                 imagePath:
-                                                    ('https://api.maczuby.com/images/${currentItem.propertyPic2}'),
+                                                    ('${currentItem.propertyPic2}'),
                                                 height: 13.adaptSize,
                                                 width: 13.adaptSize,
                                                 radius:
@@ -1441,8 +1440,7 @@ class _HomePageState extends State<HomePage> {
                       alignment: Alignment.bottomCenter,
                       children: [
                         CustomImageView(
-                          imagePath:
-                              ('https://api.maczuby.com/images/${currentItem.vehiclePic2}'),
+                          imagePath: ('${currentItem.vehiclePic2}'),
                           height: 200
                               .v, // Make sure the height matches the Container's height
                           width: 350.h,
@@ -1499,7 +1497,7 @@ class _HomePageState extends State<HomePage> {
                                         children: [
                                           CustomImageView(
                                             imagePath:
-                                                ('https://api.maczuby.com/images/${currentItem.vehiclePic2}'),
+                                                ('${currentItem.vehiclePic2}'),
                                             height: 12.v,
                                             width: 8.h,
                                             radius: BorderRadius.circular(4.h),
@@ -1550,7 +1548,7 @@ class _HomePageState extends State<HomePage> {
                                             children: [
                                               CustomImageView(
                                                 imagePath:
-                                                    ('https://api.maczuby.com/images/${currentItem.vehiclePic2}'),
+                                                    ('${currentItem.vehiclePic2}'),
                                                 height: 13.adaptSize,
                                                 width: 13.adaptSize,
                                                 radius:
@@ -1621,8 +1619,7 @@ class _HomePageState extends State<HomePage> {
                       alignment: Alignment.bottomCenter,
                       children: [
                         CustomImageView(
-                          imagePath:
-                              ('https://api.maczuby.com/images/${currentItem.flightPic2}'),
+                          imagePath: ('${currentItem.flightPic2}'),
                           height: 200
                               .v, // Make sure the height matches the Container's height
                           width: 350.h,
@@ -1679,7 +1676,7 @@ class _HomePageState extends State<HomePage> {
                                         children: [
                                           CustomImageView(
                                             imagePath:
-                                                ('https://api.maczuby.com/images/${currentItem.flightPic2}'),
+                                                ('${currentItem.flightPic2}'),
                                             height: 12.v,
                                             width: 8.h,
                                             radius: BorderRadius.circular(4.h),
@@ -1730,7 +1727,7 @@ class _HomePageState extends State<HomePage> {
                                             children: [
                                               CustomImageView(
                                                 imagePath:
-                                                    ('https://api.maczuby.com/images/${currentItem.flightPic2}'),
+                                                    ('${currentItem.flightPic2}'),
                                                 height: 13.adaptSize,
                                                 width: 13.adaptSize,
                                                 radius:
@@ -1803,8 +1800,7 @@ class _HomePageState extends State<HomePage> {
                       alignment: Alignment.bottomCenter,
                       children: [
                         CustomImageView(
-                          imagePath:
-                              ('https://api.maczuby.com/images/${currentItem.tourPic2}'),
+                          imagePath: ('${currentItem.tourPic2}'),
                           height: 200
                               .v, // Make sure the height matches the Container's height
                           width: 350.h,
@@ -1861,7 +1857,7 @@ class _HomePageState extends State<HomePage> {
                                         children: [
                                           CustomImageView(
                                             imagePath:
-                                                ('https://api.maczuby.com/images/${currentItem.tourPic3}'),
+                                                ('${currentItem.tourPic3}'),
                                             height: 12.v,
                                             width: 8.h,
                                             radius: BorderRadius.circular(4.h),
@@ -1912,7 +1908,7 @@ class _HomePageState extends State<HomePage> {
                                             children: [
                                               CustomImageView(
                                                 imagePath:
-                                                    ('https://api.maczuby.com/images/${currentItem.tourPic2}'),
+                                                    ('${currentItem.tourPic2}'),
                                                 height: 13.adaptSize,
                                                 width: 13.adaptSize,
                                                 radius:
@@ -1986,8 +1982,7 @@ class _HomePageState extends State<HomePage> {
                       alignment: Alignment.bottomCenter,
                       children: [
                         CustomImageView(
-                          imagePath:
-                              ('https://api.maczuby.com/images/${currentItem.servicePic2}'),
+                          imagePath: ('${currentItem.servicePic2}'),
                           height: 200
                               .v, // Make sure the height matches the Container's height
                           width: 350.h,
@@ -2044,7 +2039,7 @@ class _HomePageState extends State<HomePage> {
                                         children: [
                                           CustomImageView(
                                             imagePath:
-                                                ('https://api.maczuby.com/images/${currentItem.servicePic3}'),
+                                                ('${currentItem.servicePic3}'),
                                             height: 12.v,
                                             width: 8.h,
                                             radius: BorderRadius.circular(4.h),
@@ -2095,7 +2090,7 @@ class _HomePageState extends State<HomePage> {
                                             children: [
                                               CustomImageView(
                                                 imagePath:
-                                                    ('https://api.maczuby.com/images/${currentItem.servicePic2}'),
+                                                    ('${currentItem.servicePic2}'),
                                                 height: 13.adaptSize,
                                                 width: 13.adaptSize,
                                                 radius:

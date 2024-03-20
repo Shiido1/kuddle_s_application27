@@ -23,13 +23,11 @@ class _HotelFiveState extends State<HotelFive> {
 
   Widget _buildSeventyFour(BuildContext context) {
     final List<String> imageUrls = [
-      'https://api.maczuby.com/images/${widget.property.propertyPic1}',
-      'https://api.maczuby.com/images/${widget.property.propertyPic2}',
-      'https://api.maczuby.com/images/${widget.property.propertyPic3}',
+      '${widget.property.propertyPic1}',
+      '${widget.property.propertyPic2}',
+      '${widget.property.propertyPic3}',
       // Add other image URLs as needed
     ];
-
-
 
     return Align(
       alignment: Alignment.topCenter,
@@ -53,10 +51,10 @@ class _HotelFiveState extends State<HotelFive> {
                 setState(() {
                   _currentIndex = index;
                 });
-
               },
               autoPlay: true,
-              autoPlayInterval: Duration(seconds: 3), // Set the interval for automatic sliding
+              autoPlayInterval: Duration(
+                  seconds: 3), // Set the interval for automatic sliding
               autoPlayAnimationDuration: Duration(milliseconds: 800),
               autoPlayCurve: Curves.fastOutSlowIn,
               enableInfiniteScroll: true,
@@ -77,6 +75,4 @@ class _HotelFiveState extends State<HotelFive> {
       ),
     );
   }
-
 }
-

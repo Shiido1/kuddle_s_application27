@@ -13,9 +13,8 @@ import '../book_room_calendar_screen/BookingRoom.dart';
 import '../book_room_calendar_screen/book_vehicle_calendar_screen_original.dart';
 
 class VehicleDetail extends StatefulWidget {
-
   final VehicleModel vehicle;
-   VehicleDetail({Key? key, required this.vehicle}) : super(key: key);
+  VehicleDetail({Key? key, required this.vehicle}) : super(key: key);
 
   @override
   State<VehicleDetail> createState() => _VehicleDetailState();
@@ -39,13 +38,16 @@ class _VehicleDetailState extends State<VehicleDetail> {
                 children: [
                   _buildSeventyFour(context),
                   Container(
-                    margin: EdgeInsets.only(bottom: 0), // Adjust margin as needed
-                    padding: EdgeInsets.symmetric(horizontal: 15.h, vertical: 24.v),
+                    margin:
+                        EdgeInsets.only(bottom: 0), // Adjust margin as needed
+                    padding:
+                        EdgeInsets.symmetric(horizontal: 15.h, vertical: 24.v),
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text("${widget.vehicle.vehicleName}", style: theme.textTheme.headlineMedium),
+                        Text("${widget.vehicle.vehicleName}",
+                            style: theme.textTheme.headlineMedium),
                         SizedBox(height: 8.v),
                         _buildVector(context),
                         SizedBox(height: 27.v),
@@ -78,7 +80,7 @@ class _VehicleDetailState extends State<VehicleDetail> {
                         // _buildSwimmingPool(context),
                         // SizedBox(height: 27.v),
                         // _buildLaundry(context),
-                        SizedBox(height: 27.v),  // Add space between sections
+                        SizedBox(height: 27.v), // Add space between sections
                         _buildAdditionalDetails(context),
                         SizedBox(height: 150.v),
                         _buildBookNow(context)
@@ -90,7 +92,6 @@ class _VehicleDetailState extends State<VehicleDetail> {
             ),
           ),
         ),
-
       ),
     );
   }
@@ -101,7 +102,9 @@ class _VehicleDetailState extends State<VehicleDetail> {
       children: [
         Padding(
           padding: EdgeInsets.symmetric(horizontal: 16.h),
-          child: Text("Additional Details", style: theme.textTheme.headline6?.copyWith(color: Color(0xFF003B95))),
+          child: Text("Additional Details",
+              style: theme.textTheme.headline6
+                  ?.copyWith(color: Color(0xFF003B95))),
         ),
         SizedBox(height: 8.v), // Reduced spacing
         IntrinsicHeight(
@@ -109,24 +112,25 @@ class _VehicleDetailState extends State<VehicleDetail> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              _buildDetailItem(Icons.access_time, "Check In", "From 07:44 AM to 1:44 PM"),
-              _buildDetailItem(Icons.access_time, "Check Out", "From 12:00 PM to 3:00 PM"),
+              _buildDetailItem(
+                  Icons.access_time, "Check In", "From 07:44 AM to 1:44 PM"),
+              _buildDetailItem(
+                  Icons.access_time, "Check Out", "From 12:00 PM to 3:00 PM"),
             ],
           ),
         ),
         SizedBox(height: 8.v),
 
-
-
         IntrinsicHeight(
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              _buildDetailItem(Icons.policy, "Cancellation/prepayment", "Cancellation and prepayment policies vary according to accommodations type."),
+              _buildDetailItem(Icons.policy, "Cancellation/prepayment",
+                  "Cancellation and prepayment policies vary according to accommodations type."),
             ],
           ),
-        ),// Red
+        ), // Red
 
         SizedBox(height: 8.v), // Reduced spacing
         IntrinsicHeight(
@@ -134,11 +138,11 @@ class _VehicleDetailState extends State<VehicleDetail> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              _buildDetailItem(Icons.child_care, "Children & Beds", "Children are not allowed in this vehicle. No age restriction. There's no age requirement for check-in."),
+              _buildDetailItem(Icons.child_care, "Children & Beds",
+                  "Children are not allowed in this vehicle. No age restriction. There's no age requirement for check-in."),
             ],
           ),
         ),
-
 
         SizedBox(height: 8.v), // Reduced spacing
         IntrinsicHeight(
@@ -147,7 +151,8 @@ class _VehicleDetailState extends State<VehicleDetail> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               _buildDetailItem(Icons.pets, "Pets", "Pets are not allowed."),
-              _buildDetailItem(Icons.smoking_rooms, "Smoking", "Smoking is not allowed."),
+              _buildDetailItem(
+                  Icons.smoking_rooms, "Smoking", "Smoking is not allowed."),
             ],
           ),
         ),
@@ -157,7 +162,8 @@ class _VehicleDetailState extends State<VehicleDetail> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              _buildDetailItem(Icons.payment, "Accepted payment methods", "Cash is not accepted. Pay securely through your e-wallet."),
+              _buildDetailItem(Icons.payment, "Accepted payment methods",
+                  "Cash is not accepted. Pay securely through your e-wallet."),
             ],
           ),
         ),
@@ -165,7 +171,11 @@ class _VehicleDetailState extends State<VehicleDetail> {
     );
   }
 
-  Widget _buildDetailItem(IconData icon, String title, String content,) {
+  Widget _buildDetailItem(
+    IconData icon,
+    String title,
+    String content,
+  ) {
     // Calculate the fraction of ListTile width for the icon
     double iconFraction = 0.1; // Adjust the fraction for the desired size
 
@@ -179,14 +189,17 @@ class _VehicleDetailState extends State<VehicleDetail> {
           borderRadius: BorderRadius.circular(12.0),
         ),
         child: ListTile(
-          contentPadding: EdgeInsets.symmetric(horizontal: 16.h, vertical: 16.v),
+          contentPadding:
+              EdgeInsets.symmetric(horizontal: 16.h, vertical: 16.v),
           leading: Container(
             width: iconSize,
             height: iconSize,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(icon, color: Colors.white, size: 16.0), // Adjust the size for the desired icon size
+                Icon(icon,
+                    color: Colors.white,
+                    size: 16.0), // Adjust the size for the desired icon size
               ],
             ),
             padding: EdgeInsets.all(8.h),
@@ -197,13 +210,15 @@ class _VehicleDetailState extends State<VehicleDetail> {
           ),
           title: Text(
             title,
-            style: theme.textTheme.subtitle1?.copyWith(color: Color(0xFF003B95)),
+            style:
+                theme.textTheme.subtitle1?.copyWith(color: Color(0xFF003B95)),
           ),
           subtitle: Padding(
             padding: EdgeInsets.only(top: 8.v),
             child: Text(
               content,
-              style: theme.textTheme.bodyText2?.copyWith(color: Color(0xFF003B95)),
+              style:
+                  theme.textTheme.bodyText2?.copyWith(color: Color(0xFF003B95)),
             ),
           ),
         ),
@@ -222,7 +237,7 @@ class _VehicleDetailState extends State<VehicleDetail> {
   //           child: Stack(alignment: Alignment.topCenter, children: [
   //             CustomImageView(
   //                 // imagePath: ImageConstant.imgYuliyaPankevic,
-  //               imagePath: ('https://api.maczuby.com/images/${widget.vehicle.vehiclePic1}'),
+  //               imagePath: ('${widget.vehicle.vehiclePic1}'),
   //                 height: 311.v,
   //                 width: 430.h,
   //                 radius: BorderRadius.circular(15.h),
@@ -264,9 +279,9 @@ class _VehicleDetailState extends State<VehicleDetail> {
 
   Widget _buildSeventyFour(BuildContext context) {
     final List<String> imageUrls = [
-      'https://api.maczuby.com/images/${widget.vehicle.vehiclePic1}',
-      'https://api.maczuby.com/images/${widget.vehicle.vehiclePic2}',
-      'https://api.maczuby.com/images/${widget.vehicle.vehiclePic3}',
+      '${widget.vehicle.vehiclePic1}',
+      '${widget.vehicle.vehiclePic2}',
+      '${widget.vehicle.vehiclePic3}',
       // Add other image URLs as needed
     ];
 
@@ -342,30 +357,28 @@ class _VehicleDetailState extends State<VehicleDetail> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: List.generate(
                     imageUrls.length,
-                        (index) => Padding(
+                    (index) => Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Container(
                         width: _currentIndex == index ? 33.0 : 5.0,
                         height: _currentIndex == index ? 5.0 : 10.0,
                         child: _currentIndex == index
                             ? Container(
-                          decoration: BoxDecoration(
-                            color: Color(0xff003B95),
-                            borderRadius: BorderRadius.circular(15),
-                          ),
-                        )
+                                decoration: BoxDecoration(
+                                  color: Color(0xff003B95),
+                                  borderRadius: BorderRadius.circular(15),
+                                ),
+                              )
                             : Container(
-                          width: 30.0,
-                          height: 5.0,
-                          decoration: BoxDecoration(
-                            color: Colors.grey,
-                            shape: BoxShape.circle,
-                          ),
-                        ),
-
+                                width: 30.0,
+                                height: 5.0,
+                                decoration: BoxDecoration(
+                                  color: Colors.grey,
+                                  shape: BoxShape.circle,
+                                ),
+                              ),
                       ),
-
-                        ),
+                    ),
                   ),
                 ),
               ),
@@ -376,15 +389,12 @@ class _VehicleDetailState extends State<VehicleDetail> {
     );
   }
 
-
-
-
-
   /// Section Widget
   Widget _buildVector(BuildContext context) {
-
-
-    String? priceString = widget.vehicle.price != null && widget.vehicle.price!.isNotEmpty ? widget.vehicle.price : '0.0';
+    String? priceString =
+        widget.vehicle.price != null && widget.vehicle.price!.isNotEmpty
+            ? widget.vehicle.price
+            : '0.0';
 
     // Convert the String to a double using double.parse
     double price = double.parse(priceString!);
@@ -446,7 +456,9 @@ class _VehicleDetailState extends State<VehicleDetail> {
               alignment: Alignment.topRight,
               child: RichText(
                   text: TextSpan(children: [
-                    TextSpan(text: " ${formattedCurrency}", style: theme.textTheme.headlineSmall),
+                    TextSpan(
+                        text: " ${formattedCurrency}",
+                        style: theme.textTheme.headlineSmall),
                     TextSpan(text: " "),
                     TextSpan(
                         text: "",
@@ -621,17 +633,15 @@ class _VehicleDetailState extends State<VehicleDetail> {
         margin: EdgeInsets.only(left: 76.h, right: 76.h, bottom: 29.v),
         buttonStyle: CustomButtonStyles.fillPrimary,
         onPressed: () {
-
           Navigator.push(
             context,
             MaterialPageRoute(
                 builder: (context) => CarBookingWidget(vehicle: widget.vehicle)
-                    // BookVehicleCalendarScreenOriginal(vehicle: widget.vehicle)
-            ),);
-
+                // BookVehicleCalendarScreenOriginal(vehicle: widget.vehicle)
+                ),
+          );
 
           // BookVehicleCalendarScreenOriginal(vehicle: widget.vehicle);
-
         });
   }
 

@@ -13,7 +13,6 @@ class ToursectionItemWidget extends StatelessWidget {
     required this.tour,
   }) : super(key: key);
 
-
   String formatPrice(String? price) {
     if (price == null || price.isEmpty) {
       return '0.0';
@@ -30,7 +29,6 @@ class ToursectionItemWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return SizedBox(
       height: 300.v,
       width: 181.h,
@@ -39,7 +37,8 @@ class ToursectionItemWidget extends StatelessWidget {
         children: [
           CustomImageView(
             // imagePath: ImageConstant.imgValeriiaBugaio,
-            imagePath: ('https://api.maczuby.com/images/${tour.tourPic2}'), // Adjust this based on your data model
+            imagePath:
+                ('${tour.tourPic2}'), // Adjust this based on your data model
             height: 200.v,
             width: 181.h,
             fit: BoxFit.cover,
@@ -71,8 +70,6 @@ class ToursectionItemWidget extends StatelessWidget {
                           '${tour.tourName?.substring(0, 13) ?? ''}...',
                           style: CustomTextStyles.labelLargeOnPrimarySemiBold,
                         ),
-
-
                         SizedBox(height: 4.v),
                         Row(
                           children: [
@@ -86,7 +83,6 @@ class ToursectionItemWidget extends StatelessWidget {
                               padding: EdgeInsets.only(left: 5.h),
                               child: Text(
                                 '${tour?.country}',
-
                                 style: CustomTextStyles.bodySmallOnPrimary,
                               ),
                             ),
@@ -96,12 +92,10 @@ class ToursectionItemWidget extends StatelessWidget {
                         RichText(
                           text: TextSpan(
                             children: [
-
                               TextSpan(
                                 text: "${tour.city}",
                                 style: CustomTextStyles.labelLargeOnPrimary_1,
                               ),
-
 
                               // TextSpan(
                               //   text: "₦${formatPrice(tour.price)}/",

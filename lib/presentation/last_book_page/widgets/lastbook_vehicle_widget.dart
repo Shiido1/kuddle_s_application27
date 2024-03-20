@@ -6,11 +6,10 @@ import 'package:kuddle_s_application27/widgets/custom_elevated_button.dart';
 import '../../../models/vehicle_response.dart';
 import '../../../pages/bookings/model/booking_model.dart';
 
-
 // ignore: must_be_immutable
 class LastbookVehicleWidget extends StatelessWidget {
   final Vehicle vehicle;
-  LastbookVehicleWidget({Key? key,  required this.vehicle})
+  LastbookVehicleWidget({Key? key, required this.vehicle})
       : super(
           key: key,
         );
@@ -35,7 +34,7 @@ class LastbookVehicleWidget extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 CustomImageView(
-                  imagePath: ('https://api.maczuby.com/images/${vehicle.vehiclePic2}'),
+                  imagePath: ('${vehicle.vehiclePic2}'),
                   height: 108.v,
                   width: 116.h,
                   radius: BorderRadius.circular(

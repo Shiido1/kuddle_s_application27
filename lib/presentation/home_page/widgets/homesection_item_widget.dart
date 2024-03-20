@@ -5,14 +5,14 @@ import '../../../pages/home/model/property_list_model/property_model.dart';
 
 class HomesectionItemWidget extends StatelessWidget {
   final VoidCallback? onTapImgSpain;
-  final PropertyModel property; // Adjust the type based on your actual data model
+  final PropertyModel
+      property; // Adjust the type based on your actual data model
 
   HomesectionItemWidget({
     Key? key,
     this.onTapImgSpain,
     required this.property,
   }) : super(key: key);
-
 
   String formatPrice(String? price) {
     if (price == null || price.isEmpty) {
@@ -30,7 +30,6 @@ class HomesectionItemWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return SizedBox(
       height: 300.v,
       width: 181.h,
@@ -39,7 +38,8 @@ class HomesectionItemWidget extends StatelessWidget {
         children: [
           CustomImageView(
             // imagePath: ImageConstant.imgValeriiaBugaio,
-            imagePath: ('https://api.maczuby.com/images/${property.propertyPic2}'), // Adjust this based on your data model
+            imagePath:
+                ('${property.propertyPic2}'), // Adjust this based on your data model
             height: 200.v,
             width: 181.h,
             fit: BoxFit.cover,
@@ -71,8 +71,6 @@ class HomesectionItemWidget extends StatelessWidget {
                           '${property.propertyName?.substring(0, 13) ?? ''}...',
                           style: CustomTextStyles.labelLargeOnPrimarySemiBold,
                         ),
-
-
                         SizedBox(height: 4.v),
                         Row(
                           children: [
@@ -86,7 +84,6 @@ class HomesectionItemWidget extends StatelessWidget {
                               padding: EdgeInsets.only(left: 5.h),
                               child: Text(
                                 '${property?.country}',
-
                                 style: CustomTextStyles.bodySmallOnPrimary,
                               ),
                             ),
@@ -96,12 +93,10 @@ class HomesectionItemWidget extends StatelessWidget {
                         RichText(
                           text: TextSpan(
                             children: [
-
                               TextSpan(
                                 text: "${property.city}",
                                 style: CustomTextStyles.labelLargeOnPrimary_1,
                               ),
-
 
                               // TextSpan(
                               //   text: "₦${formatPrice(property.price)}/",

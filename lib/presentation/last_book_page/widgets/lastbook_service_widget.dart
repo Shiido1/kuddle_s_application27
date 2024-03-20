@@ -5,11 +5,10 @@ import 'package:kuddle_s_application27/widgets/custom_elevated_button.dart';
 import '../../../models/service_response.dart';
 import '../../../pages/bookings/model/booking_model.dart';
 
-
 // ignore: must_be_immutable
 class LastbookServiceWidget extends StatelessWidget {
   final Service bookRoom;
-  LastbookServiceWidget({Key? key,  required this.bookRoom})
+  LastbookServiceWidget({Key? key, required this.bookRoom})
       : super(
           key: key,
         );
@@ -34,7 +33,7 @@ class LastbookServiceWidget extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 CustomImageView(
-                  imagePath: ('https://api.maczuby.com/images/${bookRoom.servicePic2}'),
+                  imagePath: ('${bookRoom.servicePic2}'),
                   height: 108.v,
                   width: 116.h,
                   radius: BorderRadius.circular(
@@ -51,7 +50,7 @@ class LastbookServiceWidget extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Container(
-                        width:150,
+                        width: 150,
                         child: Text(
                           "${bookRoom.serviceName}",
                           style: theme.textTheme.titleMedium,

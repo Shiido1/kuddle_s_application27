@@ -12,16 +12,13 @@ import 'package:kuddle_s_application27/widgets/custom_icon_button.dart';
 import 'package:intl/intl.dart';
 import '../../pages/home/model/services_list_model/services_model.dart';
 
-
 class ServiceDetail extends StatefulWidget {
-
   final ServicesModel service;
-   ServiceDetail({Key? key, required this.service}) : super(key: key);
+  ServiceDetail({Key? key, required this.service}) : super(key: key);
 
   @override
   State<ServiceDetail> createState() => _HotelDetailState();
 }
-
 
 class _HotelDetailState extends State<ServiceDetail> {
   @override
@@ -41,13 +38,16 @@ class _HotelDetailState extends State<ServiceDetail> {
                 children: [
                   _buildSeventyFour(context),
                   Container(
-                    margin: EdgeInsets.only(bottom: 0), // Adjust margin as needed
-                    padding: EdgeInsets.symmetric(horizontal: 15.h, vertical: 24.v),
+                    margin:
+                        EdgeInsets.only(bottom: 0), // Adjust margin as needed
+                    padding:
+                        EdgeInsets.symmetric(horizontal: 15.h, vertical: 24.v),
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text("${widget.service.hostName}", style: theme.textTheme.headlineMedium),
+                        Text("${widget.service.hostName}",
+                            style: theme.textTheme.headlineMedium),
                         SizedBox(height: 8.v),
                         _buildVector(context),
                         SizedBox(height: 27.v),
@@ -93,7 +93,6 @@ class _HotelDetailState extends State<ServiceDetail> {
             ),
           ),
         ),
-
       ),
     );
   }
@@ -104,7 +103,9 @@ class _HotelDetailState extends State<ServiceDetail> {
       children: [
         Padding(
           padding: EdgeInsets.symmetric(horizontal: 16.h),
-          child: Text("Additional Details", style: theme.textTheme.headline6?.copyWith(color: Color(0xFF003B95))),
+          child: Text("Additional Details",
+              style: theme.textTheme.headline6
+                  ?.copyWith(color: Color(0xFF003B95))),
         ),
         SizedBox(height: 8.v), // Reduced spacing
         IntrinsicHeight(
@@ -112,24 +113,25 @@ class _HotelDetailState extends State<ServiceDetail> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              _buildDetailItem(Icons.access_time, "Check In", "From 07:44 AM to 1:44 PM"),
-              _buildDetailItem(Icons.access_time, "Check Out", "From 12:00 PM to 3:00 PM"),
+              _buildDetailItem(
+                  Icons.access_time, "Check In", "From 07:44 AM to 1:44 PM"),
+              _buildDetailItem(
+                  Icons.access_time, "Check Out", "From 12:00 PM to 3:00 PM"),
             ],
           ),
         ),
         SizedBox(height: 8.v),
-
-
 
         IntrinsicHeight(
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              _buildDetailItem(Icons.policy, "Cancellation/prepayment", "Cancellation and prepayment policies vary according to accommodations type."),
+              _buildDetailItem(Icons.policy, "Cancellation/prepayment",
+                  "Cancellation and prepayment policies vary according to accommodations type."),
             ],
           ),
-        ),// Red
+        ), // Red
 
         SizedBox(height: 8.v), // Reduced spacing
         // IntrinsicHeight(
@@ -142,7 +144,6 @@ class _HotelDetailState extends State<ServiceDetail> {
         //   ),
         // ),
 
-
         SizedBox(height: 8.v), // Reduced spacing
         IntrinsicHeight(
           child: Row(
@@ -150,7 +151,8 @@ class _HotelDetailState extends State<ServiceDetail> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               _buildDetailItem(Icons.pets, "Pets", "Pets are not allowed."),
-              _buildDetailItem(Icons.smoking_rooms, "Smoking", "Smoking is not allowed."),
+              _buildDetailItem(
+                  Icons.smoking_rooms, "Smoking", "Smoking is not allowed."),
             ],
           ),
         ),
@@ -160,7 +162,8 @@ class _HotelDetailState extends State<ServiceDetail> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              _buildDetailItem(Icons.payment, "Accepted payment methods", "Cash is not accepted. Pay securely through your e-wallet."),
+              _buildDetailItem(Icons.payment, "Accepted payment methods",
+                  "Cash is not accepted. Pay securely through your e-wallet."),
             ],
           ),
         ),
@@ -168,7 +171,11 @@ class _HotelDetailState extends State<ServiceDetail> {
     );
   }
 
-  Widget _buildDetailItem(IconData icon, String title, String content,) {
+  Widget _buildDetailItem(
+    IconData icon,
+    String title,
+    String content,
+  ) {
     // Calculate the fraction of ListTile width for the icon
     double iconFraction = 0.1; // Adjust the fraction for the desired size
 
@@ -182,14 +189,17 @@ class _HotelDetailState extends State<ServiceDetail> {
           borderRadius: BorderRadius.circular(12.0),
         ),
         child: ListTile(
-          contentPadding: EdgeInsets.symmetric(horizontal: 16.h, vertical: 16.v),
+          contentPadding:
+              EdgeInsets.symmetric(horizontal: 16.h, vertical: 16.v),
           leading: Container(
             width: iconSize,
             height: iconSize,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(icon, color: Colors.white, size: 16.0), // Adjust the size for the desired icon size
+                Icon(icon,
+                    color: Colors.white,
+                    size: 16.0), // Adjust the size for the desired icon size
               ],
             ),
             padding: EdgeInsets.all(8.h),
@@ -200,13 +210,15 @@ class _HotelDetailState extends State<ServiceDetail> {
           ),
           title: Text(
             title,
-            style: theme.textTheme.subtitle1?.copyWith(color: Color(0xFF003B95)),
+            style:
+                theme.textTheme.subtitle1?.copyWith(color: Color(0xFF003B95)),
           ),
           subtitle: Padding(
             padding: EdgeInsets.only(top: 8.v),
             child: Text(
               content,
-              style: theme.textTheme.bodyText2?.copyWith(color: Color(0xFF003B95)),
+              style:
+                  theme.textTheme.bodyText2?.copyWith(color: Color(0xFF003B95)),
             ),
           ),
         ),
@@ -225,7 +237,7 @@ class _HotelDetailState extends State<ServiceDetail> {
   //           child: Stack(alignment: Alignment.topCenter, children: [
   //             CustomImageView(
   //                 // imagePath: ImageConstant.imgYuliyaPankevic,
-  //               imagePath: ('https://api.maczuby.com/images/${widget.Service.ServicePic1}'),
+  //               imagePath: ('${widget.Service.ServicePic1}'),
   //                 height: 311.v,
   //                 width: 430.h,
   //                 radius: BorderRadius.circular(15.h),
@@ -267,9 +279,9 @@ class _HotelDetailState extends State<ServiceDetail> {
 
   Widget _buildSeventyFour(BuildContext context) {
     final List<String> imageUrls = [
-      'https://api.maczuby.com/images/${widget.service.servicePic1}',
-      'https://api.maczuby.com/images/${widget.service.servicePic2}',
-      'https://api.maczuby.com/images/${widget.service.servicePic3}',
+      '${widget.service.servicePic1}',
+      '${widget.service.servicePic2}',
+      '${widget.service.servicePic3}',
       // Add other image URLs as needed
     ];
 
@@ -345,30 +357,28 @@ class _HotelDetailState extends State<ServiceDetail> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: List.generate(
                     imageUrls.length,
-                        (index) => Padding(
+                    (index) => Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Container(
                         width: _currentIndex == index ? 33.0 : 5.0,
                         height: _currentIndex == index ? 5.0 : 10.0,
                         child: _currentIndex == index
                             ? Container(
-                          decoration: BoxDecoration(
-                            color: Color(0xff003B95),
-                            borderRadius: BorderRadius.circular(15),
-                          ),
-                        )
+                                decoration: BoxDecoration(
+                                  color: Color(0xff003B95),
+                                  borderRadius: BorderRadius.circular(15),
+                                ),
+                              )
                             : Container(
-                          width: 30.0,
-                          height: 5.0,
-                          decoration: BoxDecoration(
-                            color: Colors.grey,
-                            shape: BoxShape.circle,
-                          ),
-                        ),
-
+                                width: 30.0,
+                                height: 5.0,
+                                decoration: BoxDecoration(
+                                  color: Colors.grey,
+                                  shape: BoxShape.circle,
+                                ),
+                              ),
                       ),
-
-                        ),
+                    ),
                   ),
                 ),
               ),
@@ -379,14 +389,12 @@ class _HotelDetailState extends State<ServiceDetail> {
     );
   }
 
-
-
-
-
   /// Section Widget
   Widget _buildVector(BuildContext context) {
-
-    String? priceString = widget.service.price != null && widget.service.price!.isNotEmpty ? widget.service.price : '0.0';
+    String? priceString =
+        widget.service.price != null && widget.service.price!.isNotEmpty
+            ? widget.service.price
+            : '0.0';
 
     // Convert the String to a double using double.parse
     double price = double.parse(priceString!);
@@ -448,7 +456,9 @@ class _HotelDetailState extends State<ServiceDetail> {
               alignment: Alignment.topRight,
               child: RichText(
                   text: TextSpan(children: [
-                    TextSpan(text: " ${formattedCurrency}", style: theme.textTheme.headlineSmall),
+                    TextSpan(
+                        text: " ${formattedCurrency}",
+                        style: theme.textTheme.headlineSmall),
                     TextSpan(text: " "),
                     TextSpan(
                         text: "",
@@ -627,9 +637,9 @@ class _HotelDetailState extends State<ServiceDetail> {
           Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (context) => ServiceBookingWidget(vehicle: widget.service)
-            ),);
-
+                builder: (context) =>
+                    ServiceBookingWidget(vehicle: widget.service)),
+          );
         });
   }
 

@@ -13,7 +13,6 @@ class FlightsectionItemWidget extends StatelessWidget {
     required this.flight,
   }) : super(key: key);
 
-
   String formatPrice(String? price) {
     if (price == null || price.isEmpty) {
       return '0';
@@ -30,8 +29,8 @@ class FlightsectionItemWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
-    NumberFormat currencyFormat = NumberFormat.currency(locale: 'en_NG', symbol: '\₦');
+    NumberFormat currencyFormat =
+        NumberFormat.currency(locale: 'en_NG', symbol: '\₦');
     return SizedBox(
       height: 300.v,
       width: 181.h,
@@ -40,7 +39,8 @@ class FlightsectionItemWidget extends StatelessWidget {
         children: [
           CustomImageView(
             // imagePath: ImageConstant.imgValeriiaBugaio,
-            imagePath: ('https://api.maczuby.com/images/${flight.flightPic2}'), // Adjust this based on your data model
+            imagePath:
+                ('${flight.flightPic2}'), // Adjust this based on your data model
             height: 200.v,
             width: 181.h,
             fit: BoxFit.cover,
@@ -69,8 +69,7 @@ class FlightsectionItemWidget extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          '${flight.hostName}'
-                          , // Adjust this based on your data model
+                          '${flight.hostName}', // Adjust this based on your data model
                           style: CustomTextStyles.labelLargeOnPrimarySemiBold,
                         ),
                         SizedBox(height: 4.v),
@@ -86,7 +85,6 @@ class FlightsectionItemWidget extends StatelessWidget {
                               padding: EdgeInsets.only(left: 5.h),
                               child: Text(
                                 '${flight?.arrival}',
-
                                 style: CustomTextStyles.bodySmallOnPrimary,
                               ),
                             ),
@@ -125,7 +123,8 @@ class FlightsectionItemWidget extends StatelessWidget {
                       bottom: 2.v,
                     ),
                     child: Text(
-                      flight.flightId.toString(), // Adjust this based on your data model
+                      flight.flightId
+                          .toString(), // Adjust this based on your data model
                       style: theme.textTheme.labelSmall,
                     ),
                   ),

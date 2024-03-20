@@ -4,17 +4,16 @@ import 'package:intl/intl.dart';
 import 'package:kuddle_s_application27/models/service_response.dart';
 import 'package:kuddle_s_application27/pages/home/model/services_list_model/services_model.dart';
 
-
 class ServicesectionItemWidget extends StatelessWidget {
   final VoidCallback? onTapImgSpain;
-  final ServicesModel service; // Adjust the type based on your actual data model
+  final ServicesModel
+      service; // Adjust the type based on your actual data model
 
   ServicesectionItemWidget({
     Key? key,
     this.onTapImgSpain,
     required this.service,
   }) : super(key: key);
-
 
   String formatPrice(String? price) {
     if (price == null || price.isEmpty) {
@@ -32,7 +31,6 @@ class ServicesectionItemWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return SizedBox(
       height: 300.v,
       width: 181.h,
@@ -41,7 +39,8 @@ class ServicesectionItemWidget extends StatelessWidget {
         children: [
           CustomImageView(
             // imagePath: ImageConstant.imgValeriiaBugaio,
-            imagePath: ('https://api.maczuby.com/images/${service.servicePic2}'), // Adjust this based on your data model
+            imagePath:
+                ('${service.servicePic2}'), // Adjust this based on your data model
             height: 200.v,
             width: 181.h,
             fit: BoxFit.cover,
@@ -73,7 +72,6 @@ class ServicesectionItemWidget extends StatelessWidget {
                           '${service.serviceName?.substring(0, 9) ?? ''}...',
                           style: CustomTextStyles.labelLargeOnPrimarySemiBold,
                         ),
-
                         SizedBox(height: 4.v),
                         Row(
                           children: [
@@ -87,7 +85,6 @@ class ServicesectionItemWidget extends StatelessWidget {
                               padding: EdgeInsets.only(left: 5.h),
                               child: Text(
                                 '${service?.country}',
-
                                 style: CustomTextStyles.bodySmallOnPrimary,
                               ),
                             ),
@@ -97,12 +94,10 @@ class ServicesectionItemWidget extends StatelessWidget {
                         RichText(
                           text: TextSpan(
                             children: [
-
                               TextSpan(
                                 text: "₦${formatPrice(service.price)}/",
                                 style: CustomTextStyles.labelLargeOnPrimary_1,
                               ),
-
                               TextSpan(
                                 text: " service",
                                 style: CustomTextStyles.bodySmallOnPrimaryLight,
@@ -128,7 +123,8 @@ class ServicesectionItemWidget extends StatelessWidget {
                       bottom: 2.v,
                     ),
                     child: Text(
-                      service.serviceId.toString(), // Adjust this based on your data model
+                      service.serviceId
+                          .toString(), // Adjust this based on your data model
                       style: theme.textTheme.labelSmall,
                     ),
                   ),

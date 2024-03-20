@@ -23,7 +23,8 @@ class CustomSearchView extends StatelessWidget {
     this.fillColor,
     this.filled = true,
     this.validator,
-    this.onChanged,
+    this.onChanged, 
+    this.onTapped,
   }) : super(
           key: key,
         );
@@ -67,18 +68,20 @@ class CustomSearchView extends StatelessWidget {
   final FormFieldValidator<String>? validator;
 
   final Function(String)? onChanged;
+  final Function()? onTapped;
+  String query = '';
 
   @override
   Widget build(BuildContext context) {
     return alignment != null
         ? Align(
             alignment: alignment ?? Alignment.center,
-            child: searchViewWidget,
+            child: searchViewWidget(context),
           )
-        : searchViewWidget;
+        : searchViewWidget(context);
   }
 
-  Widget get searchViewWidget => SizedBox(
+  Widget searchViewWidget(context) => SizedBox(
         width: width ?? double.maxFinite,
         child: TextFormField(
           controller: controller,
@@ -87,14 +90,15 @@ class CustomSearchView extends StatelessWidget {
           style: textStyle ?? CustomTextStyles.bodyMediumGray400,
           keyboardType: textInputType,
           maxLines: maxLines ?? 1,
-          decoration: decoration,
+          decoration: decoration(context),
           validator: validator,
           onChanged: (String value) {
             onChanged!.call(value);
           },
         ),
       );
-  InputDecoration get decoration => InputDecoration(
+
+  InputDecoration decoration(context) => InputDecoration(
         hintText: hintText ?? "",
         hintStyle: hintStyle ?? CustomTextStyles.bodyMediumGray400,
         prefixIcon: prefix ??
@@ -113,15 +117,18 @@ class CustomSearchView extends StatelessWidget {
             BoxConstraints(
               maxHeight: 44.v,
             ),
-        suffixIcon: suffix ??
-            Container(
-              margin: EdgeInsets.fromLTRB(30.h, 7.v, 11.h, 7.v),
-              child: CustomImageView(
-                imagePath: ImageConstant.imgFilterlist,
-                height: 30.adaptSize,
-                width: 30.adaptSize,
+        suffixIcon: GestureDetector(
+          onTap: onTapped,
+          child: suffix ??
+              Container(
+                margin: EdgeInsets.fromLTRB(30.h, 7.v, 11.h, 7.v),
+                child: CustomImageView(
+                  imagePath: ImageConstant.imgFilterlist,
+                  height: 30.adaptSize,
+                  width: 30.adaptSize,
+                ),
               ),
-            ),
+        ),
         suffixIconConstraints: suffixConstraints ??
             BoxConstraints(
               maxHeight: 44.v,
@@ -155,4 +162,5 @@ class CustomSearchView extends StatelessWidget {
               ),
             ),
       );
-}
+
+  }

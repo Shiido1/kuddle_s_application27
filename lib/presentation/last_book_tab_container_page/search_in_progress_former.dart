@@ -28,7 +28,8 @@ import '../search_filter_bottomsheet/search_filter_bottomsheet.dart';
 import '../search_page/widgets/search_item_widget.dart';
 
 class SearchInProgress extends StatefulWidget {
-  const SearchInProgress({Key? key, required this.initialTabIndex}) : super(key: key);
+  const SearchInProgress({Key? key, required this.initialTabIndex})
+      : super(key: key);
 
   final int initialTabIndex;
 
@@ -36,7 +37,8 @@ class SearchInProgress extends StatefulWidget {
   SearchInProgressState createState() => SearchInProgressState();
 }
 
-class SearchInProgressState extends State<SearchInProgress> with TickerProviderStateMixin {
+class SearchInProgressState extends State<SearchInProgress>
+    with TickerProviderStateMixin {
   late TabController tabviewController;
   TextEditingController searchController = TextEditingController();
   String _query = '';
@@ -46,12 +48,9 @@ class SearchInProgressState extends State<SearchInProgress> with TickerProviderS
   double minPrice = 0.0;
   double maxPrice = 6000000.00;
 
-
   void _updateSearchPrompt() {
-    setState(() {
-
-      
-    }); // Update the state to rebuild the app bar with the new search prompt
+    setState(
+        () {}); // Update the state to rebuild the app bar with the new search prompt
   }
 
   @override
@@ -64,12 +63,12 @@ class SearchInProgressState extends State<SearchInProgress> with TickerProviderS
     providerServices?.getAllToursList();
     providerServices?.getAllServicesList();
 
-    tabviewController = TabController(length: 5, vsync: this, initialIndex: widget.initialTabIndex);
+    tabviewController = TabController(
+        length: 5, vsync: this, initialIndex: widget.initialTabIndex);
     tabviewController.addListener(_updateSearchPrompt);
 
     // Initialize the Debouncer here
     _debouncer = Debouncer(milliseconds: 500);
-
 
     searchItem.clear();
   }
@@ -79,12 +78,6 @@ class SearchInProgressState extends State<SearchInProgress> with TickerProviderS
     searchController.dispose(); // Dispose of searchController
     super.dispose();
   }
-
-
-
-
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -161,8 +154,13 @@ class SearchInProgressState extends State<SearchInProgress> with TickerProviderS
   }
 
   PreferredSizeWidget _buildAppBar(BuildContext context) {
-
-    List<String> chipNames = ["Accommodation", "Vehicle", "Flights", "Tours", "Services"];
+    List<String> chipNames = [
+      "Accommodation",
+      "Vehicle",
+      "Flights",
+      "Tours",
+      "Services"
+    ];
 
     String generateSearchPrompt(int index) {
       if (index >= 0 && index < chipNames.length) {
@@ -221,18 +219,22 @@ class SearchInProgressState extends State<SearchInProgress> with TickerProviderS
   //   );
   // }
 
-
   Widget _buildTabview(BuildContext context) {
     const double chipSpacing = 13.0; // Adjust the spacing as needed
 
-    List<String> chipNames = ["Accommodation", "Vehicle", "Flights", "Tours", "Services"];
+    List<String> chipNames = [
+      "Accommodation",
+      "Vehicle",
+      "Flights",
+      "Tours",
+      "Services"
+    ];
 
     return Container(
       height: 37.v,
       width: double.infinity,
       margin: EdgeInsets.only(left: 15.h),
       child: DefaultTabController(
-
         length: chipNames.length,
         child: TabBar(
           controller: tabviewController,
@@ -256,8 +258,8 @@ class SearchInProgressState extends State<SearchInProgress> with TickerProviderS
           ),
           tabs: List<Widget>.generate(
             chipNames.length,
-                (index) => Padding(
-              padding: EdgeInsets.only(right: chipSpacing,left:chipSpacing ),
+            (index) => Padding(
+              padding: EdgeInsets.only(right: chipSpacing, left: chipSpacing),
               child: Tab(
                 text: chipNames[index],
               ),
@@ -267,9 +269,6 @@ class SearchInProgressState extends State<SearchInProgress> with TickerProviderS
       ),
     );
   }
-
-
-
 
   // Widget _buildFilteredThirty(BuildContext context) {
   //   return Padding(
@@ -313,7 +312,6 @@ class SearchInProgressState extends State<SearchInProgress> with TickerProviderS
   // }
 
   Widget _buildPriceFilter(BuildContext context) {
-
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -339,7 +337,7 @@ class SearchInProgressState extends State<SearchInProgress> with TickerProviderS
             });
           },
           min: minPrice,
-          max: maxPrice,  // You can set this to an appropriate maximum value
+          max: maxPrice, // You can set this to an appropriate maximum value
         ),
         ElevatedButton(
           onPressed: () {
@@ -356,8 +354,6 @@ class SearchInProgressState extends State<SearchInProgress> with TickerProviderS
       ],
     );
   }
-
-
 
   Widget _buildFilteredThirty(BuildContext context) {
     return Padding(
@@ -401,10 +397,9 @@ class SearchInProgressState extends State<SearchInProgress> with TickerProviderS
   }
 
   Widget _buildSearch(BuildContext context) {
-
     switch (tabviewController.index) {
       case 0:
-       print(tabviewController.index);
+        print(tabviewController.index);
         return _performAccommodationSearch(context);
       case 1:
         print(tabviewController.index);
@@ -435,16 +430,19 @@ class SearchInProgressState extends State<SearchInProgress> with TickerProviderS
             );
           },
           itemCount: provider.propertyListModel?.result!
-              .where((element) =>
-          element.hostName?.toLowerCase().contains(_query.toLowerCase()) ==
-              true)
-              ?.length ??
+                  .where((element) =>
+                      element.hostName
+                          ?.toLowerCase()
+                          .contains(_query.toLowerCase()) ==
+                      true)
+                  ?.length ??
               0,
           itemBuilder: (context, index) {
-            final List<PropertyModel>? filteredList = provider.propertyListModel?.result
+            final List<PropertyModel>? filteredList = provider
+                .propertyListModel?.result
                 ?.where((element) => element.propertyName!
-                .toLowerCase()
-                .contains(_query.toLowerCase()))
+                    .toLowerCase()
+                    .contains(_query.toLowerCase()))
                 .toList();
 
             if (filteredList != null && index < filteredList.length) {
@@ -468,7 +466,7 @@ class SearchInProgressState extends State<SearchInProgress> with TickerProviderS
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           CustomImageView(
-                            imagePath: ('https://api.maczuby.com/images/${currentItem.propertyPic1}'),
+                            imagePath: ('${currentItem.propertyPic1}'),
                             height: 108.v,
                             width: 116.h,
                             radius: BorderRadius.circular(
@@ -533,7 +531,6 @@ class SearchInProgressState extends State<SearchInProgress> with TickerProviderS
     );
   }
 
-
   Widget _performVehiclesSearch(BuildContext context) {
     return Consumer<ProviderServices>(
       builder: (_, provider, __) {
@@ -545,16 +542,18 @@ class SearchInProgressState extends State<SearchInProgress> with TickerProviderS
               height: 19.v,
             );
           },
-          itemCount: provider.vehicleListModel?.result?.where(
-                (element) => element.hostName!
-                .toLowerCase()
-                .contains(_query.toLowerCase()),
-          )?.length ?? 0,
+          itemCount: provider.vehicleListModel?.result
+                  ?.where(
+                    (element) => element.hostName!
+                        .toLowerCase()
+                        .contains(_query.toLowerCase()),
+                  )
+                  ?.length ??
+              0,
           itemBuilder: (context, index) {
-            final List<VehicleModel>? filteredList =
-            provider.vehicleListModel?.result
-                ?.where((element) =>
-                element.vehicleName!
+            final List<VehicleModel>? filteredList = provider
+                .vehicleListModel?.result
+                ?.where((element) => element.vehicleName!
                     .toLowerCase()
                     .contains(_query.toLowerCase()))
                 .toList();
@@ -580,7 +579,7 @@ class SearchInProgressState extends State<SearchInProgress> with TickerProviderS
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           CustomImageView(
-                            imagePath: ('https://api.maczuby.com/images/${currentItem.vehiclePic1}'),
+                            imagePath: ('${currentItem.vehiclePic1}'),
                             height: 108.v,
                             width: 116.h,
                             radius: BorderRadius.circular(
@@ -656,16 +655,18 @@ class SearchInProgressState extends State<SearchInProgress> with TickerProviderS
               height: 19.v,
             );
           },
-          itemCount: provider.flightListModel?.result?.where(
-                (element) => element.hostName!
-                .toLowerCase()
-                .contains(_query.toLowerCase()),
-          )?.length ?? 0,
+          itemCount: provider.flightListModel?.result
+                  ?.where(
+                    (element) => element.hostName!
+                        .toLowerCase()
+                        .contains(_query.toLowerCase()),
+                  )
+                  ?.length ??
+              0,
           itemBuilder: (context, index) {
-            final List<FlightModel>? filteredList =
-            provider.flightListModel?.result
-                ?.where((element) =>
-                element.fromWhere!
+            final List<FlightModel>? filteredList = provider
+                .flightListModel?.result
+                ?.where((element) => element.fromWhere!
                     .toLowerCase()
                     .contains(_query.toLowerCase()))
                 .toList();
@@ -690,7 +691,7 @@ class SearchInProgressState extends State<SearchInProgress> with TickerProviderS
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           CustomImageView(
-                            imagePath: ('https://api.maczuby.com/images/${currentItem.flightPic1}'),
+                            imagePath: ('${currentItem.flightPic1}'),
                             height: 108.v,
                             width: 116.h,
                             radius: BorderRadius.circular(
@@ -766,16 +767,17 @@ class SearchInProgressState extends State<SearchInProgress> with TickerProviderS
               height: 19.v,
             );
           },
-          itemCount: provider.tourListModel?.result?.where(
-                (element) => element.hostName!
-                .toLowerCase()
-                .contains(_query.toLowerCase()),
-          )?.length ?? 0,
+          itemCount: provider.tourListModel?.result
+                  ?.where(
+                    (element) => element.hostName!
+                        .toLowerCase()
+                        .contains(_query.toLowerCase()),
+                  )
+                  ?.length ??
+              0,
           itemBuilder: (context, index) {
-            final List<TourModel>? filteredList =
-            provider.tourListModel?.result
-                ?.where((element) =>
-                element.hostName!
+            final List<TourModel>? filteredList = provider.tourListModel?.result
+                ?.where((element) => element.hostName!
                     .toLowerCase()
                     .contains(_query.toLowerCase()))
                 .toList();
@@ -800,7 +802,7 @@ class SearchInProgressState extends State<SearchInProgress> with TickerProviderS
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           CustomImageView(
-                            imagePath: ('https://api.maczuby.com/images/${currentItem.tourPic1}'),
+                            imagePath: ('${currentItem.tourPic1}'),
                             height: 108.v,
                             width: 116.h,
                             radius: BorderRadius.circular(
@@ -876,16 +878,18 @@ class SearchInProgressState extends State<SearchInProgress> with TickerProviderS
               height: 19.v,
             );
           },
-          itemCount: provider.serviceListModel?.result?.where(
-                (element) => element.hostName!
-                .toLowerCase()
-                .contains(_query.toLowerCase()),
-          )?.length ?? 0,
+          itemCount: provider.serviceListModel?.result
+                  ?.where(
+                    (element) => element.hostName!
+                        .toLowerCase()
+                        .contains(_query.toLowerCase()),
+                  )
+                  ?.length ??
+              0,
           itemBuilder: (context, index) {
-            final List<ServicesModel>? filteredList =
-            provider.serviceListModel?.result
-                ?.where((element) =>
-                element.hostName!
+            final List<ServicesModel>? filteredList = provider
+                .serviceListModel?.result
+                ?.where((element) => element.hostName!
                     .toLowerCase()
                     .contains(_query.toLowerCase()))
                 .toList();
@@ -910,7 +914,7 @@ class SearchInProgressState extends State<SearchInProgress> with TickerProviderS
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           CustomImageView(
-                            imagePath: ('https://api.maczuby.com/images/${currentItem.servicePic1}'),
+                            imagePath: ('${currentItem.servicePic1}'),
                             height: 108.v,
                             width: 116.h,
                             radius: BorderRadius.circular(
@@ -978,14 +982,10 @@ class SearchInProgressState extends State<SearchInProgress> with TickerProviderS
     );
   }
 
-
   onTapArrowLeft(BuildContext context) {
     Navigator.pop(context);
   }
-
-
 }
-
 
 class Debouncer {
   final int milliseconds;
@@ -1002,12 +1002,11 @@ class Debouncer {
   }
 }
 
-
 class FavouriteSingleItemWidgett extends StatelessWidget {
   const FavouriteSingleItemWidgett({Key? key})
       : super(
-    key: key,
-  );
+          key: key,
+        );
 
   @override
   Widget build(BuildContext context) {
@@ -1075,16 +1074,13 @@ class FavouriteSingleItemWidgett extends StatelessWidget {
                         ],
                       ),
                       SizedBox(height: 9.v),
-
                       Text('499/Night'),
-
                     ],
                   ),
                 ),
               ],
             ),
           ),
-
         ],
       ),
     );

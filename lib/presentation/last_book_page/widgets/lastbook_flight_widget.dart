@@ -7,11 +7,10 @@ import 'package:intl/intl.dart';
 import '../../../models/flight_response.dart';
 import '../../../pages/bookings/model/booking_model.dart';
 
-
 // ignore: must_be_immutable
 class LastbookFlightWidget extends StatelessWidget {
   final Flight bookRoom;
-  LastbookFlightWidget({Key? key,  required this.bookRoom})
+  LastbookFlightWidget({Key? key, required this.bookRoom})
       : super(
           key: key,
         );
@@ -21,10 +20,6 @@ class LastbookFlightWidget extends StatelessWidget {
     final formattedString = NumberFormat("#,##0.00").format(number);
     return formattedString;
   }
-
-
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +41,7 @@ class LastbookFlightWidget extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 CustomImageView(
-                  imagePath: ('https://api.maczuby.com/images/${bookRoom.flightPic2}'),
+                  imagePath: ('${bookRoom.flightPic2}'),
                   height: 108.v,
                   width: 116.h,
                   radius: BorderRadius.circular(

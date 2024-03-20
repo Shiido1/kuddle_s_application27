@@ -22,9 +22,9 @@ import '../home_page/vehicle_detail.dart';
 import '../search_page/widgets/search_item_widget.dart';
 import 'package:intl/intl.dart';
 
-
 class SearchInProgress extends StatefulWidget {
-  const SearchInProgress({Key? key, required this.initialTabIndex}) : super(key: key);
+  const SearchInProgress({Key? key, required this.initialTabIndex})
+      : super(key: key);
 
   final int initialTabIndex;
 
@@ -32,7 +32,8 @@ class SearchInProgress extends StatefulWidget {
   SearchInProgressState createState() => SearchInProgressState();
 }
 
-class SearchInProgressState extends State<SearchInProgress> with TickerProviderStateMixin {
+class SearchInProgressState extends State<SearchInProgress>
+    with TickerProviderStateMixin {
   late TabController tabviewController;
   TextEditingController searchController = TextEditingController();
   String _query = '';
@@ -41,6 +42,8 @@ class SearchInProgressState extends State<SearchInProgress> with TickerProviderS
   late Debouncer _debouncer; // Declare Debouncer instance here
   double minPrice = 0.0;
   double maxPrice = 6000000.00;
+
+  int? value;
 
   @override
   void initState() {
@@ -52,7 +55,8 @@ class SearchInProgressState extends State<SearchInProgress> with TickerProviderS
     providerServices?.getAllToursList();
     providerServices?.getAllServicesList();
 
-    tabviewController = TabController(length: 5, vsync: this, initialIndex: widget.initialTabIndex);
+    tabviewController = TabController(
+        length: 5, vsync: this, initialIndex: widget.initialTabIndex);
 
     // Initialize the Debouncer here
     _debouncer = Debouncer(milliseconds: 500);
@@ -66,11 +70,140 @@ class SearchInProgressState extends State<SearchInProgress> with TickerProviderS
     super.dispose();
   }
 
+  void _showBottomModalFilter(BuildContext? context) {
+    showModalBottomSheet(
+        context: context!,
+        isScrollControlled: true,
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.vertical(top: Radius.circular(14))),
+        builder: (context) => DraggableScrollableSheet(
+              expand: false,
+              initialChildSize: .4,
+              maxChildSize: .9,
+              minChildSize: .32,
+              builder: (context, scrollController) => SingleChildScrollView(
+                padding: EdgeInsets.symmetric(horizontal: 16),
+                controller: scrollController,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Align(
+                      alignment: Alignment.center,
+                      child: Column(
+                        children: [
+                          Container(
+                            height: 4,
+                            width: 60,
+                            decoration: BoxDecoration(
+                                color: Colors.grey.shade400,
+                                borderRadius: BorderRadius.circular(10)),
+                          ),
+                          SizedBox(
+                            height: 20,
+                          ),
+                          Text(
+                            "Filter",
+                            style: theme.textTheme.titleLarge!.copyWith(
+                              color: theme.colorScheme.primary,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Divider(
+                      color: Colors.grey.shade400,
+                    ),
+                    SizedBox(
+                      height: 18,
+                    ),
+                    Text(
+                      "Service Type",
+                      style: theme.textTheme.titleLarge!.copyWith(
+                        color: theme.colorScheme.primary,
+                      ),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Row(
+                      children: [
+                        serviceContainer(
+                            'Spa', Colors.white, theme.colorScheme.primary),
+                        SizedBox(
+                          width: 14,
+                        ),
+                        serviceContainer('Gym', theme.colorScheme.primary,
+                            theme.colorScheme.primary.withOpacity(.1)),
+                        SizedBox(
+                          width: 14,
+                        ),
+                        serviceContainer('Theater', theme.colorScheme.primary,
+                            theme.colorScheme.primary.withOpacity(.1)),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 100,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        serviceFilterOption('Reset', Colors.white, Colors.blue,
+                            () {
+                          _query = '';
+                          setState(() {});
+                          Navigator.pop(context);
+                        }),
+                        SizedBox(
+                          width: 30,
+                        ),
+                        serviceFilterOption('Apply Filter', Colors.white,
+                            theme.colorScheme.primary, () {
+                          _query = pickText;
+                          setState(() {});
+                          Navigator.pop(context);
+                        }),
+                      ],
+                    )
+                  ],
+                ),
+              ),
+            ));
+  }
 
+  String pickText = '';
 
+  serviceContainer(text, color, containerColor) => InkWell(
+        onTap: () => pickText = text,
+        child: Container(
+          padding: EdgeInsets.symmetric(vertical: 10, horizontal: 16),
+          decoration: BoxDecoration(
+              color: containerColor, borderRadius: BorderRadius.circular(20)),
+          child: Text(
+            text,
+            style: theme.textTheme.labelLarge!.copyWith(color: color),
+          ),
+        ),
+      );
 
-
-
+  serviceFilterOption(text, color, containerColor, ontap) => InkWell(
+        onTap: ontap,
+        child: Container(
+          padding: EdgeInsets.symmetric(vertical: 10, horizontal: 26),
+          decoration: BoxDecoration(
+              color: containerColor, borderRadius: BorderRadius.circular(26)),
+          child: Text(
+            text,
+            style: theme.textTheme.titleMedium!.copyWith(color: color),
+          ),
+        ),
+      );
 
   @override
   Widget build(BuildContext context) {
@@ -87,6 +220,8 @@ class SearchInProgressState extends State<SearchInProgress> with TickerProviderS
                 child: CustomSearchView(
                   width: 900,
                   controller: searchController,
+                  onTapped: () =>
+                      value == 4 ? _showBottomModalFilter(context) : () {},
                   onChanged: (v) {
                     // Use the debouncer to delay the search
                     _debouncer.run(() {
@@ -147,8 +282,6 @@ class SearchInProgressState extends State<SearchInProgress> with TickerProviderS
   }
 
   PreferredSizeWidget _buildAppBar(BuildContext context) {
-
-
     return CustomAppBar(
       leadingWidth: 46.h,
       leading: AppbarLeadingImage(
@@ -165,21 +298,28 @@ class SearchInProgressState extends State<SearchInProgress> with TickerProviderS
     );
   }
 
-
-
   Widget _buildTabview(BuildContext context) {
     const double chipSpacing = 13.0; // Adjust the spacing as needed
 
-    List<String> chipNames = ["Accommodation", "Car", "Flights", "Tours", "Services"];
+    List<String> chipNames = [
+      "Accommodation",
+      "Car",
+      "Flights",
+      "Tours",
+      "Services"
+    ];
 
     return Container(
       height: 37.v,
       width: double.infinity,
       margin: EdgeInsets.only(left: 15.h),
       child: DefaultTabController(
-
         length: chipNames.length,
         child: TabBar(
+          onTap: (v) {
+            value = v;
+            setState(() {});
+          },
           controller: tabviewController,
           isScrollable: true, // Make the tabs scrollable
           labelPadding: EdgeInsets.zero,
@@ -201,8 +341,8 @@ class SearchInProgressState extends State<SearchInProgress> with TickerProviderS
           ),
           tabs: List<Widget>.generate(
             chipNames.length,
-                (index) => Padding(
-              padding: EdgeInsets.only(right: chipSpacing,left:chipSpacing ),
+            (index) => Padding(
+              padding: EdgeInsets.only(right: chipSpacing, left: chipSpacing),
               child: Tab(
                 text: chipNames[index],
               ),
@@ -213,10 +353,7 @@ class SearchInProgressState extends State<SearchInProgress> with TickerProviderS
     );
   }
 
-
-
   Widget _buildPriceFilter(BuildContext context) {
-
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -242,7 +379,7 @@ class SearchInProgressState extends State<SearchInProgress> with TickerProviderS
             });
           },
           min: minPrice,
-          max: maxPrice,  // You can set this to an appropriate maximum value
+          max: maxPrice, // You can set this to an appropriate maximum value
         ),
         ElevatedButton(
           onPressed: () {
@@ -259,8 +396,6 @@ class SearchInProgressState extends State<SearchInProgress> with TickerProviderS
       ],
     );
   }
-
-
 
   Widget _buildFilteredThirty(BuildContext context) {
     return Padding(
@@ -304,10 +439,9 @@ class SearchInProgressState extends State<SearchInProgress> with TickerProviderS
   }
 
   Widget _buildSearch(BuildContext context) {
-
     switch (tabviewController.index) {
       case 0:
-       print(tabviewController.index);
+        print(tabviewController.index);
         return _performAccommodationSearch(context);
       case 1:
         print(tabviewController.index);
@@ -338,38 +472,40 @@ class SearchInProgressState extends State<SearchInProgress> with TickerProviderS
             );
           },
           itemCount: provider.propertyListModel?.result!
-              .where((element) =>
-          element.hostName?.toLowerCase().contains(_query.toLowerCase()) ==
-              true)
-              ?.length ??
+                  .where((element) =>
+                      element.hostName
+                          ?.toLowerCase()
+                          .contains(_query.toLowerCase()) ==
+                      true)
+                  ?.length ??
               0,
           itemBuilder: (context, index) {
-            final List<PropertyModel>? filteredList = provider.propertyListModel?.result
+            final List<PropertyModel>? filteredList = provider
+                .propertyListModel?.result
                 ?.where((element) => element.propertyName!
-                .toLowerCase()
-                .contains(_query.toLowerCase()))
+                    .toLowerCase()
+                    .contains(_query.toLowerCase()))
                 .toList();
-
-
-
 
             if (filteredList != null && index < filteredList.length) {
               final PropertyModel currentItem = filteredList[index];
 
-              String? priceString = currentItem.price != null && currentItem.price!.isNotEmpty ? currentItem.price : '0.0';
-
+              String? priceString =
+                  currentItem.price != null && currentItem.price!.isNotEmpty
+                      ? currentItem.price
+                      : '0.0';
 
               double price = double.parse(priceString ?? '0.0');
 
-
               // Create a NumberFormat instance for currency formatting
-              NumberFormat currencyFormatter = NumberFormat.currency(symbol: '₦');
+              NumberFormat currencyFormatter =
+                  NumberFormat.currency(symbol: '₦');
 
               // Format the currency string
               String formattedCurrency = currencyFormatter.format(price);
               // Use the contents of FavouriteSingleItemWidgett here
               return GestureDetector(
-                onTap: (){
+                onTap: () {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
@@ -395,7 +531,7 @@ class SearchInProgressState extends State<SearchInProgress> with TickerProviderS
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             CustomImageView(
-                              imagePath: ('https://api.maczuby.com/images/${currentItem.propertyPic1}'),
+                              imagePath: ('${currentItem.propertyPic1}'),
                               height: 108.v,
                               width: 116.h,
                               radius: BorderRadius.circular(
@@ -417,10 +553,12 @@ class SearchInProgressState extends State<SearchInProgress> with TickerProviderS
                                   ),
                                   SizedBox(height: 10.v),
                                   Row(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       CustomImageView(
-                                        imagePath: ImageConstant.imgVectorGray700,
+                                        imagePath:
+                                            ImageConstant.imgVectorGray700,
                                         height: 13.v,
                                         width: 8.h,
                                         margin: EdgeInsets.only(
@@ -461,7 +599,6 @@ class SearchInProgressState extends State<SearchInProgress> with TickerProviderS
     );
   }
 
-
   Widget _performVehiclesSearch(BuildContext context) {
     return Consumer<ProviderServices>(
       builder: (_, provider, __) {
@@ -473,34 +610,40 @@ class SearchInProgressState extends State<SearchInProgress> with TickerProviderS
               height: 19.v,
             );
           },
-          itemCount: provider.vehicleListModel?.result?.where(
-                (element) => element.hostName!
-                .toLowerCase()
-                .contains(_query.toLowerCase()),
-          )?.length ?? 0,
+          itemCount: provider.vehicleListModel?.result
+                  ?.where(
+                    (element) => element.hostName!
+                        .toLowerCase()
+                        .contains(_query.toLowerCase()),
+                  )
+                  ?.length ??
+              0,
           itemBuilder: (context, index) {
-            final List<VehicleModel>? filteredList =
-            provider.vehicleListModel?.result
-                ?.where((element) =>
-                element.vehicleName!
+            final List<VehicleModel>? filteredList = provider
+                .vehicleListModel?.result
+                ?.where((element) => element.vehicleName!
                     .toLowerCase()
                     .contains(_query.toLowerCase()))
                 .toList();
 
             if (filteredList != null && index < filteredList.length) {
               final VehicleModel currentItem = filteredList[index];
-              String? priceString = currentItem.price != null && currentItem.price!.isNotEmpty ? currentItem.price : '0.0';
+              String? priceString =
+                  currentItem.price != null && currentItem.price!.isNotEmpty
+                      ? currentItem.price
+                      : '0.0';
 
               // Convert the String to a double using double.parse
               double price = double.parse(priceString!);
 
               // Create a NumberFormat instance for currency formatting
-              NumberFormat currencyFormatter = NumberFormat.currency(symbol: '₦');
+              NumberFormat currencyFormatter =
+                  NumberFormat.currency(symbol: '₦');
 
               // Format the currency string
               String formattedCurrency = currencyFormatter.format(price);
               return GestureDetector(
-                onTap: (){
+                onTap: () {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
@@ -526,7 +669,7 @@ class SearchInProgressState extends State<SearchInProgress> with TickerProviderS
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             CustomImageView(
-                              imagePath: ('https://api.maczuby.com/images/${currentItem.vehiclePic1}'),
+                              imagePath: ('${currentItem.vehiclePic1}'),
                               height: 108.v,
                               width: 116.h,
                               radius: BorderRadius.circular(
@@ -548,10 +691,12 @@ class SearchInProgressState extends State<SearchInProgress> with TickerProviderS
                                   ),
                                   SizedBox(height: 10.v),
                                   Row(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       CustomImageView(
-                                        imagePath: ImageConstant.imgVectorGray700,
+                                        imagePath:
+                                            ImageConstant.imgVectorGray700,
                                         height: 13.v,
                                         width: 8.h,
                                         margin: EdgeInsets.only(
@@ -603,34 +748,40 @@ class SearchInProgressState extends State<SearchInProgress> with TickerProviderS
               height: 19.v,
             );
           },
-          itemCount: provider.flightListModel?.result?.where(
-                (element) => element.hostName!
-                .toLowerCase()
-                .contains(_query.toLowerCase()),
-          )?.length ?? 0,
+          itemCount: provider.flightListModel?.result
+                  ?.where(
+                    (element) => element.hostName!
+                        .toLowerCase()
+                        .contains(_query.toLowerCase()),
+                  )
+                  ?.length ??
+              0,
           itemBuilder: (context, index) {
-            final List<FlightModel>? filteredList =
-            provider.flightListModel?.result
-                ?.where((element) =>
-                element.fromWhere!
+            final List<FlightModel>? filteredList = provider
+                .flightListModel?.result
+                ?.where((element) => element.fromWhere!
                     .toLowerCase()
                     .contains(_query.toLowerCase()))
                 .toList();
 
             if (filteredList != null && index < filteredList.length) {
               final FlightModel currentItem = filteredList[index];
-              String? priceString = currentItem.price != null && currentItem.price!.isNotEmpty ? currentItem.price : '0.0';
+              String? priceString =
+                  currentItem.price != null && currentItem.price!.isNotEmpty
+                      ? currentItem.price
+                      : '0.0';
 
               // Convert the String to a double using double.parse
               double price = double.parse(priceString!);
 
               // Create a NumberFormat instance for currency formatting
-              NumberFormat currencyFormatter = NumberFormat.currency(symbol: '₦');
+              NumberFormat currencyFormatter =
+                  NumberFormat.currency(symbol: '₦');
 
               // Format the currency string
               String formattedCurrency = currencyFormatter.format(price);
               return GestureDetector(
-                onTap: (){
+                onTap: () {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
@@ -656,7 +807,7 @@ class SearchInProgressState extends State<SearchInProgress> with TickerProviderS
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             CustomImageView(
-                              imagePath: ('https://api.maczuby.com/images/${currentItem.flightPic1}'),
+                              imagePath: ('${currentItem.flightPic1}'),
                               height: 108.v,
                               width: 116.h,
                               radius: BorderRadius.circular(
@@ -678,10 +829,12 @@ class SearchInProgressState extends State<SearchInProgress> with TickerProviderS
                                   ),
                                   SizedBox(height: 10.v),
                                   Row(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       CustomImageView(
-                                        imagePath: ImageConstant.imgVectorGray700,
+                                        imagePath:
+                                            ImageConstant.imgVectorGray700,
                                         height: 13.v,
                                         width: 8.h,
                                         margin: EdgeInsets.only(
@@ -733,34 +886,39 @@ class SearchInProgressState extends State<SearchInProgress> with TickerProviderS
               height: 19.v,
             );
           },
-          itemCount: provider.tourListModel?.result?.where(
-                (element) => element.hostName!
-                .toLowerCase()
-                .contains(_query.toLowerCase()),
-          )?.length ?? 0,
+          itemCount: provider.tourListModel?.result
+                  ?.where(
+                    (element) => element.hostName!
+                        .toLowerCase()
+                        .contains(_query.toLowerCase()),
+                  )
+                  ?.length ??
+              0,
           itemBuilder: (context, index) {
-            final List<TourModel>? filteredList =
-            provider.tourListModel?.result
-                ?.where((element) =>
-                element.hostName!
+            final List<TourModel>? filteredList = provider.tourListModel?.result
+                ?.where((element) => element.hostName!
                     .toLowerCase()
                     .contains(_query.toLowerCase()))
                 .toList();
 
             if (filteredList != null && index < filteredList.length) {
               final TourModel currentItem = filteredList[index];
-              String? priceString = currentItem.price != null && currentItem.price!.isNotEmpty ? currentItem.price : '0.0';
+              String? priceString =
+                  currentItem.price != null && currentItem.price!.isNotEmpty
+                      ? currentItem.price
+                      : '0.0';
 
               // Convert the String to a double using double.parse
               double price = double.parse(priceString!);
 
               // Create a NumberFormat instance for currency formatting
-              NumberFormat currencyFormatter = NumberFormat.currency(symbol: '₦');
+              NumberFormat currencyFormatter =
+                  NumberFormat.currency(symbol: '₦');
 
               // Format the currency string
               String formattedCurrency = currencyFormatter.format(price);
               return GestureDetector(
-                onTap: (){
+                onTap: () {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
@@ -786,7 +944,7 @@ class SearchInProgressState extends State<SearchInProgress> with TickerProviderS
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             CustomImageView(
-                              imagePath: ('https://api.maczuby.com/images/${currentItem.tourPic1}'),
+                              imagePath: ('${currentItem.tourPic1}'),
                               height: 108.v,
                               width: 116.h,
                               radius: BorderRadius.circular(
@@ -808,10 +966,12 @@ class SearchInProgressState extends State<SearchInProgress> with TickerProviderS
                                   ),
                                   SizedBox(height: 10.v),
                                   Row(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       CustomImageView(
-                                        imagePath: ImageConstant.imgVectorGray700,
+                                        imagePath:
+                                            ImageConstant.imgVectorGray700,
                                         height: 13.v,
                                         width: 8.h,
                                         margin: EdgeInsets.only(
@@ -863,38 +1023,44 @@ class SearchInProgressState extends State<SearchInProgress> with TickerProviderS
               height: 19.v,
             );
           },
-          itemCount: provider.serviceListModel?.result?.where(
-                (element) => element.hostName!
-                .toLowerCase()
-                .contains(_query.toLowerCase()),
-          )?.length ?? 0,
+          itemCount: provider.serviceListModel?.result
+                  ?.where(
+                    (element) => element.hostName!
+                        .toLowerCase()
+                        .contains(_query.toLowerCase()),
+                  )
+                  ?.length ??
+              0,
           itemBuilder: (context, index) {
-            final List<ServicesModel>? filteredList =
-            provider.serviceListModel?.result
-                ?.where((element) =>
-                element.hostName!
+            final List<ServicesModel>? filteredList = provider
+                .serviceListModel?.result
+                ?.where((element) => element.hostName!
                     .toLowerCase()
                     .contains(_query.toLowerCase()))
                 .toList();
 
             if (filteredList != null && index < filteredList.length) {
               final ServicesModel currentItem = filteredList[index];
-              String? priceString = currentItem.price != null && currentItem.price!.isNotEmpty ? currentItem.price : '0.0';
+              String? priceString =
+                  currentItem.price != null && currentItem.price!.isNotEmpty
+                      ? currentItem.price
+                      : '0.0';
 
               // Convert the String to a double using double.parse
               double price = double.parse(priceString!);
 
               // Create a NumberFormat instance for currency formatting
-              NumberFormat currencyFormatter = NumberFormat.currency(symbol: '₦');
+              NumberFormat currencyFormatter =
+                  NumberFormat.currency(symbol: '₦');
 
               // Format the currency string
               String formattedCurrency = currencyFormatter.format(price);
               return GestureDetector(
-                onTap: (){
+                onTap: () {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => ServiceDetail(service : currentItem),
+                      builder: (context) => ServiceDetail(service: currentItem),
                     ),
                   );
                 },
@@ -916,7 +1082,7 @@ class SearchInProgressState extends State<SearchInProgress> with TickerProviderS
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             CustomImageView(
-                              imagePath: ('https://api.maczuby.com/images/${currentItem.servicePic1}'),
+                              imagePath: ('${currentItem.servicePic1}'),
                               height: 108.v,
                               width: 116.h,
                               radius: BorderRadius.circular(
@@ -941,10 +1107,12 @@ class SearchInProgressState extends State<SearchInProgress> with TickerProviderS
                                   ),
                                   SizedBox(height: 10.v),
                                   Row(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       CustomImageView(
-                                        imagePath: ImageConstant.imgVectorGray700,
+                                        imagePath:
+                                            ImageConstant.imgVectorGray700,
                                         height: 13.v,
                                         width: 8.h,
                                         margin: EdgeInsets.only(
@@ -985,14 +1153,10 @@ class SearchInProgressState extends State<SearchInProgress> with TickerProviderS
     );
   }
 
-
   onTapArrowLeft(BuildContext context) {
     Navigator.pop(context);
   }
-
-
 }
-
 
 class Debouncer {
   final int milliseconds;
@@ -1009,12 +1173,11 @@ class Debouncer {
   }
 }
 
-
 class FavouriteSingleItemWidgett extends StatelessWidget {
   const FavouriteSingleItemWidgett({Key? key})
       : super(
-    key: key,
-  );
+          key: key,
+        );
 
   @override
   Widget build(BuildContext context) {
@@ -1084,14 +1247,12 @@ class FavouriteSingleItemWidgett extends StatelessWidget {
                       SizedBox(height: 9.v),
 
                       // Text('499/Night'),
-
                     ],
                   ),
                 ),
               ],
             ),
           ),
-
         ],
       ),
     );

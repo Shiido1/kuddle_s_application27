@@ -7,9 +7,8 @@ import 'package:kuddle_s_application27/widgets/custom_elevated_button.dart';
 import 'package:kuddle_s_application27/widgets/custom_icon_button.dart';
 
 class HotelDetailConstruction extends StatelessWidget {
-
   final PropertyModel property;
-   HotelDetailConstruction({Key? key, required this.property}) : super(key: key);
+  HotelDetailConstruction({Key? key, required this.property}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     mediaQueryData = MediaQuery.of(context);
@@ -23,22 +22,26 @@ class HotelDetailConstruction extends StatelessWidget {
               width: double.maxFinite,
               margin: EdgeInsets.only(bottom: 5.v),
               child: SingleChildScrollView(
-
                 child: Container(
                   margin: EdgeInsets.only(bottom: 0), // Adjust margin as needed
-                  padding: EdgeInsets.symmetric(horizontal: 15.h, vertical: 24.v),
+                  padding:
+                      EdgeInsets.symmetric(horizontal: 15.h, vertical: 24.v),
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       _buildSeventyFour(context),
-                      Text("${property.propertyName}", style: theme.textTheme.headlineMedium?.copyWith(color: Color(0xFF003B95))),
+                      Text("${property.propertyName}",
+                          style: theme.textTheme.headlineMedium
+                              ?.copyWith(color: Color(0xFF003B95))),
                       SizedBox(height: 8.v),
                       _buildVector(context),
                       SizedBox(height: 27.v),
                       Divider(color: Color(0xFF003B95).withOpacity(0.7)),
                       SizedBox(height: 22.v),
-                      Text("Details", style: theme.textTheme.titleMedium?.copyWith(color: Color(0xFF003B95))),
+                      Text("Details",
+                          style: theme.textTheme.titleMedium
+                              ?.copyWith(color: Color(0xFF003B95))),
                       SizedBox(height: 27.v),
                       Container(
                         width: 385.h,
@@ -48,11 +51,13 @@ class HotelDetailConstruction extends StatelessWidget {
                             children: [
                               TextSpan(
                                 text: "${property.propertyName} ",
-                                style: CustomTextStyles.bodySmallGray500.copyWith(color: Color(0xFF003B95)),
+                                style: CustomTextStyles.bodySmallGray500
+                                    .copyWith(color: Color(0xFF003B95)),
                               ),
                               TextSpan(
                                 text: "Read More...",
-                                style: CustomTextStyles.bodySmallPrimary.copyWith(color: Color(0xFF003B95)),
+                                style: CustomTextStyles.bodySmallPrimary
+                                    .copyWith(color: Color(0xFF003B95)),
                               ),
                             ],
                           ),
@@ -60,43 +65,49 @@ class HotelDetailConstruction extends StatelessWidget {
                         ),
                       ),
                       SizedBox(height: 23.v),
-                      Text("Facilities", style: theme.textTheme.titleMedium?.copyWith(color: Color(0xFF003B95))),
+                      Text("Facilities",
+                          style: theme.textTheme.titleMedium
+                              ?.copyWith(color: Color(0xFF003B95))),
                       SizedBox(height: 32.v),
                       _buildSwimmingPool(context),
                       SizedBox(height: 27.v),
                       _buildLaundry(context),
-                      SizedBox(height: 27.v),  // Add space between sections
+                      SizedBox(height: 27.v), // Add space between sections
                       _buildAdditionalDetails(context),
-                      SizedBox(height: 27.v),  // Add space between sections
+                      SizedBox(height: 27.v), // Add space between sections
                       _buildBookNow(context),
                     ],
                   ),
                 ),
               ),
-
             ),
           ),
         ),
-
       ),
     );
   }
-
-
 
   Widget _buildAdditionalDetails(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text("Additional Details", style: theme.textTheme.headline6?.copyWith(color: Color(0xFF003B95))),
+        Text("Additional Details",
+            style:
+                theme.textTheme.headline6?.copyWith(color: Color(0xFF003B95))),
         SizedBox(height: 16.v),
-        _buildDetailItem(Icons.access_time, "Check In", "From 07:44 AM to 1:44 PM"),
-        _buildDetailItem(Icons.access_time, "Check Out", "From 12:00 PM to 3:00 PM"),
-        _buildDetailItem(Icons.policy, "Cancellation/prepayment", "Cancellation and prepayment policies vary according to accommodations type."),
-        _buildDetailItem(Icons.child_care, "Children & Beds", "Children are not allowed in this property. No age restriction. There's no age requirement for check-in."),
+        _buildDetailItem(
+            Icons.access_time, "Check In", "From 07:44 AM to 1:44 PM"),
+        _buildDetailItem(
+            Icons.access_time, "Check Out", "From 12:00 PM to 3:00 PM"),
+        _buildDetailItem(Icons.policy, "Cancellation/prepayment",
+            "Cancellation and prepayment policies vary according to accommodations type."),
+        _buildDetailItem(Icons.child_care, "Children & Beds",
+            "Children are not allowed in this property. No age restriction. There's no age requirement for check-in."),
         _buildDetailItem(Icons.pets, "Pets", "Pets are not allowed."),
-        _buildDetailItem(Icons.smoking_rooms, "Smoking", "Smoking is not allowed."),
-        _buildDetailItem(Icons.payment, "Accepted payment methods", "Cash is not accepted. Pay securely through your e-wallet."),
+        _buildDetailItem(
+            Icons.smoking_rooms, "Smoking", "Smoking is not allowed."),
+        _buildDetailItem(Icons.payment, "Accepted payment methods",
+            "Cash is not accepted. Pay securely through your e-wallet."),
       ],
     );
   }
@@ -138,7 +149,8 @@ class HotelDetailConstruction extends StatelessWidget {
           padding: EdgeInsets.only(top: 8.v),
           child: Text(
             content,
-            style: theme.textTheme.bodyText2?.copyWith(color: Color(0xFF003B95)),
+            style:
+                theme.textTheme.bodyText2?.copyWith(color: Color(0xFF003B95)),
           ),
         ),
       ),
@@ -147,7 +159,6 @@ class HotelDetailConstruction extends StatelessWidget {
 
   /// Section Widget
   Widget _buildSeventyFour(BuildContext context) {
-
     return Align(
         alignment: Alignment.topCenter,
         child: SizedBox(
@@ -156,7 +167,7 @@ class HotelDetailConstruction extends StatelessWidget {
             child: Stack(alignment: Alignment.topCenter, children: [
               CustomImageView(
                   // imagePath: ImageConstant.imgYuliyaPankevic,
-                imagePath: ('https://api.maczuby.com/images/${property.propertyPic1}'),
+                  imagePath: ('${property.propertyPic1}'),
                   height: 311.v,
                   width: 430.h,
                   radius: BorderRadius.circular(15.h),
@@ -247,7 +258,9 @@ class HotelDetailConstruction extends StatelessWidget {
               alignment: Alignment.topRight,
               child: RichText(
                   text: TextSpan(children: [
-                    TextSpan(text: " ₦${property.price}", style: theme.textTheme.headlineSmall),
+                    TextSpan(
+                        text: " ₦${property.price}",
+                        style: theme.textTheme.headlineSmall),
                     TextSpan(text: " "),
                     TextSpan(
                         text: "/night",
@@ -422,12 +435,12 @@ class HotelDetailConstruction extends StatelessWidget {
         margin: EdgeInsets.only(left: 76.h, right: 76.h, bottom: 29.v),
         buttonStyle: CustomButtonStyles.fillPrimary,
         onPressed: () {
-
           Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (context) => BookRoomCalendarScreenOriginal(property: property)
-            ),);
+                builder: (context) =>
+                    BookRoomCalendarScreenOriginal(property: property)),
+          );
           onTapBookNow(context);
         });
   }

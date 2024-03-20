@@ -54,7 +54,6 @@ class _HomePageState extends State<HomePageFormer> {
     super.initState();
   }
 
-
   @override
   Widget build(BuildContext context) {
     mediaQueryData = MediaQuery.of(context);
@@ -123,7 +122,6 @@ class _HomePageState extends State<HomePageFormer> {
     );
   }
 
-
   /// Section Widget
   PreferredSizeWidget _buildAppBar(BuildContext context) {
     return CustomAppBar(
@@ -183,14 +181,16 @@ class _HomePageState extends State<HomePageFormer> {
     );
   }
 
-
-
-
-
   Widget _buildHotel(BuildContext context) {
     const double chipSpacing = 6.0; // Adjust the spacing as needed
 
-    List<String> chipNames = ["Accomodation", "Cars", "Flights", "Tours", "Services"];
+    List<String> chipNames = [
+      "Accomodation",
+      "Cars",
+      "Flights",
+      "Tours",
+      "Services"
+    ];
 
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
@@ -199,7 +199,7 @@ class _HomePageState extends State<HomePageFormer> {
         child: Row(
           children: List<Widget>.generate(
             5,
-                (index) => Padding(
+            (index) => Padding(
               padding: EdgeInsets.only(right: chipSpacing),
               child: RawChip(
                 padding: EdgeInsets.symmetric(
@@ -220,7 +220,8 @@ class _HomePageState extends State<HomePageFormer> {
                 selected: selectedChipIndex == index,
                 backgroundColor: theme.colorScheme.onPrimaryContainer,
                 // Set the selected color to green when the chip is selected
-                selectedColor: Colors.blue, // Change this to your desired green color
+                selectedColor:
+                    Colors.blue, // Change this to your desired green color
                 shape: RoundedRectangleBorder(
                   side: BorderSide.none,
                   borderRadius: BorderRadius.circular(18.h),
@@ -376,25 +377,25 @@ class _HomePageState extends State<HomePageFormer> {
   /// Section Widget
   Widget _buildPopularHotelsSection(BuildContext context) {
     return Padding(
-        padding: EdgeInsets.only(right: 15.h),
-        child:
-            Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-          Text("Popular Hotels", style: CustomTextStyles.titleLarge23),
-              Padding(
-                padding: EdgeInsets.only(top: 9.v, bottom: 2.v),
-                child: GestureDetector(
-                  onTap: () {
-                    // Navigate to the search three page
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => SearchThreePage()),
-                    );
-                  },
-                  child: Text("View All", style: CustomTextStyles.bodyMediumRegular_1),
-                ),
-              )
-
-            ]),);
+      padding: EdgeInsets.only(right: 15.h),
+      child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+        Text("Popular Hotels", style: CustomTextStyles.titleLarge23),
+        Padding(
+          padding: EdgeInsets.only(top: 9.v, bottom: 2.v),
+          child: GestureDetector(
+            onTap: () {
+              // Navigate to the search three page
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => SearchThreePage()),
+              );
+            },
+            child:
+                Text("View All", style: CustomTextStyles.bodyMediumRegular_1),
+          ),
+        )
+      ]),
+    );
   }
 
   /// Section Widget
@@ -423,10 +424,11 @@ class _HomePageState extends State<HomePageFormer> {
                   // Customize parameters based on currentItem if needed
                   onTapImgSpain: () {
                     Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                        builder: (context) => HotelDetail(property: currentItem)
-                    ),);
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) =>
+                              HotelDetail(property: currentItem)),
+                    );
                     // onTapImgSpain(context);
                   },
                   property: currentItem, // Pass the specific PropertyModel
@@ -438,8 +440,6 @@ class _HomePageState extends State<HomePageFormer> {
       },
     );
   }
-
-
 
   /// Section Widget
   Widget _buildHomeSection2(BuildContext context) {
@@ -483,8 +483,6 @@ class _HomePageState extends State<HomePageFormer> {
     );
   }
 
-
-
   /// Section Widget
   Widget _buildHomeSection3(BuildContext context) {
     return Consumer<ProviderServices>(
@@ -526,8 +524,6 @@ class _HomePageState extends State<HomePageFormer> {
       },
     );
   }
-
-
 
   /// Section Widget
   Widget _buildHomeSection4(BuildContext context) {
@@ -571,8 +567,6 @@ class _HomePageState extends State<HomePageFormer> {
     );
   }
 
-
-
   /// Section Widget
   Widget _buildHomeSection5(BuildContext context) {
     return Consumer<ProviderServices>(
@@ -615,10 +609,6 @@ class _HomePageState extends State<HomePageFormer> {
     );
   }
 
-
-
-
-
   Widget buildBottomNavigationBar() {
     return BottomNavigationBar(
       currentIndex: _currentIndex,
@@ -628,7 +618,8 @@ class _HomePageState extends State<HomePageFormer> {
         });
       },
       selectedItemColor: Colors.blue, // Selected item color
-      unselectedItemColor: Colors.blue.withOpacity(0.7), // Unselected item color with opacity
+      unselectedItemColor:
+          Colors.blue.withOpacity(0.7), // Unselected item color with opacity
       items: [
         BottomNavigationBarItem(
           icon: Icon(Icons.home),
@@ -654,8 +645,6 @@ class _HomePageState extends State<HomePageFormer> {
     );
   }
 
-
-
   Widget _buildContentBasedOnSelectedWidget() {
     switch (selectedChipIndex) {
       case 0:
@@ -673,23 +662,18 @@ class _HomePageState extends State<HomePageFormer> {
     }
   }
 
-
-
   Widget _buildVariation1() {
     return Padding(
       padding: EdgeInsets.only(left: 15.h),
-      child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            _buildPopularHotelsSection(context),
-            SizedBox(height: 27.v),
-            _buildHomeSection(context),
-            SizedBox(height: 40.v),
-            Text("Hot Deals 1",
-                style: CustomTextStyles.titleLarge23),
-            SizedBox(height: 29.v),
-            _buildHotDealsSection(context)
-          ]),
+      child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+        _buildPopularHotelsSection(context),
+        SizedBox(height: 27.v),
+        _buildHomeSection(context),
+        SizedBox(height: 40.v),
+        Text("Hot Deals 1", style: CustomTextStyles.titleLarge23),
+        SizedBox(height: 29.v),
+        _buildHotDealsSection(context)
+      ]),
     );
   }
 
@@ -698,18 +682,15 @@ class _HomePageState extends State<HomePageFormer> {
     // Example:
     return Padding(
       padding: EdgeInsets.only(left: 15.h),
-      child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            _buildPopularHotelsSection(context),
-            SizedBox(height: 27.v),
-            _buildHomeSection2(context),
-            SizedBox(height: 40.v),
-            Text("Hot Deals 2",
-                style: CustomTextStyles.titleLarge23),
-            SizedBox(height: 29.v),
-            _buildHotDealsSection2(context)
-          ]),
+      child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+        _buildPopularHotelsSection(context),
+        SizedBox(height: 27.v),
+        _buildHomeSection2(context),
+        SizedBox(height: 40.v),
+        Text("Hot Deals 2", style: CustomTextStyles.titleLarge23),
+        SizedBox(height: 29.v),
+        _buildHotDealsSection2(context)
+      ]),
     );
   }
 
@@ -719,18 +700,15 @@ class _HomePageState extends State<HomePageFormer> {
   Widget _buildVariation3() {
     return Padding(
       padding: EdgeInsets.only(left: 15.h),
-      child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            _buildPopularHotelsSection(context),
-            SizedBox(height: 27.v),
-            _buildHomeSection3(context),
-            SizedBox(height: 40.v),
-            Text("Hot Deals 3",
-                style: CustomTextStyles.titleLarge23),
-            SizedBox(height: 29.v),
-            _buildHotDealsSection3(context)
-          ]),
+      child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+        _buildPopularHotelsSection(context),
+        SizedBox(height: 27.v),
+        _buildHomeSection3(context),
+        SizedBox(height: 40.v),
+        Text("Hot Deals 3", style: CustomTextStyles.titleLarge23),
+        SizedBox(height: 29.v),
+        _buildHotDealsSection3(context)
+      ]),
     );
   }
 
@@ -738,18 +716,15 @@ class _HomePageState extends State<HomePageFormer> {
   Widget _buildVariation4() {
     return Padding(
       padding: EdgeInsets.only(left: 15.h),
-      child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            _buildPopularHotelsSection(context),
-            SizedBox(height: 27.v),
-            _buildHomeSection4(context),
-            SizedBox(height: 40.v),
-            Text("Hot Deals 4",
-                style: CustomTextStyles.titleLarge23),
-            SizedBox(height: 29.v),
-            _buildHotDealsSection4(context)
-          ]),
+      child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+        _buildPopularHotelsSection(context),
+        SizedBox(height: 27.v),
+        _buildHomeSection4(context),
+        SizedBox(height: 40.v),
+        Text("Hot Deals 4", style: CustomTextStyles.titleLarge23),
+        SizedBox(height: 29.v),
+        _buildHotDealsSection4(context)
+      ]),
     );
   }
 
@@ -757,31 +732,25 @@ class _HomePageState extends State<HomePageFormer> {
   Widget _buildVariation5() {
     return Padding(
       padding: EdgeInsets.only(left: 15.h),
-      child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            _buildPopularHotelsSection(context),
-            SizedBox(height: 27.v),
-            _buildHomeSection5(context),
-            SizedBox(height: 40.v),
-            Text("Hot Deals 5",
-                style: CustomTextStyles.titleLarge23),
-            SizedBox(height: 29.v),
-            _buildHotDealsSection5(context)
-          ]),
+      child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+        _buildPopularHotelsSection(context),
+        SizedBox(height: 27.v),
+        _buildHomeSection5(context),
+        SizedBox(height: 40.v),
+        Text("Hot Deals 5", style: CustomTextStyles.titleLarge23),
+        SizedBox(height: 29.v),
+        _buildHotDealsSection5(context)
+      ]),
     );
   }
 
   /// Navigates to the hotelSixScreen when the action is triggered.
   onTapImgSpain(BuildContext context) {
-
     // Navigator.push(
     //   context,
     //   MaterialPageRoute(builder: (ctx) => HotelDetail()),
     // );
-
   }
-
 
   Widget _buildHotDealsSection(BuildContext context) {
     return Consumer<ProviderServices>(
@@ -800,16 +769,17 @@ class _HomePageState extends State<HomePageFormer> {
 
                 return Container(
                   width: 350.h, // Adjust the width as needed
-                  height: 200.h,// Adjust the height as needed
+                  height: 200.h, // Adjust the height as needed
                   margin: EdgeInsets.only(right: 10.h),
                   child: Stack(
                     alignment: Alignment.bottomCenter,
                     children: [
                       CustomImageView(
-                        imagePath: ('https://api.maczuby.com/images/${currentItem.propertyPic2}'),
-                        height: 200.v,  // Make sure the height matches the Container's height
+                        imagePath: ('${currentItem.propertyPic2}'),
+                        height: 200
+                            .v, // Make sure the height matches the Container's height
                         width: 350.h,
-                        fit: BoxFit.cover,// Adjust the width as needed
+                        fit: BoxFit.cover, // Adjust the width as needed
                         radius: BorderRadius.circular(20.h),
                         alignment: Alignment.center,
                       ),
@@ -825,7 +795,8 @@ class _HomePageState extends State<HomePageFormer> {
                               text: currentItem.hostName.toString(),
                               margin: EdgeInsets.only(left: 14.h),
                               buttonStyle: CustomButtonStyles.fillBlueTL18,
-                              buttonTextStyle: CustomTextStyles.titleSmallOnPrimary,
+                              buttonTextStyle:
+                                  CustomTextStyles.titleSmallOnPrimary,
                             ),
                             SizedBox(height: 32.v),
                             Container(
@@ -836,7 +807,7 @@ class _HomePageState extends State<HomePageFormer> {
                               decoration: AppDecoration.gradientBlackToOnPrimary
                                   .copyWith(
                                 borderRadius:
-                                BorderRadiusStyle.customBorderTL20,
+                                    BorderRadiusStyle.customBorderTL20,
                               ),
                               child: Column(
                                 mainAxisSize: MainAxisSize.min,
@@ -852,13 +823,14 @@ class _HomePageState extends State<HomePageFormer> {
                                   Container(
                                     decoration: BoxDecoration(
                                       borderRadius:
-                                      BorderRadiusStyle.roundedBorder7,
+                                          BorderRadiusStyle.roundedBorder7,
                                     ),
                                     child: Row(
                                       mainAxisSize: MainAxisSize.min,
                                       children: [
                                         CustomImageView(
-                                          imagePath: ('https://api.maczuby.com/images/${currentItem.propertyPic2}'),
+                                          imagePath:
+                                              ('${currentItem.propertyPic2}'),
                                           height: 12.v,
                                           width: 8.h,
                                           radius: BorderRadius.circular(4.h),
@@ -868,7 +840,8 @@ class _HomePageState extends State<HomePageFormer> {
                                           padding: EdgeInsets.only(left: 4.h),
                                           child: Text(
                                             currentItem.country.toString(),
-                                            style: CustomTextStyles.bodySmallOnPrimary_1,
+                                            style: CustomTextStyles
+                                                .bodySmallOnPrimary_1,
                                           ),
                                         ),
                                       ],
@@ -876,18 +849,21 @@ class _HomePageState extends State<HomePageFormer> {
                                   ),
                                   SizedBox(height: 5.v),
                                   Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
                                     children: [
                                       RichText(
                                         text: TextSpan(
                                           children: [
                                             TextSpan(
                                               text: currentItem.price,
-                                              style: CustomTextStyles.titleSmallOnPrimary_2,
+                                              style: CustomTextStyles
+                                                  .titleSmallOnPrimary_2,
                                             ),
                                             TextSpan(
                                               text: " night",
-                                              style: CustomTextStyles.bodyMediumOnPrimary,
+                                              style: CustomTextStyles
+                                                  .bodyMediumOnPrimary,
                                             ),
                                           ],
                                         ),
@@ -897,22 +873,28 @@ class _HomePageState extends State<HomePageFormer> {
                                         margin: EdgeInsets.only(bottom: 3.v),
                                         decoration: BoxDecoration(
                                           borderRadius:
-                                          BorderRadiusStyle.roundedBorder7,
+                                              BorderRadiusStyle.roundedBorder7,
                                         ),
                                         child: Row(
-                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
                                           children: [
                                             CustomImageView(
-                                              imagePath: ('https://api.maczuby.com/images/${currentItem.propertyPic2}'),
+                                              imagePath:
+                                                  ('${currentItem.propertyPic2}'),
                                               height: 13.adaptSize,
                                               width: 13.adaptSize,
-                                              radius: BorderRadius.circular(6.h),
+                                              radius:
+                                                  BorderRadius.circular(6.h),
                                             ),
                                             Padding(
-                                              padding: EdgeInsets.only(left: 2.h),
+                                              padding:
+                                                  EdgeInsets.only(left: 2.h),
                                               child: Text(
-                                                currentItem.propertyId.toString(),
-                                                style: theme.textTheme.labelSmall,
+                                                currentItem.propertyId
+                                                    .toString(),
+                                                style:
+                                                    theme.textTheme.labelSmall,
                                               ),
                                             ),
                                           ],
@@ -936,13 +918,6 @@ class _HomePageState extends State<HomePageFormer> {
       },
     );
   }
-
-
-
-
-
-
-
 
   Widget _buildHotDealsSection2(BuildContext context) {
     return Consumer<ProviderServices>(
@@ -961,16 +936,17 @@ class _HomePageState extends State<HomePageFormer> {
 
                 return Container(
                   width: 350.h, // Adjust the width as needed
-                  height: 200.h,// Adjust the height as needed
+                  height: 200.h, // Adjust the height as needed
                   margin: EdgeInsets.only(right: 10.h),
                   child: Stack(
                     alignment: Alignment.bottomCenter,
                     children: [
                       CustomImageView(
-                        imagePath: ('https://api.maczuby.com/images/${currentItem.vehiclePic2}'),
-                        height: 200.v,  // Make sure the height matches the Container's height
+                        imagePath: ('${currentItem.vehiclePic2}'),
+                        height: 200
+                            .v, // Make sure the height matches the Container's height
                         width: 350.h,
-                        fit: BoxFit.cover,// Adjust the width as needed
+                        fit: BoxFit.cover, // Adjust the width as needed
                         radius: BorderRadius.circular(20.h),
                         alignment: Alignment.center,
                       ),
@@ -986,7 +962,8 @@ class _HomePageState extends State<HomePageFormer> {
                               text: currentItem.hostName.toString(),
                               margin: EdgeInsets.only(left: 14.h),
                               buttonStyle: CustomButtonStyles.fillBlueTL18,
-                              buttonTextStyle: CustomTextStyles.titleSmallOnPrimary,
+                              buttonTextStyle:
+                                  CustomTextStyles.titleSmallOnPrimary,
                             ),
                             SizedBox(height: 32.v),
                             Container(
@@ -997,7 +974,7 @@ class _HomePageState extends State<HomePageFormer> {
                               decoration: AppDecoration.gradientBlackToOnPrimary
                                   .copyWith(
                                 borderRadius:
-                                BorderRadiusStyle.customBorderTL20,
+                                    BorderRadiusStyle.customBorderTL20,
                               ),
                               child: Column(
                                 mainAxisSize: MainAxisSize.min,
@@ -1013,13 +990,14 @@ class _HomePageState extends State<HomePageFormer> {
                                   Container(
                                     decoration: BoxDecoration(
                                       borderRadius:
-                                      BorderRadiusStyle.roundedBorder7,
+                                          BorderRadiusStyle.roundedBorder7,
                                     ),
                                     child: Row(
                                       mainAxisSize: MainAxisSize.min,
                                       children: [
                                         CustomImageView(
-                                          imagePath: ('https://api.maczuby.com/images/${currentItem.vehiclePic2}'),
+                                          imagePath:
+                                              ('${currentItem.vehiclePic2}'),
                                           height: 12.v,
                                           width: 8.h,
                                           radius: BorderRadius.circular(4.h),
@@ -1029,7 +1007,8 @@ class _HomePageState extends State<HomePageFormer> {
                                           padding: EdgeInsets.only(left: 4.h),
                                           child: Text(
                                             currentItem.country.toString(),
-                                            style: CustomTextStyles.bodySmallOnPrimary_1,
+                                            style: CustomTextStyles
+                                                .bodySmallOnPrimary_1,
                                           ),
                                         ),
                                       ],
@@ -1037,14 +1016,16 @@ class _HomePageState extends State<HomePageFormer> {
                                   ),
                                   SizedBox(height: 5.v),
                                   Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
                                     children: [
                                       RichText(
                                         text: TextSpan(
                                           children: [
                                             TextSpan(
                                               text: currentItem.price,
-                                              style: CustomTextStyles.titleSmallOnPrimary_2,
+                                              style: CustomTextStyles
+                                                  .titleSmallOnPrimary_2,
                                             ),
                                             // TextSpan(
                                             //   text: " night",
@@ -1058,22 +1039,28 @@ class _HomePageState extends State<HomePageFormer> {
                                         margin: EdgeInsets.only(bottom: 3.v),
                                         decoration: BoxDecoration(
                                           borderRadius:
-                                          BorderRadiusStyle.roundedBorder7,
+                                              BorderRadiusStyle.roundedBorder7,
                                         ),
                                         child: Row(
-                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
                                           children: [
                                             CustomImageView(
-                                              imagePath: ('https://api.maczuby.com/images/${currentItem.vehiclePic2}'),
+                                              imagePath:
+                                                  ('${currentItem.vehiclePic2}'),
                                               height: 13.adaptSize,
                                               width: 13.adaptSize,
-                                              radius: BorderRadius.circular(6.h),
+                                              radius:
+                                                  BorderRadius.circular(6.h),
                                             ),
                                             Padding(
-                                              padding: EdgeInsets.only(left: 2.h),
+                                              padding:
+                                                  EdgeInsets.only(left: 2.h),
                                               child: Text(
-                                                currentItem.vehicleId.toString(),
-                                                style: theme.textTheme.labelSmall,
+                                                currentItem.vehicleId
+                                                    .toString(),
+                                                style:
+                                                    theme.textTheme.labelSmall,
                                               ),
                                             ),
                                           ],
@@ -1097,8 +1084,6 @@ class _HomePageState extends State<HomePageFormer> {
       },
     );
   }
-
-
 
   Widget _buildHotDealsSection3(BuildContext context) {
     return Consumer<ProviderServices>(
@@ -1117,16 +1102,17 @@ class _HomePageState extends State<HomePageFormer> {
 
                 return Container(
                   width: 350.h, // Adjust the width as needed
-                  height: 200.h,// Adjust the height as needed
+                  height: 200.h, // Adjust the height as needed
                   margin: EdgeInsets.only(right: 10.h),
                   child: Stack(
                     alignment: Alignment.bottomCenter,
                     children: [
                       CustomImageView(
-                        imagePath: ('https://api.maczuby.com/images/${currentItem.flightPic2}'),
-                        height: 200.v,  // Make sure the height matches the Container's height
+                        imagePath: ('${currentItem.flightPic2}'),
+                        height: 200
+                            .v, // Make sure the height matches the Container's height
                         width: 350.h,
-                        fit: BoxFit.cover,// Adjust the width as needed
+                        fit: BoxFit.cover, // Adjust the width as needed
                         radius: BorderRadius.circular(20.h),
                         alignment: Alignment.center,
                       ),
@@ -1142,7 +1128,8 @@ class _HomePageState extends State<HomePageFormer> {
                               text: currentItem.hostName.toString(),
                               margin: EdgeInsets.only(left: 14.h),
                               buttonStyle: CustomButtonStyles.fillBlueTL18,
-                              buttonTextStyle: CustomTextStyles.titleSmallOnPrimary,
+                              buttonTextStyle:
+                                  CustomTextStyles.titleSmallOnPrimary,
                             ),
                             SizedBox(height: 32.v),
                             Container(
@@ -1153,7 +1140,7 @@ class _HomePageState extends State<HomePageFormer> {
                               decoration: AppDecoration.gradientBlackToOnPrimary
                                   .copyWith(
                                 borderRadius:
-                                BorderRadiusStyle.customBorderTL20,
+                                    BorderRadiusStyle.customBorderTL20,
                               ),
                               child: Column(
                                 mainAxisSize: MainAxisSize.min,
@@ -1169,13 +1156,14 @@ class _HomePageState extends State<HomePageFormer> {
                                   Container(
                                     decoration: BoxDecoration(
                                       borderRadius:
-                                      BorderRadiusStyle.roundedBorder7,
+                                          BorderRadiusStyle.roundedBorder7,
                                     ),
                                     child: Row(
                                       mainAxisSize: MainAxisSize.min,
                                       children: [
                                         CustomImageView(
-                                          imagePath: ('https://api.maczuby.com/images/${currentItem.flightPic2}'),
+                                          imagePath:
+                                              ('${currentItem.flightPic2}'),
                                           height: 12.v,
                                           width: 8.h,
                                           radius: BorderRadius.circular(4.h),
@@ -1185,7 +1173,8 @@ class _HomePageState extends State<HomePageFormer> {
                                           padding: EdgeInsets.only(left: 4.h),
                                           child: Text(
                                             currentItem.arrival.toString(),
-                                            style: CustomTextStyles.bodySmallOnPrimary_1,
+                                            style: CustomTextStyles
+                                                .bodySmallOnPrimary_1,
                                           ),
                                         ),
                                       ],
@@ -1193,14 +1182,16 @@ class _HomePageState extends State<HomePageFormer> {
                                   ),
                                   SizedBox(height: 5.v),
                                   Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
                                     children: [
                                       RichText(
                                         text: TextSpan(
                                           children: [
                                             TextSpan(
                                               text: currentItem.price,
-                                              style: CustomTextStyles.titleSmallOnPrimary_2,
+                                              style: CustomTextStyles
+                                                  .titleSmallOnPrimary_2,
                                             ),
                                             // TextSpan(
                                             //   text: " night",
@@ -1214,22 +1205,27 @@ class _HomePageState extends State<HomePageFormer> {
                                         margin: EdgeInsets.only(bottom: 3.v),
                                         decoration: BoxDecoration(
                                           borderRadius:
-                                          BorderRadiusStyle.roundedBorder7,
+                                              BorderRadiusStyle.roundedBorder7,
                                         ),
                                         child: Row(
-                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
                                           children: [
                                             CustomImageView(
-                                              imagePath: ('https://api.maczuby.com/images/${currentItem.flightPic2}'),
+                                              imagePath:
+                                                  ('${currentItem.flightPic2}'),
                                               height: 13.adaptSize,
                                               width: 13.adaptSize,
-                                              radius: BorderRadius.circular(6.h),
+                                              radius:
+                                                  BorderRadius.circular(6.h),
                                             ),
                                             Padding(
-                                              padding: EdgeInsets.only(left: 2.h),
+                                              padding:
+                                                  EdgeInsets.only(left: 2.h),
                                               child: Text(
                                                 currentItem.flightId.toString(),
-                                                style: theme.textTheme.labelSmall,
+                                                style:
+                                                    theme.textTheme.labelSmall,
                                               ),
                                             ),
                                           ],
@@ -1254,10 +1250,7 @@ class _HomePageState extends State<HomePageFormer> {
     );
   }
 
-
   // build hot deals 3
-
-
 
   Widget _buildHotDealsSection4(BuildContext context) {
     return Consumer<ProviderServices>(
@@ -1276,16 +1269,17 @@ class _HomePageState extends State<HomePageFormer> {
 
                 return Container(
                   width: 350.h, // Adjust the width as needed
-                  height: 200.h,// Adjust the height as needed
+                  height: 200.h, // Adjust the height as needed
                   margin: EdgeInsets.only(right: 10.h),
                   child: Stack(
                     alignment: Alignment.bottomCenter,
                     children: [
                       CustomImageView(
-                        imagePath: ('https://api.maczuby.com/images/${currentItem.tourPic2}'),
-                        height: 200.v,  // Make sure the height matches the Container's height
+                        imagePath: ('${currentItem.tourPic2}'),
+                        height: 200
+                            .v, // Make sure the height matches the Container's height
                         width: 350.h,
-                        fit: BoxFit.cover,// Adjust the width as needed
+                        fit: BoxFit.cover, // Adjust the width as needed
                         radius: BorderRadius.circular(20.h),
                         alignment: Alignment.center,
                       ),
@@ -1301,7 +1295,8 @@ class _HomePageState extends State<HomePageFormer> {
                               text: currentItem.tourName.toString(),
                               margin: EdgeInsets.only(left: 14.h),
                               buttonStyle: CustomButtonStyles.fillBlueTL18,
-                              buttonTextStyle: CustomTextStyles.titleSmallOnPrimary,
+                              buttonTextStyle:
+                                  CustomTextStyles.titleSmallOnPrimary,
                             ),
                             SizedBox(height: 32.v),
                             Container(
@@ -1312,7 +1307,7 @@ class _HomePageState extends State<HomePageFormer> {
                               decoration: AppDecoration.gradientBlackToOnPrimary
                                   .copyWith(
                                 borderRadius:
-                                BorderRadiusStyle.customBorderTL20,
+                                    BorderRadiusStyle.customBorderTL20,
                               ),
                               child: Column(
                                 mainAxisSize: MainAxisSize.min,
@@ -1328,13 +1323,14 @@ class _HomePageState extends State<HomePageFormer> {
                                   Container(
                                     decoration: BoxDecoration(
                                       borderRadius:
-                                      BorderRadiusStyle.roundedBorder7,
+                                          BorderRadiusStyle.roundedBorder7,
                                     ),
                                     child: Row(
                                       mainAxisSize: MainAxisSize.min,
                                       children: [
                                         CustomImageView(
-                                          imagePath: ('https://api.maczuby.com/images/${currentItem.tourPic3}'),
+                                          imagePath:
+                                              ('${currentItem.tourPic3}'),
                                           height: 12.v,
                                           width: 8.h,
                                           radius: BorderRadius.circular(4.h),
@@ -1344,7 +1340,8 @@ class _HomePageState extends State<HomePageFormer> {
                                           padding: EdgeInsets.only(left: 4.h),
                                           child: Text(
                                             currentItem.city.toString(),
-                                            style: CustomTextStyles.bodySmallOnPrimary_1,
+                                            style: CustomTextStyles
+                                                .bodySmallOnPrimary_1,
                                           ),
                                         ),
                                       ],
@@ -1352,14 +1349,16 @@ class _HomePageState extends State<HomePageFormer> {
                                   ),
                                   SizedBox(height: 5.v),
                                   Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
                                     children: [
                                       RichText(
                                         text: TextSpan(
                                           children: [
                                             TextSpan(
                                               text: currentItem.price,
-                                              style: CustomTextStyles.titleSmallOnPrimary_2,
+                                              style: CustomTextStyles
+                                                  .titleSmallOnPrimary_2,
                                             ),
                                             // TextSpan(
                                             //   text: " night",
@@ -1373,22 +1372,27 @@ class _HomePageState extends State<HomePageFormer> {
                                         margin: EdgeInsets.only(bottom: 3.v),
                                         decoration: BoxDecoration(
                                           borderRadius:
-                                          BorderRadiusStyle.roundedBorder7,
+                                              BorderRadiusStyle.roundedBorder7,
                                         ),
                                         child: Row(
-                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
                                           children: [
                                             CustomImageView(
-                                              imagePath: ('https://api.maczuby.com/images/${currentItem.tourPic2}'),
+                                              imagePath:
+                                                  ('${currentItem.tourPic2}'),
                                               height: 13.adaptSize,
                                               width: 13.adaptSize,
-                                              radius: BorderRadius.circular(6.h),
+                                              radius:
+                                                  BorderRadius.circular(6.h),
                                             ),
                                             Padding(
-                                              padding: EdgeInsets.only(left: 2.h),
+                                              padding:
+                                                  EdgeInsets.only(left: 2.h),
                                               child: Text(
                                                 currentItem.zipCode.toString(),
-                                                style: theme.textTheme.labelSmall,
+                                                style:
+                                                    theme.textTheme.labelSmall,
                                               ),
                                             ),
                                           ],
@@ -1413,12 +1417,7 @@ class _HomePageState extends State<HomePageFormer> {
     );
   }
 
-
-
   // build hot deals 4
-
-
-
 
   Widget _buildHotDealsSection5(BuildContext context) {
     return Consumer<ProviderServices>(
@@ -1437,16 +1436,17 @@ class _HomePageState extends State<HomePageFormer> {
 
                 return Container(
                   width: 350.h, // Adjust the width as needed
-                  height: 200.h,// Adjust the height as needed
+                  height: 200.h, // Adjust the height as needed
                   margin: EdgeInsets.only(right: 10.h),
                   child: Stack(
                     alignment: Alignment.bottomCenter,
                     children: [
                       CustomImageView(
-                        imagePath: ('https://api.maczuby.com/images/${currentItem.servicePic2}'),
-                        height: 200.v,  // Make sure the height matches the Container's height
+                        imagePath: ('${currentItem.servicePic2}'),
+                        height: 200
+                            .v, // Make sure the height matches the Container's height
                         width: 350.h,
-                        fit: BoxFit.cover,// Adjust the width as needed
+                        fit: BoxFit.cover, // Adjust the width as needed
                         radius: BorderRadius.circular(20.h),
                         alignment: Alignment.center,
                       ),
@@ -1462,7 +1462,8 @@ class _HomePageState extends State<HomePageFormer> {
                               text: currentItem.serviceName.toString(),
                               margin: EdgeInsets.only(left: 14.h),
                               buttonStyle: CustomButtonStyles.fillBlueTL18,
-                              buttonTextStyle: CustomTextStyles.titleSmallOnPrimary,
+                              buttonTextStyle:
+                                  CustomTextStyles.titleSmallOnPrimary,
                             ),
                             SizedBox(height: 32.v),
                             Container(
@@ -1473,7 +1474,7 @@ class _HomePageState extends State<HomePageFormer> {
                               decoration: AppDecoration.gradientBlackToOnPrimary
                                   .copyWith(
                                 borderRadius:
-                                BorderRadiusStyle.customBorderTL20,
+                                    BorderRadiusStyle.customBorderTL20,
                               ),
                               child: Column(
                                 mainAxisSize: MainAxisSize.min,
@@ -1489,13 +1490,14 @@ class _HomePageState extends State<HomePageFormer> {
                                   Container(
                                     decoration: BoxDecoration(
                                       borderRadius:
-                                      BorderRadiusStyle.roundedBorder7,
+                                          BorderRadiusStyle.roundedBorder7,
                                     ),
                                     child: Row(
                                       mainAxisSize: MainAxisSize.min,
                                       children: [
                                         CustomImageView(
-                                          imagePath: ('https://api.maczuby.com/images/${currentItem.servicePic3}'),
+                                          imagePath:
+                                              ('${currentItem.servicePic3}'),
                                           height: 12.v,
                                           width: 8.h,
                                           radius: BorderRadius.circular(4.h),
@@ -1505,7 +1507,8 @@ class _HomePageState extends State<HomePageFormer> {
                                           padding: EdgeInsets.only(left: 4.h),
                                           child: Text(
                                             currentItem.city.toString(),
-                                            style: CustomTextStyles.bodySmallOnPrimary_1,
+                                            style: CustomTextStyles
+                                                .bodySmallOnPrimary_1,
                                           ),
                                         ),
                                       ],
@@ -1513,14 +1516,16 @@ class _HomePageState extends State<HomePageFormer> {
                                   ),
                                   SizedBox(height: 5.v),
                                   Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
                                     children: [
                                       RichText(
                                         text: TextSpan(
                                           children: [
                                             TextSpan(
                                               text: currentItem.price,
-                                              style: CustomTextStyles.titleSmallOnPrimary_2,
+                                              style: CustomTextStyles
+                                                  .titleSmallOnPrimary_2,
                                             ),
                                             // TextSpan(
                                             //   text: " night",
@@ -1534,22 +1539,27 @@ class _HomePageState extends State<HomePageFormer> {
                                         margin: EdgeInsets.only(bottom: 3.v),
                                         decoration: BoxDecoration(
                                           borderRadius:
-                                          BorderRadiusStyle.roundedBorder7,
+                                              BorderRadiusStyle.roundedBorder7,
                                         ),
                                         child: Row(
-                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
                                           children: [
                                             CustomImageView(
-                                              imagePath: ('https://api.maczuby.com/images/${currentItem.servicePic2}'),
+                                              imagePath:
+                                                  ('${currentItem.servicePic2}'),
                                               height: 13.adaptSize,
                                               width: 13.adaptSize,
-                                              radius: BorderRadius.circular(6.h),
+                                              radius:
+                                                  BorderRadius.circular(6.h),
                                             ),
                                             Padding(
-                                              padding: EdgeInsets.only(left: 2.h),
+                                              padding:
+                                                  EdgeInsets.only(left: 2.h),
                                               child: Text(
                                                 currentItem.zipCode.toString(),
-                                                style: theme.textTheme.labelSmall,
+                                                style:
+                                                    theme.textTheme.labelSmall,
                                               ),
                                             ),
                                           ],
@@ -1574,166 +1584,149 @@ class _HomePageState extends State<HomePageFormer> {
     );
   }
 
-
   // build hot deals 5
 
-
-    Widget _buildHotDealsSection6(BuildContext context) {
-      return SizedBox(
-        height: 219.v,
-        child: ListView(
-          scrollDirection: Axis.horizontal,
-          children: List.generate(5, (index) {
-            return Container(
-              width: 400.h,
-              margin: EdgeInsets.only(right: 16.h), // Adjust spacing between items
-              child: Stack(
-                alignment: Alignment.bottomCenter,
-                children: [
-                  CustomImageView(
-                    imagePath: ImageConstant.imgFernandoAlvare,
-                    height: 219.v,
-                    width: 400.h,
-                    radius: BorderRadius.circular(20.h),
-                    alignment: Alignment.center,
-                  ),
-                  Align(
-                    alignment: Alignment.bottomCenter,
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        CustomElevatedButton(
-                          height: 37.v,
-                          width: 93.h,
-                          text: "20% Off",
-                          margin: EdgeInsets.only(left: 14.h),
-                          buttonStyle: CustomButtonStyles.fillBlueTL18,
-                          buttonTextStyle: CustomTextStyles.titleSmallOnPrimary,
+  Widget _buildHotDealsSection6(BuildContext context) {
+    return SizedBox(
+      height: 219.v,
+      child: ListView(
+        scrollDirection: Axis.horizontal,
+        children: List.generate(5, (index) {
+          return Container(
+            width: 400.h,
+            margin:
+                EdgeInsets.only(right: 16.h), // Adjust spacing between items
+            child: Stack(
+              alignment: Alignment.bottomCenter,
+              children: [
+                CustomImageView(
+                  imagePath: ImageConstant.imgFernandoAlvare,
+                  height: 219.v,
+                  width: 400.h,
+                  radius: BorderRadius.circular(20.h),
+                  alignment: Alignment.center,
+                ),
+                Align(
+                  alignment: Alignment.bottomCenter,
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      CustomElevatedButton(
+                        height: 37.v,
+                        width: 93.h,
+                        text: "20% Off",
+                        margin: EdgeInsets.only(left: 14.h),
+                        buttonStyle: CustomButtonStyles.fillBlueTL18,
+                        buttonTextStyle: CustomTextStyles.titleSmallOnPrimary,
+                      ),
+                      SizedBox(height: 32.v),
+                      Container(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 14.h,
+                          vertical: 12.v,
                         ),
-                        SizedBox(height: 32.v),
-                        Container(
-                          padding: EdgeInsets.symmetric(
-                            horizontal: 14.h,
-                            vertical: 12.v,
-                          ),
-                          decoration: AppDecoration.gradientBlackToOnPrimary
-                              .copyWith(
-                              borderRadius:
-                              BorderRadiusStyle.customBorderTL20),
-                          child: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              SizedBox(height: 45.v),
-                              Text(
-                                "Mandarin Oriental",
-                                style: CustomTextStyles.titleSmallOnPrimary,
+                        decoration: AppDecoration.gradientBlackToOnPrimary
+                            .copyWith(
+                                borderRadius:
+                                    BorderRadiusStyle.customBorderTL20),
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            SizedBox(height: 45.v),
+                            Text(
+                              "Mandarin Oriental",
+                              style: CustomTextStyles.titleSmallOnPrimary,
+                            ),
+                            SizedBox(height: 6.v),
+                            Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadiusStyle.roundedBorder7,
                               ),
-                              SizedBox(height: 6.v),
-                              Container(
-                                decoration: BoxDecoration(
-                                  borderRadius:
-                                  BorderRadiusStyle.roundedBorder7,
-                                ),
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    CustomImageView(
-                                      imagePath: ImageConstant
-                                          .imgVectorOnprimary,
-                                      height: 12.v,
-                                      width: 8.h,
-                                      radius: BorderRadius.circular(4.h),
-                                      margin:
-                                      EdgeInsets.only(bottom: 2.v),
-                                    ),
-                                    Padding(
-                                      padding: EdgeInsets.only(left: 4.h),
-                                      child: Text(
-                                        "Bangkok, Thailand",
-                                        style: CustomTextStyles
-                                            .bodySmallOnPrimary_1,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              SizedBox(height: 5.v),
-                              Row(
-                                mainAxisAlignment:
-                                MainAxisAlignment.spaceBetween,
+                              child: Row(
+                                mainAxisSize: MainAxisSize.min,
                                 children: [
-                                  RichText(
-                                    text: TextSpan(
-                                      children: [
-                                        TextSpan(
-                                          text: " 799/",
-                                          style: CustomTextStyles
-                                              .titleSmallOnPrimary_2,
-                                        ),
-                                        TextSpan(
-                                          text: " night",
-                                          style: CustomTextStyles
-                                              .bodyMediumOnPrimary,
-                                        ),
-                                      ],
-                                    ),
-                                    textAlign: TextAlign.left,
+                                  CustomImageView(
+                                    imagePath: ImageConstant.imgVectorOnprimary,
+                                    height: 12.v,
+                                    width: 8.h,
+                                    radius: BorderRadius.circular(4.h),
+                                    margin: EdgeInsets.only(bottom: 2.v),
                                   ),
-                                  Container(
-                                    margin: EdgeInsets.only(bottom: 3.v),
-                                    decoration: BoxDecoration(
-                                      borderRadius:
-                                      BorderRadiusStyle.roundedBorder7,
-                                    ),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                      MainAxisAlignment.center,
-                                      children: [
-                                        CustomImageView(
-                                          imagePath: ImageConstant
-                                              .imgStarRate,
-                                          height: 13.adaptSize,
-                                          width: 13.adaptSize,
-                                          radius:
-                                          BorderRadius.circular(6.h),
-                                        ),
-                                        Padding(
-                                          padding: EdgeInsets.only(
-                                              left: 2.h),
-                                          child: Text(
-                                            "4.9",
-                                            style: theme.textTheme
-                                                .labelSmall,
-                                          ),
-                                        ),
-                                      ],
+                                  Padding(
+                                    padding: EdgeInsets.only(left: 4.h),
+                                    child: Text(
+                                      "Bangkok, Thailand",
+                                      style:
+                                          CustomTextStyles.bodySmallOnPrimary_1,
                                     ),
                                   ),
                                 ],
                               ),
-                            ],
-                          ),
+                            ),
+                            SizedBox(height: 5.v),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                RichText(
+                                  text: TextSpan(
+                                    children: [
+                                      TextSpan(
+                                        text: " 799/",
+                                        style: CustomTextStyles
+                                            .titleSmallOnPrimary_2,
+                                      ),
+                                      TextSpan(
+                                        text: " night",
+                                        style: CustomTextStyles
+                                            .bodyMediumOnPrimary,
+                                      ),
+                                    ],
+                                  ),
+                                  textAlign: TextAlign.left,
+                                ),
+                                Container(
+                                  margin: EdgeInsets.only(bottom: 3.v),
+                                  decoration: BoxDecoration(
+                                    borderRadius:
+                                        BorderRadiusStyle.roundedBorder7,
+                                  ),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      CustomImageView(
+                                        imagePath: ImageConstant.imgStarRate,
+                                        height: 13.adaptSize,
+                                        width: 13.adaptSize,
+                                        radius: BorderRadius.circular(6.h),
+                                      ),
+                                      Padding(
+                                        padding: EdgeInsets.only(left: 2.h),
+                                        child: Text(
+                                          "4.9",
+                                          style: theme.textTheme.labelSmall,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
-                ],
-              ),
-            );
-          }),
-        ),
-      );
-    }
+                ),
+              ],
+            ),
+          );
+        }),
+      ),
+    );
+  }
 
-    // build hot deals 6
-
-
-
-
-
-
-
+  // build hot deals 6
 }

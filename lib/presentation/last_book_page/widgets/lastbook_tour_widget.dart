@@ -6,11 +6,10 @@ import 'package:kuddle_s_application27/widgets/custom_elevated_button.dart';
 import '../../../models/tour_response.dart';
 import '../../../pages/bookings/model/booking_model.dart';
 
-
 // ignore: must_be_immutable
 class LastbookTourWidget extends StatelessWidget {
   final Tour bookRoom;
-  LastbookTourWidget({Key? key,  required this.bookRoom})
+  LastbookTourWidget({Key? key, required this.bookRoom})
       : super(
           key: key,
         );
@@ -35,7 +34,7 @@ class LastbookTourWidget extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 CustomImageView(
-                  imagePath: ('https://api.maczuby.com/images/${bookRoom.tourPic2}'),
+                  imagePath: ('${bookRoom.tourPic2}'),
                   height: 108.v,
                   width: 116.h,
                   radius: BorderRadius.circular(

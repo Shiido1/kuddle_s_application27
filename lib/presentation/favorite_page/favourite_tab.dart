@@ -70,7 +70,8 @@ class _FavoritePageTabState extends State<FavoritePageTab> {
       builder: (BuildContext dialogContext) {
         return AlertDialog(
           title: Text('Are you sure?'),
-          content: Text('Do you really want to remove ${favorite.name} from favorites?'),
+          content: Text(
+              'Do you really want to remove ${favorite.name} from favorites?'),
           actions: [
             TextButton(
               onPressed: () => Navigator.of(dialogContext).pop(true),
@@ -88,14 +89,14 @@ class _FavoritePageTabState extends State<FavoritePageTab> {
     if (confirmRemove == true) {
       try {
         var favoritesBox = await Hive.openBox<Favorite>('favoritesBox');
-        await favoritesBox.delete(favorite.key); // Assuming 'key' is a unique identifier for each favorite
+        await favoritesBox.delete(favorite
+            .key); // Assuming 'key' is a unique identifier for each favorite
         initializeFavorites(); // Refresh the favorites list after removal
       } catch (e) {
         print('Error removing from favorites: $e');
       }
     }
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -109,8 +110,7 @@ class _FavoritePageTabState extends State<FavoritePageTab> {
           return SafeArea(
             child: Scaffold(
               appBar: _buildAppBar(builderContext),
-              body:
-                  TabBarView(
+              body: TabBarView(
                 children: [
                   _buildGridViewTab(builderContext),
                   _buildListViewTab(context),
@@ -123,12 +123,11 @@ class _FavoritePageTabState extends State<FavoritePageTab> {
     );
   }
 
-
   Widget _buildListTile(Favorite favorite) {
     return ListTile(
       contentPadding: EdgeInsets.all(16.0),
       leading: Image.network(
-        'https://api.maczuby.com/images/${favorite.image}',
+        '${favorite.image}',
         width: 80.0,
         fit: BoxFit.cover,
       ),
@@ -157,37 +156,37 @@ class _FavoritePageTabState extends State<FavoritePageTab> {
     return Padding(
       padding: EdgeInsets.only(left: 16.h, top: 24.v, right: 16.h),
       child: favoritesList.isEmpty
-          ? Center(child: Text('No favorites yet. Add favorites to see them here.'))
+          ? Center(
+              child: Text('No favorites yet. Add favorites to see them here.'))
           : ListView.builder(
-        itemCount: favoritesList.length,
-        itemBuilder: (context, index) {
-          return _buildListTile(favoritesList[index]);
-        },
-      ),
+              itemCount: favoritesList.length,
+              itemBuilder: (context, index) {
+                return _buildListTile(favoritesList[index]);
+              },
+            ),
     );
   }
-
-
-
-
 
   Widget _buildGridViewTab(BuildContext context) {
     return Padding(
       padding: EdgeInsets.only(left: 16.h, top: 24.v, right: 16.h),
       child: favoritesList.isEmpty
-          ? Center(child: Text('No favorites yet. Add favorites to see them here.')) : GridView.builder(
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-          crossAxisSpacing: 16.0,
-          mainAxisSpacing: 16.0,
-        ),
-        itemCount: favoritesList.length,
-        itemBuilder: (context, index) {
-          return _buildFavoriteCard(favoritesList[index]);
-        },
-      ),
+          ? Center(
+              child: Text('No favorites yet. Add favorites to see them here.'))
+          : GridView.builder(
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                crossAxisSpacing: 16.0,
+                mainAxisSpacing: 16.0,
+              ),
+              itemCount: favoritesList.length,
+              itemBuilder: (context, index) {
+                return _buildFavoriteCard(favoritesList[index]);
+              },
+            ),
     );
   }
+
   final NumberFormat currencyFormatter = NumberFormat.currency(symbol: '₦');
 
   // Widget _buildFavoriteCard(Favorite favorite) {
@@ -199,7 +198,7 @@ class _FavoritePageTabState extends State<FavoritePageTab> {
   //         // Display the image
   //         Expanded(
   //           child: Image.network(
-  //             'https://api.maczuby.com/images/${favorite.image}',
+  //             '${favorite.image}',
   //             width: double.infinity,
   //             fit: BoxFit.cover,
   //           ),
@@ -235,7 +234,7 @@ class _FavoritePageTabState extends State<FavoritePageTab> {
           // Display the image
           Expanded(
             child: Image.network(
-              'https://api.maczuby.com/images/${favorite.image}',
+              '${favorite.image}',
               width: double.infinity,
               fit: BoxFit.cover,
             ),
@@ -274,7 +273,6 @@ class _FavoritePageTabState extends State<FavoritePageTab> {
     );
   }
 
-
   PreferredSizeWidget _buildAppBar(BuildContext context) {
     return CustomAppBar(
       leadingWidth: 46.h,
@@ -285,7 +283,8 @@ class _FavoritePageTabState extends State<FavoritePageTab> {
           onTapArrowLeft(context);
         },
       ),
-      title: AppbarTitle(text: "Favorites", margin: EdgeInsets.only(left: 14.h)),
+      title:
+          AppbarTitle(text: "Favorites", margin: EdgeInsets.only(left: 14.h)),
       actions: [
         AppbarTrailingImage(
           imagePath: ImageConstant.imgVuesaxLinearElement3Primary,

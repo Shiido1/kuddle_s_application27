@@ -5,11 +5,10 @@ import 'package:kuddle_s_application27/widgets/custom_elevated_button.dart';
 import 'package:intl/intl.dart';
 import '../../../pages/bookings/model/booking_model.dart';
 
-
 // ignore: must_be_immutable
 class LastbookItemWidget extends StatelessWidget {
   final Booking bookRoom;
-  LastbookItemWidget({Key? key,  required this.bookRoom})
+  LastbookItemWidget({Key? key, required this.bookRoom})
       : super(
           key: key,
         );
@@ -48,7 +47,7 @@ class LastbookItemWidget extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 CustomImageView(
-                  imagePath: ('https://api.maczuby.com/images/${bookRoom.propertyPic2}'),
+                  imagePath: ('${bookRoom.propertyPic2}'),
                   height: 108.v,
                   width: 116.h,
                   radius: BorderRadius.circular(
@@ -72,18 +71,19 @@ class LastbookItemWidget extends StatelessWidget {
                       Row(
                         children: [
                           Icon(
-                            Icons.vpn_key, // Use the VpnKey icon for a key representation
+                            Icons
+                                .vpn_key, // Use the VpnKey icon for a key representation
                             color: Colors.blue, // Set the color of the key icon
                           ),
-                          SizedBox(width: 8.0), // Add some space between the icon and the text
+                          SizedBox(
+                              width:
+                                  8.0), // Add some space between the icon and the text
                           Text(
                             "Room number: ${bookRoom.roomNo}",
                             style: theme.textTheme.titleSmall,
                           ),
                         ],
                       ),
-
-
                       SizedBox(height: 10.v),
                       Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -134,7 +134,6 @@ class LastbookItemWidget extends StatelessWidget {
                           ),
                         ],
                       ),
-
                       SizedBox(height: 1.v),
                       Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -193,13 +192,13 @@ class LastbookItemWidget extends StatelessWidget {
                   height: 10.adaptSize,
                   width: 10.adaptSize,
                 ),
-            Padding(
-              padding: EdgeInsets.only(left: 4.h),
-              child: Text(
-                "This Booking is ongoing ",
-                style: CustomTextStyles.bodySmallBluegray400,
-              ),
-            ),
+                Padding(
+                  padding: EdgeInsets.only(left: 4.h),
+                  child: Text(
+                    "This Booking is ongoing ",
+                    style: CustomTextStyles.bodySmallBluegray400,
+                  ),
+                ),
               ],
             ),
           ),
