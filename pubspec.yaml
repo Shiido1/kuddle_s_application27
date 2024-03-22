@@ -27,13 +27,13 @@ dependencies:
   flutter_date_pickers: ^0.4.2
   dots_indicator: ^3.0.0
   pay_with_paystack: ^1.0.6
-  flutter_paystack_plus: ^1.0.2
+  flutter_paystack_plus:
   flutter_paystack: ^1.0.7
   numberpicker: ^2.1.2
   cloudinary: ^1.2.0
   image_picker: ^1.0.5
   flutter_launcher_icons: ^0.13.1
-  flutter_native_splash: ^2.3.9
+  flutter_native_splash: ^2.4.0
   hive: ^2.2.3
   hive_generator: ^2.0.1
   hive_flutter: ^1.1.0

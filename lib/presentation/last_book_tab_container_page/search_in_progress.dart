@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:kuddle_s_application27/core/app_export.dart';
 import 'package:kuddle_s_application27/presentation/last_book_complete_page/last_book_complete_page.dart';
 import 'package:kuddle_s_application27/presentation/last_book_page/last_book_page.dart';
+import 'package:kuddle_s_application27/presentation/last_book_tab_container_page/modal_filter_frame.dart';
 import 'package:kuddle_s_application27/widgets/app_bar/appbar_leading_image.dart';
 import 'package:kuddle_s_application27/widgets/app_bar/appbar_title.dart';
 import 'package:kuddle_s_application27/widgets/app_bar/custom_app_bar.dart';
@@ -36,7 +37,7 @@ class SearchInProgressState extends State<SearchInProgress>
     with TickerProviderStateMixin {
   late TabController tabviewController;
   TextEditingController searchController = TextEditingController();
-  String _query = '';
+  // String _query = '';
   List searchItem = [];
   ProviderServices? providerServices;
   late Debouncer _debouncer; // Declare Debouncer instance here
@@ -77,208 +78,92 @@ class SearchInProgressState extends State<SearchInProgress>
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.vertical(top: Radius.circular(14))),
         builder: (context) => DraggableScrollableSheet(
-              expand: false,
-              initialChildSize: .4,
-              maxChildSize: .9,
-              minChildSize: .32,
-              builder: (context, scrollController) => SingleChildScrollView(
-                padding: EdgeInsets.symmetric(horizontal: 16),
-                controller: scrollController,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Align(
-                      alignment: Alignment.center,
-                      child: Column(
-                        children: [
-                          Container(
-                            height: 4,
-                            width: 60,
-                            decoration: BoxDecoration(
-                                color: Colors.grey.shade400,
-                                borderRadius: BorderRadius.circular(10)),
-                          ),
-                          SizedBox(
-                            height: 20,
-                          ),
-                          Text(
-                            "Filter",
-                            style: theme.textTheme.titleLarge!.copyWith(
-                              color: theme.colorScheme.primary,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Divider(
-                      color: Colors.grey.shade400,
-                    ),
-                    SizedBox(
-                      height: 18,
-                    ),
-                    Text(
-                      "Service Type",
-                      style: theme.textTheme.titleLarge!.copyWith(
-                        color: theme.colorScheme.primary,
-                      ),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Row(
-                      children: [
-                        serviceContainer(
-                            'Spa', Colors.white, theme.colorScheme.primary),
-                        SizedBox(
-                          width: 14,
-                        ),
-                        serviceContainer('Gym', theme.colorScheme.primary,
-                            theme.colorScheme.primary.withOpacity(.1)),
-                        SizedBox(
-                          width: 14,
-                        ),
-                        serviceContainer('Theater', theme.colorScheme.primary,
-                            theme.colorScheme.primary.withOpacity(.1)),
-                      ],
-                    ),
-                    SizedBox(
-                      height: 100,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        serviceFilterOption('Reset', Colors.white, Colors.blue,
-                            () {
-                          _query = '';
-                          setState(() {});
-                          Navigator.pop(context);
-                        }),
-                        SizedBox(
-                          width: 30,
-                        ),
-                        serviceFilterOption('Apply Filter', Colors.white,
-                            theme.colorScheme.primary, () {
-                          _query = pickText;
-                          setState(() {});
-                          Navigator.pop(context);
-                        }),
-                      ],
-                    )
-                  ],
-                ),
-              ),
-            ));
+            expand: false,
+            initialChildSize: .4,
+            maxChildSize: .9,
+            minChildSize: .32,
+            builder: (context, scrollController) =>
+                ModalFilterFrame(scrollController: scrollController)));
   }
-
-  String pickText = '';
-
-  serviceContainer(text, color, containerColor) => InkWell(
-        onTap: () => pickText = text,
-        child: Container(
-          padding: EdgeInsets.symmetric(vertical: 10, horizontal: 16),
-          decoration: BoxDecoration(
-              color: containerColor, borderRadius: BorderRadius.circular(20)),
-          child: Text(
-            text,
-            style: theme.textTheme.labelLarge!.copyWith(color: color),
-          ),
-        ),
-      );
-
-  serviceFilterOption(text, color, containerColor, ontap) => InkWell(
-        onTap: ontap,
-        child: Container(
-          padding: EdgeInsets.symmetric(vertical: 10, horizontal: 26),
-          decoration: BoxDecoration(
-              color: containerColor, borderRadius: BorderRadius.circular(26)),
-          child: Text(
-            text,
-            style: theme.textTheme.titleMedium!.copyWith(color: color),
-          ),
-        ),
-      );
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        appBar: _buildAppBar(context),
-        body: SizedBox(
-          width: double.maxFinite,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 15.h),
-                child: CustomSearchView(
-                  width: 900,
-                  controller: searchController,
-                  onTapped: () =>
-                      value == 4 ? _showBottomModalFilter(context) : () {},
-                  onChanged: (v) {
-                    // Use the debouncer to delay the search
-                    _debouncer.run(() {
-                      setState(() => _query = v);
-                      // Perform your search operation here
-                      // You can call your search function or update the UI based on the search query
-                    });
-                  },
-                  hintText: "Search",
-                  // suffix: GestureDetector(
-                  //   onTap: () {
-                  //     showModalBottomSheet(
-                  //       context: context,
-                  //       isScrollControlled: true,
-                  //       builder: (BuildContext context) {
-                  //         return Container(
-                  //           height: MediaQuery.of(context).size.height - 300,
-                  //           child: SearchFilterBottomsheet(),
-                  //         );
-                  //       },
-                  //     );
-                  //   },
-                  //   child: Container(
-                  //     margin: EdgeInsets.fromLTRB(30.h, 7.v, 11.h, 7.v),
-                  //     child: CustomImageView(
-                  //       imagePath: ImageConstant.imgFilterlist,
-                  //       height: 30.adaptSize,
-                  //       width: 30.adaptSize,
-                  //     ),
-                  //   ),
-                  // ),
-                ),
-              ),
-              SizedBox(height: 24.v),
-              _buildTabview(context),
-              // SizedBox(height: 24.v),
-              // _buildFilteredThirty(context),
-              Expanded(
-                child: SizedBox(
-                  height: 740.v,
-                  child: TabBarView(
-                    controller: tabviewController,
-                    children: [
-                      _performAccommodationSearch(context),
-                      _performVehiclesSearch(context),
-                      _performFlightsSearch(context),
-                      _performToursSearch(context),
-                      _performServicesSearch(context),
-                    ],
+    return Consumer<ProviderServices>(builder: (context, myData, __) {
+      return SafeArea(
+        child: Scaffold(
+          appBar: _buildAppBar(context),
+          body: SizedBox(
+            width: double.maxFinite,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 15.h),
+                  child: CustomSearchView(
+                    width: 900,
+                    controller: searchController,
+                    onTapped: () =>
+                        value == 4 ? _showBottomModalFilter(context) : () {},
+                    onChanged: (v) {
+                      // Use the debouncer to delay the search
+                      _debouncer.run(() {
+                        myData.query = myData.query;
+                        setState(() => myData.query = v);
+                        myData.notifyListeners();
+                        // Perform your search operation here
+                        // You can call your search function or update the UI based on the search query
+                      });
+                    },
+                    hintText: "Search",
+                    // suffix: GestureDetector(
+                    //   onTap: () {
+                    //     showModalBottomSheet(
+                    //       context: context,
+                    //       isScrollControlled: true,
+                    //       builder: (BuildContext context) {
+                    //         return Container(
+                    //           height: MediaQuery.of(context).size.height - 300,
+                    //           child: SearchFilterBottomsheet(),
+                    //         );
+                    //       },
+                    //     );
+                    //   },
+                    //   child: Container(
+                    //     margin: EdgeInsets.fromLTRB(30.h, 7.v, 11.h, 7.v),
+                    //     child: CustomImageView(
+                    //       imagePath: ImageConstant.imgFilterlist,
+                    //       height: 30.adaptSize,
+                    //       width: 30.adaptSize,
+                    //     ),
+                    //   ),
+                    // ),
                   ),
                 ),
-              )
-            ],
+                SizedBox(height: 24.v),
+                _buildTabview(context),
+                // SizedBox(height: 24.v),
+                // _buildFilteredThirty(context),
+                Expanded(
+                  child: SizedBox(
+                    height: 740.v,
+                    child: TabBarView(
+                      controller: tabviewController,
+                      children: [
+                        _performAccommodationSearch(context),
+                        _performVehiclesSearch(context),
+                        _performFlightsSearch(context),
+                        _performToursSearch(context),
+                        _performServicesSearch(context),
+                      ],
+                    ),
+                  ),
+                )
+              ],
+            ),
           ),
         ),
-      ),
-    );
+      );
+    });
   }
 
   PreferredSizeWidget _buildAppBar(BuildContext context) {
@@ -475,16 +360,16 @@ class SearchInProgressState extends State<SearchInProgress>
                   .where((element) =>
                       element.hostName
                           ?.toLowerCase()
-                          .contains(_query.toLowerCase()) ==
+                          .contains(provider.query.toLowerCase()) ==
                       true)
-                  ?.length ??
+                  .length ??
               0,
           itemBuilder: (context, index) {
             final List<PropertyModel>? filteredList = provider
                 .propertyListModel?.result
                 ?.where((element) => element.propertyName!
                     .toLowerCase()
-                    .contains(_query.toLowerCase()))
+                    .contains(provider.query.toLowerCase()))
                 .toList();
 
             if (filteredList != null && index < filteredList.length) {
@@ -614,7 +499,7 @@ class SearchInProgressState extends State<SearchInProgress>
                   ?.where(
                     (element) => element.hostName!
                         .toLowerCase()
-                        .contains(_query.toLowerCase()),
+                        .contains(provider.query.toLowerCase()),
                   )
                   ?.length ??
               0,
@@ -623,7 +508,7 @@ class SearchInProgressState extends State<SearchInProgress>
                 .vehicleListModel?.result
                 ?.where((element) => element.vehicleName!
                     .toLowerCase()
-                    .contains(_query.toLowerCase()))
+                    .contains(provider.query.toLowerCase()))
                 .toList();
 
             if (filteredList != null && index < filteredList.length) {
@@ -752,7 +637,7 @@ class SearchInProgressState extends State<SearchInProgress>
                   ?.where(
                     (element) => element.hostName!
                         .toLowerCase()
-                        .contains(_query.toLowerCase()),
+                        .contains(provider.query.toLowerCase()),
                   )
                   ?.length ??
               0,
@@ -761,7 +646,7 @@ class SearchInProgressState extends State<SearchInProgress>
                 .flightListModel?.result
                 ?.where((element) => element.fromWhere!
                     .toLowerCase()
-                    .contains(_query.toLowerCase()))
+                    .contains(provider.query.toLowerCase()))
                 .toList();
 
             if (filteredList != null && index < filteredList.length) {
@@ -890,7 +775,7 @@ class SearchInProgressState extends State<SearchInProgress>
                   ?.where(
                     (element) => element.hostName!
                         .toLowerCase()
-                        .contains(_query.toLowerCase()),
+                        .contains(provider.query.toLowerCase()),
                   )
                   ?.length ??
               0,
@@ -898,7 +783,7 @@ class SearchInProgressState extends State<SearchInProgress>
             final List<TourModel>? filteredList = provider.tourListModel?.result
                 ?.where((element) => element.hostName!
                     .toLowerCase()
-                    .contains(_query.toLowerCase()))
+                    .contains(provider.query.toLowerCase()))
                 .toList();
 
             if (filteredList != null && index < filteredList.length) {
@@ -1027,7 +912,7 @@ class SearchInProgressState extends State<SearchInProgress>
                   ?.where(
                     (element) => element.hostName!
                         .toLowerCase()
-                        .contains(_query.toLowerCase()),
+                        .contains(provider.query.toLowerCase()),
                   )
                   ?.length ??
               0,
@@ -1036,7 +921,7 @@ class SearchInProgressState extends State<SearchInProgress>
                 .serviceListModel?.result
                 ?.where((element) => element.hostName!
                     .toLowerCase()
-                    .contains(_query.toLowerCase()))
+                    .contains(provider.query.toLowerCase()))
                 .toList();
 
             if (filteredList != null && index < filteredList.length) {

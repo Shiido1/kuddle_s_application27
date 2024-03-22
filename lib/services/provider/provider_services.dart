@@ -25,6 +25,7 @@ import '../../pages/home/model/services_list_model/services_list_model.dart';
 import '../../pages/home/model/tour_list_model/tour_list_model.dart';
 import '../../pages/home/model/vehicle_list_model/vehicle_list_model.dart';
 import '../../presentation/home_page/home_page.dart';
+import '../../theme/theme_helper.dart';
 
 class ProviderServices extends ChangeNotifier {
   AuthRepo authRepo = AuthRepo();
@@ -79,19 +80,193 @@ class ProviderServices extends ChangeNotifier {
   TransactionData? get transactionData => _transactionData;
   TransactionData? _transactionData;
 
+  // String pickText = '';
+  // List<String> isTapped = ['Spa'];
+
+  String query = '';
+
+  // serviceContainer(
+  //   text,
+  //   color,
+  //   containerColor,
+  // ) =>
+  //     InkWell(
+  //       onTap: () {
+  //         pickText = text;
+  //         if (isTapped.contains(text)) {
+  //         } else if (!isTapped.contains(text)) {
+  //           isTapped.clear();
+  //           isTapped.add(text);
+  //         } else {
+  //           isTapped.remove(text);
+  //         }
+  //         print(isTapped.toString());
+  //         // setState(() {});
+  //         notifyListeners();
+  //       },
+  //       child: Container(
+  //         padding: EdgeInsets.symmetric(vertical: 10, horizontal: 16),
+  //         decoration: BoxDecoration(
+  //             color: containerColor, borderRadius: BorderRadius.circular(20)),
+  //         child: Text(
+  //           text,
+  //           style: theme.textTheme.labelLarge!.copyWith(color: color),
+  //         ),
+  //       ),
+  //     );
+
+  // serviceFilterOption(text, color, containerColor, ontap) => InkWell(
+  //       onTap: ontap,
+  //       child: Container(
+  //         padding: EdgeInsets.symmetric(vertical: 10, horizontal: 26),
+  //         decoration: BoxDecoration(
+  //             color: containerColor, borderRadius: BorderRadius.circular(26)),
+  //         child: Text(
+  //           text,
+  //           style: theme.textTheme.titleMedium!.copyWith(color: color),
+  //         ),
+  //       ),
+  //     );
+
+  // void showBottomModalFilter(BuildContext? context) {
+  //   showModalBottomSheet(
+  //       context: context!,
+  //       isScrollControlled: true,
+  //       shape: RoundedRectangleBorder(
+  //           borderRadius: BorderRadius.vertical(top: Radius.circular(14))),
+  //       builder: (context) => DraggableScrollableSheet(
+  //             expand: false,
+  //             initialChildSize: .4,
+  //             maxChildSize: .9,
+  //             minChildSize: .32,
+  //             builder: (context, scrollController) => SingleChildScrollView(
+  //               padding: EdgeInsets.symmetric(horizontal: 16),
+  //               controller: scrollController,
+  //               child: Column(
+  //                 crossAxisAlignment: CrossAxisAlignment.start,
+  //                 children: [
+  //                   SizedBox(
+  //                     height: 20,
+  //                   ),
+  //                   Align(
+  //                     alignment: Alignment.center,
+  //                     child: Column(
+  //                       children: [
+  //                         Container(
+  //                           height: 4,
+  //                           width: 60,
+  //                           decoration: BoxDecoration(
+  //                               color: Colors.grey.shade400,
+  //                               borderRadius: BorderRadius.circular(10)),
+  //                         ),
+  //                         SizedBox(
+  //                           height: 20,
+  //                         ),
+  //                         Text(
+  //                           "Filter",
+  //                           style: theme.textTheme.titleLarge!.copyWith(
+  //                             color: theme.colorScheme.primary,
+  //                           ),
+  //                         ),
+  //                       ],
+  //                     ),
+  //                   ),
+  //                   SizedBox(
+  //                     height: 20,
+  //                   ),
+  //                   Divider(
+  //                     color: Colors.grey.shade400,
+  //                   ),
+  //                   SizedBox(
+  //                     height: 18,
+  //                   ),
+  //                   Text(
+  //                     "Service Type",
+  //                     style: theme.textTheme.titleLarge!.copyWith(
+  //                       color: theme.colorScheme.primary,
+  //                     ),
+  //                   ),
+  //                   SizedBox(
+  //                     height: 10,
+  //                   ),
+  //                   Row(
+  //                     children: [
+  //                       serviceContainer(
+  //                         'Spa',
+  //                         isTapped.contains('Spa')
+  //                             ? Colors.white
+  //                             : theme.colorScheme.primary,
+  //                         isTapped.contains('Spa')
+  //                             ? theme.colorScheme.primary
+  //                             : Colors.white,
+  //                       ),
+  //                       SizedBox(
+  //                         width: 14,
+  //                       ),
+  //                       serviceContainer(
+  //                         'Gym',
+  //                         isTapped.contains('Gym')
+  //                             ? Colors.white
+  //                             : theme.colorScheme.primary,
+  //                         isTapped.contains('Gym')
+  //                             ? theme.colorScheme.primary
+  //                             : Colors.white,
+  //                       ),
+  //                       SizedBox(
+  //                         width: 14,
+  //                       ),
+  //                       serviceContainer(
+  //                         'Theater',
+  //                         isTapped.contains('Theater')
+  //                             ? Colors.white
+  //                             : theme.colorScheme.primary,
+  //                         isTapped.contains('Theater')
+  //                             ? theme.colorScheme.primary
+  //                             : Colors.white,
+  //                       ),
+  //                     ],
+  //                   ),
+  //                   SizedBox(
+  //                     height: 100,
+  //                   ),
+  //                   Row(
+  //                     mainAxisAlignment: MainAxisAlignment.center,
+  //                     crossAxisAlignment: CrossAxisAlignment.center,
+  //                     children: [
+  //                       serviceFilterOption('Reset', Colors.white, Colors.blue,
+  //                           () {
+  //                         _query = '';
+  //                         Navigator.pop(context);
+  //                         notifyListeners();
+  //                       }),
+  //                       SizedBox(
+  //                         width: 30,
+  //                       ),
+  //                       serviceFilterOption('Apply Filter', Colors.white,
+  //                           theme.colorScheme.primary, () {
+  //                         _query = pickText;
+  //                         Navigator.pop(context);
+  //                         notifyListeners();
+  //                       }),
+  //                     ],
+  //                   )
+  //                 ],
+  //               ),
+  //             ),
+  //           ));
+  //   notifyListeners();
+  // }
 
   void signIn({Map<String, String>? map, BuildContext? context}) async {
     try {
       _isLoading = true;
       notifyListeners();
 
-
       Response? response = await authRepo.login(map!);
 
       if (response != null && response.statusCode == 200) {
         print('response is $response');
         print('${response.data}');
-
 
         _loginModel = LoginModel.fromJson(response.data);
         // Display success message in Snackbar
@@ -111,11 +286,8 @@ class ProviderServices extends ChangeNotifier {
           SessionManager.instance.isLoggedIn = true;
 
           if (_loginModel != null && _loginModel!.token != null) {
-
             SessionManager.instance.authToken = _loginModel!.token!;
             SessionManager.instance.authUserID = _loginModel!.userID.toString();
-
-
           }
 
           print('${SessionManager.instance.authToken}');
@@ -126,10 +298,10 @@ class ProviderServices extends ChangeNotifier {
           Navigator.pushReplacement(
             context!,
             MaterialPageRoute(
-              builder: (context) =>
-                  HomePage(selectedIndex: 0,), // Replace SignInScreen with your actual sign-in screen
+              builder: (context) => HomePage(
+                selectedIndex: 0,
+              ), // Replace SignInScreen with your actual sign-in screen
             ),
-
           );
         }
       } else {
@@ -148,7 +320,6 @@ class ProviderServices extends ChangeNotifier {
 
 // The rest of your helper functions (handleStatusCodeError, handleOtherException, showSnackBar) remain unchanged.
 
-
   void signOut() async {
     try {
       SessionManager.instance.logOut();
@@ -166,7 +337,6 @@ class ProviderServices extends ChangeNotifier {
     try {
       _isLoading = true;
       notifyListeners();
-
 
       Response? response = await authRepo.register(map!);
 
@@ -187,7 +357,6 @@ class ProviderServices extends ChangeNotifier {
           ),
         ));
 
-
         if (_registerModel?.success == true) {
           _isLoading = false;
           Navigator.pushReplacement(
@@ -197,7 +366,6 @@ class ProviderServices extends ChangeNotifier {
                   SignInScreen(), // Replace SignInScreen with your actual sign-in screen
             ),
           );
-
         }
       } else {
         // Handle other status codes
@@ -213,29 +381,28 @@ class ProviderServices extends ChangeNotifier {
     }
   }
 
-
   void handleStatusCodeError(BuildContext? context, int? statusCode) {
     // Handle different status codes
     if (statusCode != null) {
       switch (statusCode) {
         case 400:
-        // Bad Request
+          // Bad Request
           showSnackBars(
               context, 'Password must have capital letter and number');
           break;
         case 401:
-        // Unauthorized
+          // Unauthorized
           showSnackBars(context, 'Unauthorized: Please check your credentials');
           // Handle unauthorized scenario (if needed)
           break;
         case 403:
-        // Forbidden
+          // Forbidden
           showSnackBars(context,
               'Forbidden: You do not have permission to access this resource');
           break;
-      // Add more cases for other status codes as needed
+        // Add more cases for other status codes as needed
         default:
-        // Default error message
+          // Default error message
           showSnackBars(context, 'An error occurred');
           break;
       }
@@ -248,8 +415,8 @@ class ProviderServices extends ChangeNotifier {
     // Handle DioError based on response status code
     if (e.response != null) {
       final int statusCode = e.response!.statusCode!;
-      final String errorMessage = e.response!.data['message'] ??
-          'An error occurred';
+      final String errorMessage =
+          e.response!.data['message'] ?? 'An error occurred';
 
       // Display different messages for specific status codes
       handleStatusCodeError(context, statusCode);
@@ -277,7 +444,6 @@ class ProviderServices extends ChangeNotifier {
     ));
   }
 
-
   void getAllPropertiesList() async {
     try {
       _isLoading = true;
@@ -295,7 +461,6 @@ class ProviderServices extends ChangeNotifier {
       debugPrint("StackTrace: $str");
     }
   }
-
 
   void getAllVehiclesList() async {
     try {
@@ -315,7 +480,6 @@ class ProviderServices extends ChangeNotifier {
     }
   }
 
-
   void getAllFlightsList() async {
     try {
       _isLoading = true;
@@ -333,7 +497,6 @@ class ProviderServices extends ChangeNotifier {
       debugPrint("StackTrace: $str");
     }
   }
-
 
   void getAllToursList() async {
     try {
@@ -353,7 +516,6 @@ class ProviderServices extends ChangeNotifier {
     }
   }
 
-
   void getAllServicesList() async {
     try {
       _isLoading = true;
@@ -361,7 +523,6 @@ class ProviderServices extends ChangeNotifier {
       if (response != null && response.statusCode == 200) {
         _serviceListModel = ServicesListModel.fromJson(response.data);
         _isLoading = false;
-
       }
       if (response != null && response.statusCode != 200) {
         _isLoading = false;
@@ -372,7 +533,6 @@ class ProviderServices extends ChangeNotifier {
       debugPrint("StackTrace: $str");
     }
   }
-
 
   void getAllBookingsList() async {
     try {
@@ -396,7 +556,6 @@ class ProviderServices extends ChangeNotifier {
       debugPrint("StackTrace: $str");
     }
   }
-
 
   void getAllRoomsList($roomID) async {
     try {
@@ -442,8 +601,6 @@ class ProviderServices extends ChangeNotifier {
     }
   }
 
-
-
   void getAllBookedFlightsList() async {
     try {
       _isLoading = true;
@@ -465,7 +622,6 @@ class ProviderServices extends ChangeNotifier {
       debugPrint("StackTrace: $str");
     }
   }
-
 
   void getAllBookedToursList() async {
     try {
@@ -489,8 +645,6 @@ class ProviderServices extends ChangeNotifier {
     }
   }
 
-
-
   void getAllBookedServicesList() async {
     try {
       _isLoading = true;
@@ -513,8 +667,6 @@ class ProviderServices extends ChangeNotifier {
     }
   }
 
-
-
   void getAllBookedRoomList() async {
     try {
       _isLoading = true;
@@ -532,8 +684,6 @@ class ProviderServices extends ChangeNotifier {
       debugPrint("StackTrace: $str");
     }
   }
-
-
 
   void getAllWalletHistory() async {
     try {
@@ -553,8 +703,6 @@ class ProviderServices extends ChangeNotifier {
     }
   }
 
-
-
   void getUserDetails() async {
     try {
       _isLoading = true;
@@ -572,7 +720,6 @@ class ProviderServices extends ChangeNotifier {
       debugPrint("StackTrace: $str");
     }
   }
-
 
   // getAllWalletHistory()
   // getAllWalletDetails()
@@ -595,8 +742,6 @@ class ProviderServices extends ChangeNotifier {
       debugPrint("StackTrace: $str");
     }
   }
-
-
 
   void addOrder({Map<String, String>? map, BuildContext? context}) async {
     try {
@@ -636,7 +781,6 @@ class ProviderServices extends ChangeNotifier {
       debugPrint("StackTrace: $str");
     }
   }
-
 
   void updateProfile({Map<String, String>? map, BuildContext? context}) async {
     try {
@@ -678,7 +822,6 @@ class ProviderServices extends ChangeNotifier {
     }
   }
 
-
   void addAvatar({Map<String, String>? map, BuildContext? context}) async {
     try {
       _isLoading = true;
@@ -717,8 +860,6 @@ class ProviderServices extends ChangeNotifier {
       debugPrint("StackTrace: $str");
     }
   }
-
-
 
   void userFundWallet({Map<String, String>? map, BuildContext? context}) async {
     try {
@@ -761,7 +902,8 @@ class ProviderServices extends ChangeNotifier {
     }
   }
 
-  void userPayWithWallet({Map<String, String>? map, BuildContext? context}) async {
+  void userPayWithWallet(
+      {Map<String, String>? map, BuildContext? context}) async {
     try {
       _isLoading = true;
       notifyListeners();
@@ -803,10 +945,6 @@ class ProviderServices extends ChangeNotifier {
     }
   }
 
-
-
-
-
   Future<List<Favorite>> getFavoritesList() async {
     var favoritesBox = await Hive.openBox<Favorite>('favoritesBox');
     return favoritesBox.values.toList();
@@ -830,5 +968,4 @@ class ProviderServices extends ChangeNotifier {
     _favoritesList.remove(favorite);
     notifyListeners();
   }
-
 }
