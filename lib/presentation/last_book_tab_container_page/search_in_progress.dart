@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:kuddle_s_application27/core/app_export.dart';
 import 'package:kuddle_s_application27/presentation/last_book_complete_page/last_book_complete_page.dart';
 import 'package:kuddle_s_application27/presentation/last_book_page/last_book_page.dart';
-import 'package:kuddle_s_application27/presentation/last_book_tab_container_page/modal_filter_frame.dart';
+import 'package:kuddle_s_application27/presentation/last_book_tab_container_page/filter_folder/accommodation_modal_filter.dart';
+import 'package:kuddle_s_application27/presentation/last_book_tab_container_page/filter_folder/modal_filter_frame.dart';
 import 'package:kuddle_s_application27/widgets/app_bar/appbar_leading_image.dart';
 import 'package:kuddle_s_application27/widgets/app_bar/appbar_title.dart';
 import 'package:kuddle_s_application27/widgets/app_bar/custom_app_bar.dart';
@@ -22,6 +23,10 @@ import '../home_page/tour_detail.dart';
 import '../home_page/vehicle_detail.dart';
 import '../search_page/widgets/search_item_widget.dart';
 import 'package:intl/intl.dart';
+
+import 'filter_folder/car_modal_filter.dart';
+import 'filter_folder/flight_modal_filter.dart';
+import 'filter_folder/tour_modal_filter.dart';
 
 class SearchInProgress extends StatefulWidget {
   const SearchInProgress({Key? key, required this.initialTabIndex})
@@ -44,7 +49,7 @@ class SearchInProgressState extends State<SearchInProgress>
   double minPrice = 0.0;
   double maxPrice = 6000000.00;
 
-  int? value;
+  int value = 0;
 
   @override
   void initState() {
@@ -83,7 +88,26 @@ class SearchInProgressState extends State<SearchInProgress>
             maxChildSize: .9,
             minChildSize: .32,
             builder: (context, scrollController) =>
-                ModalFilterFrame(scrollController: scrollController)));
+                tabFilterWidget(scrollController)));
+  }
+
+  tabFilterWidget(scrollController) {
+    if (value == 0) {
+      return AccommodationModalFilterFrame(scrollController: scrollController);
+    }
+
+    if (value == 1) {
+      return CarModalFilterFrame(scrollController: scrollController);
+    }
+    if (value == 2) {
+      return FlightModalFilterFrame(scrollController: scrollController);
+    }
+    if (value == 3) {
+      return TourFilterFrame(scrollController: scrollController);
+    }
+    if (value == 4) {
+      return ModalFilterFrame(scrollController: scrollController);
+    }
   }
 
   @override
@@ -102,8 +126,7 @@ class SearchInProgressState extends State<SearchInProgress>
                   child: CustomSearchView(
                     width: 900,
                     controller: searchController,
-                    onTapped: () =>
-                        value == 4 ? _showBottomModalFilter(context) : () {},
+                    onTapped: () => _showBottomModalFilter(context),
                     onChanged: (v) {
                       // Use the debouncer to delay the search
                       _debouncer.run(() {

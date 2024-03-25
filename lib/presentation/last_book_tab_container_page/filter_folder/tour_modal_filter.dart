@@ -4,32 +4,27 @@ import 'package:flutter/material.dart';
 import 'package:kuddle_s_application27/theme/theme_helper.dart';
 import 'package:provider/provider.dart';
 
-import '../../services/provider/provider_services.dart';
+import '../../../services/provider/provider_services.dart';
 
-class ModalFilterFrame extends StatefulWidget {
-  ModalFilterFrame({Key? key, required ScrollController scrollController})
+class TourFilterFrame extends StatefulWidget {
+  TourFilterFrame({Key? key, required ScrollController scrollController})
       : super(key: key);
   ScrollController? scrollController;
 
   @override
-  State<ModalFilterFrame> createState() => _ModalFilterFrameState();
+  State<TourFilterFrame> createState() => _TourFilterFrameState();
 }
 
-class _ModalFilterFrameState extends State<ModalFilterFrame> {
+class _TourFilterFrameState extends State<TourFilterFrame> {
   ScrollController? _scrollController;
   String pickText = '';
-  List<String> isTapped = ['Spa'];
+  List<String> isTapped = ['Park'];
   String _query = '';
   ProviderServices? providerServices;
 
-  serviceContainer(
-    text,
-    color,
-    containerColor,
-  ) =>
-      InkWell(
+  serviceContainer(text, color, containerColor, textValue) => InkWell(
         onTap: () {
-          pickText = text;
+          pickText = textValue;
           if (isTapped.contains(text)) {
           } else if (!isTapped.contains(text)) {
             isTapped.clear();
@@ -126,42 +121,95 @@ class _ModalFilterFrameState extends State<ModalFilterFrame> {
           SizedBox(
             height: 10,
           ),
-          Row(
-            children: [
-              serviceContainer(
-                'Spa',
-                isTapped.contains('Spa')
-                    ? Colors.white
-                    : theme.colorScheme.primary,
-                isTapped.contains('Spa')
-                    ? theme.colorScheme.primary
-                    : Colors.white,
-              ),
-              SizedBox(
-                width: 14,
-              ),
-              serviceContainer(
-                'Gym',
-                isTapped.contains('Gym')
-                    ? Colors.white
-                    : theme.colorScheme.primary,
-                isTapped.contains('Gym')
-                    ? theme.colorScheme.primary
-                    : Colors.white,
-              ),
-              SizedBox(
-                width: 14,
-              ),
-              serviceContainer(
-                'Theater',
-                isTapped.contains('Theater')
-                    ? Colors.white
-                    : theme.colorScheme.primary,
-                isTapped.contains('Theater')
-                    ? theme.colorScheme.primary
-                    : Colors.white,
-              ),
-            ],
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              children: [
+                serviceContainer(
+                    'Park',
+                    isTapped.contains('Park')
+                        ? Colors.white
+                        : theme.colorScheme.primary,
+                    isTapped.contains('Park')
+                        ? theme.colorScheme.primary
+                        : theme.colorScheme.primary.withOpacity(.05),
+                    'Park'),
+                SizedBox(
+                  width: 14,
+                ),
+                serviceContainer(
+                    'Museum',
+                    isTapped.contains('Museum')
+                        ? Colors.white
+                        : theme.colorScheme.primary,
+                    isTapped.contains('Museum')
+                        ? theme.colorScheme.primary
+                        : theme.colorScheme.primary.withOpacity(.05),
+                    'Museum'),
+                SizedBox(
+                  width: 14,
+                ),
+                serviceContainer(
+                    'Lake City',
+                    isTapped.contains('Lake City')
+                        ? Colors.white
+                        : theme.colorScheme.primary,
+                    isTapped.contains('Lake City')
+                        ? theme.colorScheme.primary
+                        : theme.colorScheme.primary.withOpacity(.05),
+                    'City'),
+                SizedBox(
+                  width: 14,
+                ),
+                serviceContainer(
+                    'Resort',
+                    isTapped.contains('Resort')
+                        ? Colors.white
+                        : theme.colorScheme.primary,
+                    isTapped.contains('Resort')
+                        ? theme.colorScheme.primary
+                        : theme.colorScheme.primary.withOpacity(.05),
+                    'Resort'),
+                SizedBox(
+                  width: 14,
+                ),
+                serviceContainer(
+                    'Garden',
+                    isTapped.contains('Garden')
+                        ? Colors.white
+                        : theme.colorScheme.primary,
+                    isTapped.contains('Garden')
+                        ? theme.colorScheme.primary
+                        : theme.colorScheme.primary.withOpacity(.05),
+                    'Garden'),
+
+                // SizedBox(
+                //   width: 14,
+                // ),
+                // serviceContainer(
+                //     'Companion',
+                //     isTapped.contains('Companion')
+                //         ? Colors.white
+                //         : theme.colorScheme.primary,
+                //     isTapped.contains('Companion')
+                //         ? theme.colorScheme.primary
+                //         : theme.colorScheme.primary.withOpacity(.05),
+                //     'Companion'),
+                // SizedBox(
+                //   width: 14,
+                // ),
+                // serviceContainer(
+                //   'Other',
+                //   isTapped.contains('Other')
+                //       ? Colors.white
+                //       : theme.colorScheme.primary,
+                //   isTapped.contains('Other')
+                //       ? theme.colorScheme.primary
+
+                //       : theme.colorScheme.primary.withOpacity(.1),
+                // ),
+              ],
+            ),
           ),
           SizedBox(
             height: 100,
