@@ -843,7 +843,7 @@ class _HotelDetailState extends State<HotelDetail> {
     // Navigate back and await the result
 
     Navigator.push(
-      context!,
+      context,
       MaterialPageRoute(
         builder: (context) => HomePage(selectedIndex: 0),
       ),

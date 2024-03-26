@@ -38,6 +38,7 @@ class Room {
   final String discount;
   final String available;
   final String agreeCancel;
+  final String bookedDates;
   final String createdAt;
 
   Room({
@@ -53,6 +54,7 @@ class Room {
     required this.discount,
     required this.available,
     required this.agreeCancel,
+    required this.bookedDates,
     required this.createdAt,
   });
 
@@ -70,6 +72,7 @@ class Room {
       discount: json['discount'],
       available: json['available'],
       agreeCancel: json['agreeCancel'],
+      bookedDates: json['bookedDates'],
       createdAt: json['createdAt'],
     );
   }
