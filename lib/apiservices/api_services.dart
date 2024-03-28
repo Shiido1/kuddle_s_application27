@@ -83,7 +83,6 @@ mixin ApiServices {
     }
   }
 
-
   Future<Response?> apiPatchRequests(
       String endPoint, Map<String, dynamic> credentials,
       {Map<String, dynamic>? header}) async {
@@ -106,7 +105,6 @@ mixin ApiServices {
     }
   }
 
-
   Future<Response?> apiPutRequests(
       String endPoint, Map<String, dynamic> credentials,
       {Map<String, dynamic>? header}) async {
@@ -128,7 +126,6 @@ mixin ApiServices {
       return e.response;
     }
   }
-
 
   // Future<Response?> apiPostRequestss(
   //     String endPoint, Map<String, dynamic> credentials,
@@ -165,7 +162,7 @@ mixin ApiServices {
       Response response = await dio.get(endPoint,
           options: Options(
               headers: {"Authorization": "Bearer " + await getAuthToken()}));
-      //  debugPrint(response.data.toString());
+
       return response;
     } on DioError catch (e) {
       return e.response;
@@ -205,8 +202,6 @@ mixin ApiServices {
       return catchError(e);
     }
   }
-
-
 
   // Future<Map<String, dynamic>?> apiUploadPatchRequests(
   //     String endPoint, Map<String, dynamic> credentials) async {

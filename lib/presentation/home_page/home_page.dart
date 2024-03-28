@@ -569,6 +569,7 @@ class _HomePageState extends State<HomePage> {
                 return VehiclesectionItemWidget(
                   // Customize parameters based on currentItem if needed
                   onTapImgSpain: () {
+                    providerServices?.getAllBookedVehiclesList();
                     Navigator.push(
                       context,
                       MaterialPageRoute(

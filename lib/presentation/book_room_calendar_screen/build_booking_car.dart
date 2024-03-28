@@ -14,25 +14,19 @@ import '../../pages/home/model/vehicle_list_model/vehicle_model.dart';
 import '../../services/provider/provider_services.dart';
 import '../../theme/custom_button_style.dart';
 import '../../widgets/custom_elevated_button.dart';
+import '../../widgets/flush_bar.dart';
 import '../payment_sucess_screen/payment_sucess_screen.dart';
 import 'package:intl/intl.dart';
 
 class CarBookingWidget extends StatefulWidget {
-
   final VehicleModel vehicle;
-  CarBookingWidget({Key? key, required this.vehicle }) : super(key: key);
+  CarBookingWidget({Key? key, required this.vehicle}) : super(key: key);
 
   @override
   _CarBookingWidgetState createState() => _CarBookingWidgetState();
 }
 
-
-
 class _CarBookingWidgetState extends State<CarBookingWidget> {
-
-
-
-
   int adultCount = 1;
   int childrenCount = 0;
   DateTime departureDate = DateTime.now();
@@ -44,7 +38,6 @@ class _CarBookingWidgetState extends State<CarBookingWidget> {
   double childPrice = 20.0; // Replace with your actual child price
   double infantPrice = 40.0; // Replace with your actual infant price
   String bookingFor = 'Myself';
-
 
   DateTime? rangeStart;
 
@@ -79,54 +72,52 @@ class _CarBookingWidgetState extends State<CarBookingWidget> {
     return userID;
   }
 
-
   void addOrder(context) async {
-
     // setState(() {});
     var userId = await getAuthUserID();
 
     var price = totalPrice;
     DateTime now = DateTime.now();
-    String formattedDate = "${now.year}-${now.month.toString().padLeft(2, '0')}-${now.day.toString().padLeft(2, '0')}";
-    String formattedTime = "${now.hour.toString().padLeft(2, '0')}:${now.minute.toString().padLeft(2, '0')}";
+    String formattedDate =
+        "${now.year}-${now.month.toString().padLeft(2, '0')}-${now.day.toString().padLeft(2, '0')}";
+    String formattedTime =
+        "${now.hour.toString().padLeft(2, '0')}:${now.minute.toString().padLeft(2, '0')}";
     var $userId = getAuthUserID();
-    providerServices?.addOrder(
-        map: {
-          // "amountPaid":'${finalTotalMade}',
-          // "bookingFor":"Room",
-          // "checkInDate":"2023-10-20",
-          // "checkInTime": "2023-10-20",
-          // "checkOutDate":"2023-10-20",
-          // "checkOutTime":"2023-10-20",
-          // "duration":"2",
-          // "hostID":'${widget.property.hostId}',
-          // "itemID": '${widget.property.roomId}',
-          // "itemType":"accommodation",
-          // "itemUnitPrice":'${widget.property.price}',
-          // "tickets":0.toString(),
-          // "userID":36.toString(),
-          // "roomID": '${widget.property.roomId}',
-          // "paymentStatus": "1",
-          // "delivery_charge": 1500.toString()
+    providerServices?.addOrder(map: {
+      // "amountPaid":'${finalTotalMade}',
+      // "bookingFor":"Room",
+      // "checkInDate":"2023-10-20",
+      // "checkInTime": "2023-10-20",
+      // "checkOutDate":"2023-10-20",
+      // "checkOutTime":"2023-10-20",
+      // "duration":"2",
+      // "hostID":'${widget.property.hostId}',
+      // "itemID": '${widget.property.roomId}',
+      // "itemType":"accommodation",
+      // "itemUnitPrice":'${widget.property.price}',
+      // "tickets":0.toString(),
+      // "userID":36.toString(),
+      // "roomID": '${widget.property.roomId}',
+      // "paymentStatus": "1",
+      // "delivery_charge": 1500.toString()
 
-          "amountPaid": finalTotalMade.toString(),
-          "bookingFor":"vehicle",
-          "checkInDate":departureDate.toString(),
-          "checkInTime": departureTime.toString(),
-          "checkOutDate":returningDate.toString(),
-          "checkOutTime":returningTime.toString(),
-          "duration":numberOfDays.toString(),
-          "hostID":4.toString(),
-          "itemID": widget.vehicle.vehicleId.toString(),
-          "itemType":"vehicle",
-          "itemUnitPrice":widget.vehicle.price.toString(),
-          "tickets":0.toString(),
-          "userID":"$userId",
-          "roomID": 1.toString(),
-          "paymentStatus": "1",
-          "delivery_charge": 1500.toString()
-        },
-        context: context);
+      "amountPaid": finalTotalMade.toString(),
+      "bookingFor": "vehicle",
+      "checkInDate": departureDate.toString(),
+      "checkInTime": departureTime.toString(),
+      "checkOutDate": returningDate.toString(),
+      "checkOutTime": returningTime.toString(),
+      "duration": numberOfDays.toString(),
+      "hostID": 4.toString(),
+      "itemID": widget.vehicle.vehicleId.toString(),
+      "itemType": "vehicle",
+      "itemUnitPrice": widget.vehicle.price.toString(),
+      "tickets": 0.toString(),
+      "userID": "$userId",
+      "roomID": 1.toString(),
+      "paymentStatus": "1",
+      "delivery_charge": 1500.toString()
+    }, context: context);
 
     // ScaffoldMessenger.of(context!).showSnackBar(SnackBar(
     //   content: AutoSizeText('Adding Product..'),
@@ -143,7 +134,8 @@ class _CarBookingWidgetState extends State<CarBookingWidget> {
   void _startPaystack() async {
     // await dotenv.load(fileName: '.env');
     // String? publicKey = dotenv.env['PUBLIC_KEY'];
-    payStackClient.initialize(publicKey: 'pk_test_7553303bab0cb7acba1834f15fe274a3d624188a');
+    payStackClient.initialize(
+        publicKey: 'pk_test_7553303bab0cb7acba1834f15fe274a3d624188a');
   }
 
   final snackBarSuccess = const SnackBar(
@@ -158,8 +150,6 @@ class _CarBookingWidgetState extends State<CarBookingWidget> {
       "unique_transaction_ref_${Random().nextInt(1000000000)}";
 
   void _makePayment(int amount) async {
-
-
     double price = finalTotalMade;
 
     final Charge charge = Charge()
@@ -186,7 +176,6 @@ class _CarBookingWidgetState extends State<CarBookingWidget> {
       ScaffoldMessenger.of(context).showSnackBar(snackBarFailure);
     }
   }
-
 
   @override
   void dispose() {
@@ -217,7 +206,38 @@ class _CarBookingWidgetState extends State<CarBookingWidget> {
     print("Final Total Made received from child: $finalTotalMade");
   }
 
+  checkBookedDate(context) {
+    var vDepartureDate = DateFormat('E MMM dd yyyy').format(departureDate);
+    var vReturningDate = DateFormat('E MMM dd yyyy').format(returningDate);
+    for (var element in providerServices!.vehicleListModel!.result!) {
+      if (element.bookedDates!.contains('$vDepartureDate') ||
+          element.bookedDates!.contains('$vReturningDate')) {
+        AppUtils.snackbar(context,
+            message: "Sorry, You can't book already booked dates!",
+            error: true);
+      } else {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (builder) => PaymentChoiceScreen(
+                    finalPaymentMode: finalTotalMade.toDouble(),
+                    itemType: "vehicle",
+                    id: widget.vehicle.vehicleId.toString(),
+                    hostID: widget.vehicle.hostId.toString(),
+                    roomID: widget.vehicle.vehicleId.toString(),
+                    itemID: widget.vehicle.vehicleId.toString(),
+                    checkInDate: departureDate.toString(),
+                    checkInTime: departureTime.toString(),
+                    checkOutDate: returningDate.toString(),
+                    checkOutTime: returningTime.toString(),
+                    numberOfDays: numberOfDays.toString(),
+                    price: widget.vehicle.price.toString())));
+      }
 
+      print('calendar date1......${element.bookedDates}');
+      print('calendar date..3.....${returningDate}');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -234,8 +254,6 @@ class _CarBookingWidgetState extends State<CarBookingWidget> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-
-
               // Example usage:
               // Container(
               //   margin: EdgeInsets.symmetric(horizontal: 10),
@@ -273,12 +291,10 @@ class _CarBookingWidgetState extends State<CarBookingWidget> {
 
               // SizedBox(height: 16),
 
-
               DepartureDateTimeCard(
                 title: 'Vehicle Booking Start',
                 date: departureDate,
                 time: departureTime,
-
                 onDateChanged: (date) => setState(() => departureDate = date),
                 onTimeChanged: (time) => setState(() => departureTime = time),
               ),
@@ -317,35 +333,20 @@ class _CarBookingWidgetState extends State<CarBookingWidget> {
                   // Update the totalFlightPrice in the parent widget
 
                   totalFlightPrice = totalPrice;
-
                 },
-
               ),
               SizedBox(height: 16),
               CustomElevatedButton(
                   width: 280.h,
                   text: "Continue",
-                  margin: EdgeInsets.only(left: 75.h, right: 75.h, bottom: 54.v),
+                  margin:
+                      EdgeInsets.only(left: 75.h, right: 75.h, bottom: 54.v),
                   buttonStyle: CustomButtonStyles.fillPrimary,
-
                   onPressed: () {
-
-                    Navigator.push(context, MaterialPageRoute(builder: (builder) =>
-                        PaymentChoiceScreen(finalPaymentMode: finalTotalMade.toDouble(),
-                            itemType: "vehicle", id: widget.vehicle.vehicleId.toString(),
-                            hostID: widget.vehicle.hostId.toString(),
-                            roomID:widget.vehicle.vehicleId.toString(),
-                            itemID: widget.vehicle.vehicleId.toString(),
-                            checkInDate:departureDate.toString(),
-                            checkInTime: departureTime.toString(),
-                            checkOutDate :returningDate.toString(),
-                            checkOutTime:returningTime.toString(),
-                            numberOfDays: numberOfDays.toString(),
-                            price: widget.vehicle.price.toString())));
+                    checkBookedDate(context);
                     // onDataFromChild(totalPrice);
                     // _makePayment(totalPrice.toInt());
                     // calculateTotalPrice();
-
                   })
             ],
           ),
@@ -381,7 +382,6 @@ class BookingDetailsCard extends StatefulWidget {
     required this.totalPrice,
     required this.callback,
     required this.onTotalPriceChanged,
-
     required this.costOfOneRoom,
     // Provide a default key or allow null
     this.cardKey,
@@ -399,19 +399,16 @@ class _BookingDetailsCardState extends State<BookingDetailsCard> {
   double percentageCostVat = 0;
   double percentageCostCity = 0;
 
-
   @override
   void initState() {
     super.initState();
   }
 
-
-
   // Call the callback function in the parent widget
 
-
   void calculateTotalPrice() {
-    int numberOfDays = widget.returningDate.difference(widget.departureDate).inDays;
+    int numberOfDays =
+        widget.returningDate.difference(widget.departureDate).inDays;
     totalFlightPrice = (widget.costOfOneRoom * numberOfDays);
     totalFlightPrice = widget.totalPrice;
 
@@ -422,22 +419,16 @@ class _BookingDetailsCardState extends State<BookingDetailsCard> {
     });
   }
 
-
-
-
-
-
   double calculateFinalTotal(double numberOfDays) {
     // Multiply the number of days by 30,000
     double initialTotal = numberOfDays * widget.costOfOneRoom;
     initialCostOfRoom = initialTotal;
 
-
     // Add 15% of the new total
     double finalTotal = initialTotal + (initialTotal * 0.15);
     double tenpercentCost = initialTotal + (initialTotal * 0.10);
     double fivepercentCost = initialTotal + (initialTotal * 0.05);
-    percentageCostVat = fivepercentCost - initialTotal ;
+    percentageCostVat = fivepercentCost - initialTotal;
     percentageCostCity = tenpercentCost - initialTotal;
 
     widget.callback(finalTotal);
@@ -445,10 +436,10 @@ class _BookingDetailsCardState extends State<BookingDetailsCard> {
     return finalTotal;
   }
 
-
   @override
   Widget build(BuildContext context) {
-    int numberOfDays = widget.returningDate.difference(widget.departureDate).inDays;
+    int numberOfDays =
+        widget.returningDate.difference(widget.departureDate).inDays;
     int totalTickets = widget.adultCount + widget.childrenCount;
     double totalPrice = (widget.costOfOneRoom * numberOfDays);
     print("$totalPrice is here");
@@ -459,9 +450,6 @@ class _BookingDetailsCardState extends State<BookingDetailsCard> {
 
     final NumberFormat currencyFormatter = NumberFormat.currency(symbol: '₦');
 
-
-
-
     return Card(
       key: widget.cardKey, // Set the key here
       elevation: 0.5,
@@ -469,62 +457,64 @@ class _BookingDetailsCardState extends State<BookingDetailsCard> {
         borderRadius: BorderRadius.circular(12),
       ),
       child: Padding(
-        padding:  EdgeInsets.all(16.0),
-        child: numberOfDays == 0 ? Text('Select Booking') : Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              'Booking Details',
-              style: TextStyle(
-                fontSize: 10,
-                fontWeight: FontWeight.bold,
-                color: Color(0xFF006CE3), // Royal Blue
-              ),
-            ),
-            SizedBox(height: 8),
-            Text(
-              'booking details below',
-              style: TextStyle(fontSize: 10, color: Colors.grey),
-            ),
-            SizedBox(height: 16),
-            BookingDetailItem(title: 'Number of Days:', value: '$numberOfDays days'),
-          BookingDetailItem(
-            title: 'Vehicle Booking Date',
-            value: DateFormat.yMMMMd().format(widget.departureDate),
-          ),
-          BookingDetailItem(
-            title: 'Vehicle Booking Date',
-            value: DateFormat.yMMMMd().format(widget.returningDate),
-          ),
+        padding: EdgeInsets.all(16.0),
+        child: numberOfDays == 0
+            ? Text('Select Booking')
+            : Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Booking Details',
+                    style: TextStyle(
+                      fontSize: 10,
+                      fontWeight: FontWeight.bold,
+                      color: Color(0xFF006CE3), // Royal Blue
+                    ),
+                  ),
+                  SizedBox(height: 8),
+                  Text(
+                    'booking details below',
+                    style: TextStyle(fontSize: 10, color: Colors.grey),
+                  ),
+                  SizedBox(height: 16),
+                  BookingDetailItem(
+                      title: 'Number of Days:', value: '$numberOfDays days'),
+                  BookingDetailItem(
+                    title: 'Vehicle Booking Date',
+                    value: DateFormat.yMMMMd().format(widget.departureDate),
+                  ),
+                  BookingDetailItem(
+                    title: 'Vehicle Booking Date',
+                    value: DateFormat.yMMMMd().format(widget.returningDate),
+                  ),
 
-            BookingDetailItem(
-              title: 'Base Vehicle Booking Price:',
-              value: currencyFormatter.format(widget.costOfOneRoom),
-            ),
-            BookingDetailItem(
-              title: 'City Tax: 10%:',
-              value: currencyFormatter.format(percentageCostCity),
-            ),
-            BookingDetailItem(
-              title: 'Vat: 5%',
-              value: currencyFormatter.format(percentageCostVat),
-            ),
-            BookingDetailItem(
-              title: 'Total Price:',
-              value: currencyFormatter.format(finalTotal),
-            ),
-            // BookingDetailItem(title: 'Base Vehicle Booking Price:', value: '₦ ${widget.costOfOneRoom}'),
-            // BookingDetailItem(title: 'City Tax: 10%:', value: '₦ ${percentageCostCity}'),
-            // BookingDetailItem(title: 'Vat: 5%', value: '₦ ${percentageCostVat}'),
-            // BookingDetailItem(title: 'Total Price:', value: '₦ ${finalTotal}'),
-            // BookingDetailItem(title: 'Total Tickets:', value: '$totalTickets ticket(s)'),
-          ],
-        ),
+                  BookingDetailItem(
+                    title: 'Base Vehicle Booking Price:',
+                    value: currencyFormatter.format(widget.costOfOneRoom),
+                  ),
+                  BookingDetailItem(
+                    title: 'City Tax: 10%:',
+                    value: currencyFormatter.format(percentageCostCity),
+                  ),
+                  BookingDetailItem(
+                    title: 'Vat: 5%',
+                    value: currencyFormatter.format(percentageCostVat),
+                  ),
+                  BookingDetailItem(
+                    title: 'Total Price:',
+                    value: currencyFormatter.format(finalTotal),
+                  ),
+                  // BookingDetailItem(title: 'Base Vehicle Booking Price:', value: '₦ ${widget.costOfOneRoom}'),
+                  // BookingDetailItem(title: 'City Tax: 10%:', value: '₦ ${percentageCostCity}'),
+                  // BookingDetailItem(title: 'Vat: 5%', value: '₦ ${percentageCostVat}'),
+                  // BookingDetailItem(title: 'Total Price:', value: '₦ ${finalTotal}'),
+                  // BookingDetailItem(title: 'Total Tickets:', value: '$totalTickets ticket(s)'),
+                ],
+              ),
       ),
     );
   }
 }
-
 
 class BookingDetailItem extends StatelessWidget {
   final String title;
@@ -542,7 +532,8 @@ class BookingDetailItem extends StatelessWidget {
         children: [
           Text(
             title,
-            style: TextStyle(fontSize: 10, color: Colors.grey, fontWeight: FontWeight.bold),
+            style: TextStyle(
+                fontSize: 10, color: Colors.grey, fontWeight: FontWeight.bold),
           ),
           Text(
             value,
@@ -565,14 +556,12 @@ class DepartureDateTimeCard extends StatelessWidget {
   final Function(DateTime) onDateChanged;
   final Function(TimeOfDay) onTimeChanged;
 
-
   DepartureDateTimeCard({
     required this.title,
     required this.date,
     required this.time,
     required this.onDateChanged,
     required this.onTimeChanged,
-
   });
 
   @override
@@ -614,7 +603,9 @@ class DepartureDateTimeCard extends StatelessWidget {
                           color: Colors.grey,
                         ),
                       ),
-                      SizedBox(height: 19,),
+                      SizedBox(
+                        height: 19,
+                      ),
                       DatePickerWidget(
                         initialDate: date,
                         onDateChanged: onDateChanged,
@@ -687,7 +678,6 @@ class PassengerCountRow extends StatelessWidget {
               onIncrement: onAdultIncrement,
               onDecrement: onAdultDecrement,
             ),
-
             PassengerCountCard(
               title: 'Children',
               count: childrenCount,
@@ -774,7 +764,10 @@ class CircleIconButton extends StatelessWidget {
       radius: 20,
       backgroundColor: Color(0xFF003B95), // Royal Blue
       child: IconButton(
-        icon: Icon(icon,size: 18,),
+        icon: Icon(
+          icon,
+          size: 18,
+        ),
         color: Colors.white,
         onPressed: onPressed,
       ),
@@ -804,11 +797,11 @@ class DatePickerWidget extends StatelessWidget {
 
         if (pickedDate != null && pickedDate != initialDate) {
           onDateChanged(pickedDate);
-
         }
       },
       style: ElevatedButton.styleFrom(
-        padding: EdgeInsets.all(25), backgroundColor: Color(0xFFFFB700), // Royal Blue
+        padding: EdgeInsets.all(24),
+        backgroundColor: Color(0xFFFFB700), // Royal Blue
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(8),
         ),
@@ -820,17 +813,20 @@ class DatePickerWidget extends StatelessWidget {
             Icons.date_range,
             color: Colors.white,
           ),
-          Text(
-            '${initialDate.toLocal()}'.split(' ')[0],
-            style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold, color: Colors.white),
+          Expanded(
+            child: Text(
+              '${initialDate.toLocal()}'.split(' ')[0],
+              style: TextStyle(
+                  fontSize: 10,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white),
+            ),
           ),
         ],
       ),
     );
   }
 }
-
-
 
 class TimePickerWidget extends StatelessWidget {
   final TimeOfDay initialTime;
@@ -848,7 +844,8 @@ class TimePickerWidget extends StatelessWidget {
         _showTimeInputDialog(context);
       },
       style: ElevatedButton.styleFrom(
-        padding: EdgeInsets.all(25), backgroundColor: Color(0xffFFB700), // Royal Blue
+        padding: EdgeInsets.all(24),
+        backgroundColor: Color(0xffFFB700), // Royal Blue
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(8),
         ),
@@ -899,18 +896,20 @@ class TimePickerWidget extends StatelessWidget {
                       _buildTimePicker(
                         context,
                         selectedTime.hour,
-                            (value) {
+                        (value) {
                           setState(() {
-                            selectedTime = TimeOfDay(hour: value, minute: selectedTime.minute);
+                            selectedTime = TimeOfDay(
+                                hour: value, minute: selectedTime.minute);
                           });
                         },
                       ),
                       _buildTimePicker(
                         context,
                         selectedTime.minute,
-                            (value) {
+                        (value) {
                           setState(() {
-                            selectedTime = TimeOfDay(hour: selectedTime.hour, minute: value);
+                            selectedTime = TimeOfDay(
+                                hour: selectedTime.hour, minute: value);
                           });
                         },
                       ),
@@ -932,7 +931,8 @@ class TimePickerWidget extends StatelessWidget {
                           ),
                         ),
                         child: Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                          padding:
+                              EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                           child: Text(
                             'OK',
                             style: TextStyle(
@@ -953,7 +953,8 @@ class TimePickerWidget extends StatelessWidget {
     );
   }
 
-  Widget _buildTimePicker(BuildContext context, int value, ValueChanged<int> onChanged) {
+  Widget _buildTimePicker(
+      BuildContext context, int value, ValueChanged<int> onChanged) {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
@@ -973,7 +974,8 @@ class TimePickerWidget extends StatelessWidget {
         ),
         IconButton(
           onPressed: () {
-            int newValue = (value - 1 + (value == 0 ? 24 : 60)) % (value == 0 ? 24 : 60);
+            int newValue =
+                (value - 1 + (value == 0 ? 24 : 60)) % (value == 0 ? 24 : 60);
             onChanged(newValue);
           },
           icon: Icon(Icons.arrow_drop_down),
@@ -1032,8 +1034,7 @@ class RoundedDropdownButton extends StatelessWidget {
         decoration: InputDecoration(
             border: InputBorder.none,
             labelText: accessibilityLabel,
-            labelStyle: TextStyle(fontSize: 00.0)
-        ),
+            labelStyle: TextStyle(fontSize: 00.0)),
         items: items.map<DropdownMenuItem<String>>((String value) {
           return DropdownMenuItem<String>(
             value: value,
@@ -1041,7 +1042,10 @@ class RoundedDropdownButton extends StatelessWidget {
               alignment: Alignment.center,
               child: Text(
                 value,
-                style: TextStyle(fontSize: 10.0, color: Color(0xFF006CE3), fontWeight: FontWeight.bold),
+                style: TextStyle(
+                    fontSize: 10.0,
+                    color: Color(0xFF006CE3),
+                    fontWeight: FontWeight.bold),
               ),
             ),
           );

@@ -69,6 +69,7 @@ class Vehicle {
   final String? aboutNeighborhood;
   final int? approvalStatus;
   final int? vehicleImageID;
+  final String? bookedDates;
   final String? vehiclePic1;
   final String? vehiclePic2;
   final String? vehiclePic3;
@@ -126,6 +127,7 @@ class Vehicle {
     this.vehiclePic3,
     this.vehiclePic4,
     this.vehiclePic5,
+    this.bookedDates,
   });
 
   factory Vehicle.fromJson(Map<String, dynamic> json) {
@@ -150,7 +152,7 @@ class Vehicle {
       confirmation: json['confirmation'],
       updatedAt: json['updatedAt'] != null ? DateTime.parse(json['updatedAt']) : null,
       createdAt: json['createdAt'] != null ? DateTime.parse(json['createdAt']) : null,
-
+      bookedDates: json['bookedDates'],
       roomID: json['roomID'],
       vehicleID: json['vehicleID'],
       roomType: json['roomType'],

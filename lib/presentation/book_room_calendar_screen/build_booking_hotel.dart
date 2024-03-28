@@ -205,9 +205,14 @@ class _HotelBookingWidgetState extends State<HotelBookingWidget> {
   }
 
   checkBookedDate(context) {
+    var vDepartureDate = DateFormat('E MMM dd yyyy').format(departureDate);
+    var vReturningDate = DateFormat('E MMM dd yyyy').format(returningDate);
     for (var element in providerServices!.roomModel!.rooms) {
-      if (element.bookedDates.contains('${departureDate.day}') &&
-          element.bookedDates.contains('${departureDate.month}')) {
+      if (element.bookedDates.contains('$vDepartureDate') ||
+          element.bookedDates.contains('$vReturningDate')) {
+        // for (int i = 0; i <= element.bookedDates.length; i++) {
+        //   print("......${element.bookedDates.split(", ")[i]}");
+        // }
         AppUtils.snackbar(context,
             message: "Sorry, You can't book already booked dates!",
             error: true);
@@ -229,6 +234,9 @@ class _HotelBookingWidgetState extends State<HotelBookingWidget> {
                     itemType: "accommodation",
                     price: widget.vehicle.price.toString())));
       }
+
+      print('calendar date1......${element.bookedDates}');
+      print('calendar date..3.....${returningDate}');
     }
   }
 

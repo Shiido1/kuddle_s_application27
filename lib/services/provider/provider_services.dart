@@ -586,7 +586,8 @@ class ProviderServices extends ChangeNotifier {
       if (response != null) {
         if (response.statusCode == 200) {
           _vehicleResponse = VehicleResponse.fromJson(response.data);
-          // print(bookingResponse.status);
+          print(
+              "_vehicleResponse!.result.toString()${_vehicleResponse!.result.toString()}");
 
           // print('we are here $_bookingList');
         }

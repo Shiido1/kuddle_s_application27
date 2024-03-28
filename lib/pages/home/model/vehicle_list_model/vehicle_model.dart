@@ -37,6 +37,7 @@ class VehicleModel extends Equatable {
   final String? discount;
   final String? agreeCancel;
   final int? vehicleImageId;
+  final String? bookedDates;
   final String? vehiclePic1;
   final String? vehiclePic2;
   final String? vehiclePic3;
@@ -80,6 +81,7 @@ class VehicleModel extends Equatable {
     this.discount,
     this.agreeCancel,
     this.vehicleImageId,
+    this.bookedDates,
     this.vehiclePic1,
     this.vehiclePic2,
     this.vehiclePic3,
@@ -129,6 +131,7 @@ class VehicleModel extends Equatable {
         agreeCancel: json['agreeCancel'] as String?,
         vehicleImageId: json['vehicleImageID'] as int?,
         vehiclePic1: json['vehiclePic1'] as String?,
+        bookedDates: json['bookedDates'] as String,
         vehiclePic2: json['vehiclePic2'] as String?,
         vehiclePic3: json['vehiclePic3'] as String?,
         vehiclePic4: json['vehiclePic4'] as String?,
@@ -172,6 +175,7 @@ class VehicleModel extends Equatable {
         'discount': discount,
         'agreeCancel': agreeCancel,
         'vehicleImageID': vehicleImageId,
+        'bookedDates': bookedDates,
         'vehiclePic1': vehiclePic1,
         'vehiclePic2': vehiclePic2,
         'vehiclePic3': vehiclePic3,
