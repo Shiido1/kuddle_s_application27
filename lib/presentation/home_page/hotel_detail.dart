@@ -702,11 +702,14 @@ class _HotelDetailState extends State<HotelDetail> {
         buttonStyle: CustomButtonStyles.fillPrimary,
         onPressed: () {
           // BookRoomCalendarScreenOriginal(property: widget.property)
+          print("object::::${widget.property.price}");
+          print("object::::$roomPrice");
           Navigator.push(
             context,
             MaterialPageRoute(
                 builder: (context) => HotelBookingWidget(
                     vehicle: widget.property,
+                    price: roomPrice,
                     itemID: selectedRoomIDNow.toString())),
           );
         });

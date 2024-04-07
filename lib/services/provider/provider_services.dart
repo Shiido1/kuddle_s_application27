@@ -7,6 +7,7 @@ import 'package:kuddle_s_application27/models/register.dart';
 import 'package:kuddle_s_application27/pages/bookings/model/transaction_data_model.dart';
 import 'package:kuddle_s_application27/pages/home/model/property_list_model/property_list_model.dart';
 import 'package:kuddle_s_application27/presentation/sign_in_screen/sign_in_screen.dart';
+import 'package:rename/platform_file_editors/abs_platform_file_editor.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../apiservices/auth_repo.dart';
 import '../../models/booking_response.dart';
@@ -450,6 +451,7 @@ class ProviderServices extends ChangeNotifier {
       Response? response = await authRepo.getPropertyList();
       if (response != null && response.statusCode == 200) {
         _propertyListModel = PropertyListModel.fromJson(response.data);
+        logger.d('oooooo${_propertyListModel?.toJson()}');
         _isLoading = false;
       }
       if (response != null && response.statusCode != 200) {
@@ -466,6 +468,9 @@ class ProviderServices extends ChangeNotifier {
     try {
       _isLoading = true;
       Response? response = await authRepo.getVehicleList();
+
+      print('prin print....${response?.data}');
+
       if (response != null && response.statusCode == 200) {
         _vehicleListModel = VehicleListModel.fromJson(response.data);
         _isLoading = false;
@@ -567,7 +572,7 @@ class ProviderServices extends ChangeNotifier {
         if (response.statusCode == 200) {
           _roomModel = RoomModel.fromJson(response.data);
 
-          // print('we are here $_bookingList');
+          print('we are here ${_roomModel}');
         }
         _isLoading = false;
         notifyListeners();

@@ -225,6 +225,7 @@ class VehicleModel extends Equatable {
     String? vehiclePic3,
     String? vehiclePic4,
     String? vehiclePic5,
+    String? bookedDates,
   }) {
     return VehicleModel(
       vehicleId: vehicleId ?? this.vehicleId,
@@ -263,6 +264,7 @@ class VehicleModel extends Equatable {
       discount: discount ?? this.discount,
       agreeCancel: agreeCancel ?? this.agreeCancel,
       vehicleImageId: vehicleImageId ?? this.vehicleImageId,
+      bookedDates: bookedDates?? this.bookedDates,
       vehiclePic1: vehiclePic1 ?? this.vehiclePic1,
       vehiclePic2: vehiclePic2 ?? this.vehiclePic2,
       vehiclePic3: vehiclePic3 ?? this.vehiclePic3,
@@ -315,6 +317,7 @@ class VehicleModel extends Equatable {
       vehiclePic3,
       vehiclePic4,
       vehiclePic5,
+      bookedDates
     ];
   }
 }

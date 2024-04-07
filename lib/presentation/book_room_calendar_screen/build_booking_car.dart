@@ -209,6 +209,7 @@ class _CarBookingWidgetState extends State<CarBookingWidget> {
   checkBookedDate(context) {
     var vDepartureDate = DateFormat('E MMM dd yyyy').format(departureDate);
     var vReturningDate = DateFormat('E MMM dd yyyy').format(returningDate);
+
     for (var element in providerServices!.vehicleListModel!.result!) {
       if (element.bookedDates!.contains('$vDepartureDate') ||
           element.bookedDates!.contains('$vReturningDate')) {
@@ -235,7 +236,7 @@ class _CarBookingWidgetState extends State<CarBookingWidget> {
       }
 
       print('calendar date1......${element.bookedDates}');
-      print('calendar date..3.....${returningDate}');
+      print('calendar date..3.....${providerServices!.vehicleListModel!}');
     }
   }
 
