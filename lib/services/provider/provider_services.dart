@@ -748,7 +748,7 @@ class ProviderServices extends ChangeNotifier {
     }
   }
 
-  void addOrder({Map<String, String>? map, BuildContext? context}) async {
+  void addOrder({Map<String, dynamic>? map, BuildContext? context}) async {
     try {
       _isLoading = true;
       notifyListeners();

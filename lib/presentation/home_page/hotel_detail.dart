@@ -701,9 +701,6 @@ class _HotelDetailState extends State<HotelDetail> {
         margin: EdgeInsets.only(left: 76.h, right: 76.h, bottom: 29.v),
         buttonStyle: CustomButtonStyles.fillPrimary,
         onPressed: () {
-          // BookRoomCalendarScreenOriginal(property: widget.property)
-          print("object::::${widget.property.price}");
-          print("object::::$roomPrice");
           Navigator.push(
             context,
             MaterialPageRoute(

@@ -236,46 +236,6 @@ class _TourBookingWidgetState extends State<TourBookingWidget> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-
-
-              // Example usage:
-              // Container(
-              //   margin: EdgeInsets.symmetric(horizontal: 10),
-              //   padding: EdgeInsets.symmetric(vertical: 10),
-              //   decoration: BoxDecoration(
-              //     border: Border(
-              //       bottom: BorderSide(
-              //         color: Colors.grey, // You can customize the color
-              //         width: 0.0, // You can customize the width
-              //       ),
-              //     ),
-              //   ),
-              //   child: Text(
-              //     'Who are you Booking for?',
-              //     style: TextStyle(
-              //       fontSize: 10,
-              //       fontWeight: FontWeight.bold,
-              //       color: Colors.grey, // You can customize the color
-              //     ),
-              //   ),
-              // ),
-
-              // RoundedDropdownButton(
-              //   value: bookingFor,
-              //   items: ['Myself', 'For Someone Else'],
-              //   onChanged: (String? newValue) {
-              //     if (newValue != null) {
-              //       setState(() {
-              //         bookingFor = newValue;
-              //       });
-              //     }
-              //   },
-              //   accessibilityLabel: 'Booking For',
-              // ),
-
-              // SizedBox(height: 16),
-
-
               DepartureDateTimeCard(
                 title: 'Tour Start',
                 date: departureDate,
@@ -850,7 +810,7 @@ class TimePickerWidget extends StatelessWidget {
         _showTimeInputDialog(context);
       },
       style: ElevatedButton.styleFrom(
-        padding: EdgeInsets.all(25), backgroundColor: Color(0xffFFB700), // Royal Blue
+        padding: EdgeInsets.all(22), backgroundColor: Color(0xffFFB700), // Royal Blue
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(8),
         ),

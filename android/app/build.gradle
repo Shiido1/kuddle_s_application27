@@ -47,7 +47,7 @@ android {
         applicationId "com.maczuby.app"
         minSdkVersion 21
         targetSdkVersion flutter.targetSdkVersion
-        versionCode 10 // Change to a higher number
+        versionCode 11 // Change to a higher number
         versionName "1.0.1" // Change to a higher number
     }
 

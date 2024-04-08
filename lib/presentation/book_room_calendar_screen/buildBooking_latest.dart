@@ -782,7 +782,7 @@ class TimePickerWidget extends StatelessWidget {
         _showTimeInputDialog(context);
       },
       style: ElevatedButton.styleFrom(
-        padding: EdgeInsets.all(25), backgroundColor: Color(0xffFFB700), // Royal Blue
+        padding: EdgeInsets.all(22), backgroundColor: Color(0xffFFB700), // Royal Blue
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(8),
         ),

@@ -19,8 +19,7 @@ class PaymentChoiceScreen extends StatefulWidget {
   final String itemType;
   final String id;
   final String price;
-
-
+  final List<String>? bookedDates;
   final String? checkInDate;
   final String? checkInTime;
   final String? checkOutDate;
@@ -43,7 +42,7 @@ class PaymentChoiceScreen extends StatefulWidget {
     this.itemID,
     this.numberOfTickets,
     this.numberOfDays,
-    required this.price}) : super(key: key);
+    required this.price, this.bookedDates}) : super(key: key);
 
   @override
   _PaymentChoiceScreenState createState() => _PaymentChoiceScreenState();
@@ -55,8 +54,6 @@ class _PaymentChoiceScreenState extends State<PaymentChoiceScreen> {
 
 
   void addOrder(context) async {
-
-    // setState(() {});
     var userId = await getAuthUserID();
     DateTime now = DateTime.now();
     String formattedDate = "${now.year}-${now.month.toString().padLeft(2, '0')}-${now.day.toString().padLeft(2, '0')}";
@@ -64,42 +61,6 @@ class _PaymentChoiceScreenState extends State<PaymentChoiceScreen> {
 
     providerServices?.addOrder(
         map: {
-          // "amountPaid":'${finalTotalMade}',
-          // "bookingFor":"Room",
-          // "checkInDate":"2023-10-20",
-          // "checkInTime": "2023-10-20",
-          // "checkOutDate":"2023-10-20",
-          // "checkOutTime":"2023-10-20",
-          // "duration":"2",
-          // "hostID":'${widget.property.hostId}',
-          // "itemID": '${widget.property.roomId}',
-          // "itemType":"accommodation",
-          // "itemUnitPrice":'${widget.property.price}',
-          // "tickets":0.toString(),
-          // "userID":36.toString(),
-          // "roomID": '${widget.property.roomId}',
-          // "paymentStatus": "1",
-          // "delivery_charge": 1500.toString()
-
-          //
-          // "amountPaid": finalTotalMade.toString(),
-          // "bookingFor":"Room",
-          // "checkInDate":departureDate.toString(),
-          // "checkInTime": departureTime.toString(),
-          // "checkOutDate":returningDate.toString(),
-          // "checkOutTime":returningTime.toString(),
-          // "duration":numberOfDays.toString(),
-          // "hostID": widget.vehicle.hostId.toString(),
-          // "itemID": widget.vehicle.propertyId.toString(),
-          // "itemType":"accommodation",
-          // "itemUnitPrice":widget.vehicle.price.toString(),
-          // "tickets":0.toString(),
-          // "userID":"$userId",
-          // "roomID": widget.vehicle.roomId.toString(),
-          // "paymentStatus": "1",
-          // "delivery_charge": 1500.toString()
-
-
           "amountPaid":finalTotalMade.toString(),
           "bookingFor": widget.itemType.toString(),
           "checkInDate":widget.checkInDate.toString(),
@@ -113,6 +74,7 @@ class _PaymentChoiceScreenState extends State<PaymentChoiceScreen> {
           "itemUnitPrice":widget.price.toString(),
           "tickets": widget.numberOfTickets?.toString() ?? 0.toString() ?? '1',
           "userID":"$userId",
+          "bookedDates": widget.bookedDates,
           "roomID": widget.id.toString(),
           "paymentStatus": "1",
           "delivery_charge": 1500.toString()

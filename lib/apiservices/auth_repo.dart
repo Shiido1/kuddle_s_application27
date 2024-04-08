@@ -120,7 +120,7 @@ class AuthRepo with ApiServices {
     return null;
   }
 
-  Future<Response?> addOrder(Map<String, String> credentials) async {
+  Future<Response?> addOrder(Map<String, dynamic> credentials) async {
     Response? response = await apiPostRequests("booking", credentials);
 
     if (response != null) {

@@ -217,6 +217,10 @@ class _CarBookingWidgetState extends State<CarBookingWidget> {
             message: "Sorry, You can't book already booked dates!",
             error: true);
       } else {
+        List<String> bookDates = [];
+        bookDates.add(
+            "$vDepartureDate ${departureTime.hour}:${departureTime.minute}:00 GMT 0100 (West Africa Standard Time), $vReturningDate ${returningTime.hour}:${returningDate.minute}:00 GMT 0100 (West Africa Standard Time)");
+        
         Navigator.push(
             context,
             MaterialPageRoute(
@@ -232,6 +236,7 @@ class _CarBookingWidgetState extends State<CarBookingWidget> {
                     checkOutDate: returningDate.toString(),
                     checkOutTime: returningTime.toString(),
                     numberOfDays: numberOfDays.toString(),
+                    bookedDates: bookDates,
                     price: widget.vehicle.price.toString())));
       }
 
